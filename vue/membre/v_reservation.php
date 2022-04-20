@@ -11,15 +11,21 @@
                 </div>
 
                 <div class="contenuInfo">
-                    <p><span class="titreInfo">Type :</span> <?php echo $laLocation->idtype->libtype; ?> </p>
-                    <p><span class="titreInfo">Adresse :</span> <?php echo $laLocation->idimm->adimm; ?> </p>
-                    <p><span class="titreInfo">Ville :</span> <?php echo $laLocation->idimm->ville; ?> </p>
-                    <?php if ($laLocation->idimm->ascensseur) : ?>
-                    <p><span class="titreInfo">Ascenseur :</span> Oui</p>
+                    <p><span class="titreInfo">Type :</span> <?php echo $laLocation->LIBETYPE; ?></p>
+                    <p><span class="titreInfo">Adresse :</span> <?php echo $laLocation->ADRESSE; ?> </p>
+                    <p><span class="titreInfo">Ville :</span> <?php echo $laLocation->VILLE; ?> </p>
+
+                    <?php if ($laLocation->ASCENSSEUR) : ?>
+                        <p><span class="titreInfo">Ascenseur :</span> Oui</p>
                     <?php else : ?>
                         <p><span class="titreInfo">Ascenseur :</span> Non</p>
                     <?php endif; ?>
-                    <p><span class="titreInfo">Prix :</span> <?php echo $laLocation->idtype->tariflocbase; ?>€</p>
+
+                    <p><span class="titreInfo">Prix :</span> <?php echo $laLocation->TARIFLOCABASE; ?>€</p>
+
+                    <?php if (isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) :?>
+                        <a href="?page=reserver&id=<?php echo $laLocation->ID; ?>" class="bouton">Louer</a>
+                    <?php endif; ?>
                 </div>
 
             </div>

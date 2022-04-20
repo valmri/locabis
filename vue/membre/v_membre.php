@@ -11,8 +11,8 @@
                 </div>
 
                 <div class="contenuInfo">
-                    <p><span class="titreInfo">Identité :</span> <?php echo $infos->prenom.' '.$infos->nom; ?></p>
-                    <p><span class="titreInfo">Adresse-mel :</span> <?php echo $infos->identifiant; ?></p>
+                    <p><span class="titreInfo">Identité :</span> <?php echo $utilisateur->getPrenom().' '.$utilisateur->getNom(); ?></p>
+                    <p><span class="titreInfo">Adresse-mel :</span> <?php echo $utilisateur->getMel(); ?></p>
                     <p><span class="titreInfo">Dernière connexion :</span> <?php echo $derniereConnexion; ?></p>
                 </div>
 

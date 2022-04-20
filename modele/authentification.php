@@ -3,11 +3,11 @@
 function connexion(string $identifiant, string $motDePasse) {
 
     $resultat = false;
-    $infosUtilisateur = requete("http://172.24.2.143:8055/items/utilisateur?fields=id,identifiant,motDePasse&[filter][identifiant][_eq]=".$identifiant);
+    $infosUtilisateur = requete("http://172.24.2.143:8055/items/utilisateur?fields=id,mel,motDePasse&[filter][mel][_eq]=".$identifiant);
 
     if(!empty($infosUtilisateur->data)) {
 
-        $identifiantUtilisateur = $infosUtilisateur->data[0]->identifiant;
+        $identifiantUtilisateur = $infosUtilisateur->data[0]->mel;
         $mdpUtilisateur = $infosUtilisateur->data[0]->motDePasse;
 
         if ($identifiant ===  $identifiantUtilisateur && password_verify($motDePasse, $mdpUtilisateur)) {
@@ -38,11 +38,11 @@ function estConnecte() {
         $identifiant = $_SESSION['identifiant'];
         $motDePasse = $_SESSION['motDePasse'];
     
-        $infosUtilisateur = requete("http://172.24.2.143:8055/items/utilisateur?fields=identifiant,motDePasse&[filter][identifiant][_eq]=".$identifiant);
+        $infosUtilisateur = requete("http://172.24.2.143:8055/items/utilisateur?fields=mel,motDePasse&[filter][mel][_eq]=".$identifiant);
 
         if(!empty($infosUtilisateur->data)) {
 
-            $identifiantUtilisateur = $infosUtilisateur->data[0]->identifiant;
+            $identifiantUtilisateur = $infosUtilisateur->data[0]->mel;
             $mdpUtilisateur = $infosUtilisateur->data[0]->motDePasse;
 
             if ($identifiant ===  $identifiantUtilisateur && password_verify($motDePasse, $mdpUtilisateur)) {
@@ -62,7 +62,7 @@ function getInfosUtilisateur(string $identifiant) {
 
     $resultat = false;
     
-    $infosUtilisateur = requete("http://172.24.2.143:8055/items/utilisateur?fields=identifiant,prenom,nom,derniere_connexion&[filter][identifiant][_eq]=".$identifiant);
+    $infosUtilisateur = requete("http://172.24.2.143:8055/items/utilisateur?fields=mel,prenom,nom,derniere_connexion&[filter][mel][_eq]=".$identifiant);
 
     if(!empty($infosUtilisateur->data)) {
 

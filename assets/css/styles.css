@@ -101,8 +101,8 @@ h1 {
     width: 50%;
 }
 
-.carteLoc_contenu {
-    line-height: 10px;
+.carteLoc_contenu > h2 {
+    font-size: 16px;
 }
 
 .message {

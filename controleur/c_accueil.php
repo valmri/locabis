@@ -1,6 +1,9 @@
 <?php
-// Fichiers par défaut
-require_once './vue/elements/header.php';
+// Fichier de base de données
+require_once './modele/dao/dao.php';
+require_once './modele/dao/appartement_dao.php';
+
+$appartementDAO = new Appartement_DAO();
 
 // Récupération numero page
 if(isset($_GET['n']) && !empty($_GET['n']) && is_numeric($_GET['n'])) {
@@ -11,19 +14,20 @@ if(isset($_GET['n']) && !empty($_GET['n']) && is_numeric($_GET['n'])) {
 
 // Système de pagination
 // Connaitre le nombre d'appart
-$nbLocations = getNombreLocations();
+$nbLocations = $appartementDAO->getNbAppartements();
 
 // Définition du nombre de page
 $locationParPage = 9;
-$pages = ceil($nbLocations->total_count/$locationParPage);
+$pages = ceil($nbLocations/$locationParPage);
 
 // Calcul première page
 $premierePage = ($pageCourante * $locationParPage) - $locationParPage;
 
 // Récupération des locations
-$afficheLocation = getPage($premierePage, $locationParPage);
+$afficheLocation = $appartementDAO->getAppartements($premierePage, $locationParPage);
 $nbCase = 0;
 
+// Chargement des vues
+require_once './vue/elements/header.php';
 require_once './vue/v_accueil.php';
-
 require_once './vue/elements/footer.php';

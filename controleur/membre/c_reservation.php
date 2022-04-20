@@ -1,7 +1,17 @@
 <?php
-if(estConnecte()) {
-    // Fichiers par défaut
-    require_once './vue/elements/header.php';
+// Fichier de base de données
+require_once './modele/dao/dao.php';
+require_once './modele/dao/authentification_dao.php';
+require_once './modele/entite/utilisateur.php';
+require_once './modele/dao/appartement_dao.php';
+
+// Vérification de l'authentification
+if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
+    $unUtilisateur = new Authentification($_SESSION['utilisateur']['MEL'], $_SESSION['utilisateur']['MOTDEPASSE']);
+    $autorisation = $unUtilisateur->estConnecte();
+}
+
+if(isset($autorisation) && $autorisation) {
 
     if(
         isset($_GET['id']) &&
@@ -11,10 +21,11 @@ if(estConnecte()) {
     
         // Récupération des données
         $idLocation = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-        $idUtilisateur = $_SESSION['id'];
+        $idUtilisateur = $_SESSION['utilisateur']['ID'];
     
         // Récupération des informations de la location
-        $laLocation = getLocationById($idLocation);
+        $appartementDAO = new Appartement_DAO();
+        $laLocation = $appartementDAO->getAppartementById($idLocation);
 
         if(
             isset($_POST['dateDebut']) &&
@@ -51,6 +62,8 @@ if(estConnecte()) {
 
         }
 
+        // Chargement des vues
+        require_once './vue/elements/header.php';
         if($laLocation) {
             require_once './vue/membre/v_reservation.php';
         } else {

@@ -1,9 +1,10 @@
-<?php 
-// Fichiers par défaut
-require_once './vue/elements/header.php';
+<?php
+// Fichier de base de données
+require_once './modele/dao/dao.php';
+require_once './modele/dao/authentification_dao.php';
+require_once './modele/entite/utilisateur.php';
 
 // Récupération des données
-
 if(
     isset($_POST['identifiant']) &&
     isset($_POST['motDePasse']) &&
@@ -15,26 +16,27 @@ if(
     $identifiant = filter_input(INPUT_POST, 'identifiant', FILTER_SANITIZE_STRING);
     $motDePasse = filter_input(INPUT_POST, 'motDePasse', FILTER_SANITIZE_STRING);
 
-    $autorisationConnexion = connexion($identifiant, $motDePasse);
+    $authentification = new Authentification($identifiant,$motDePasse);
+    $utilisateur = $authentification->connexion();
 
-    if($autorisationConnexion['connecte']) {
+    if($utilisateur) {
 
         session_start();
-        $_SESSION['id'] = $autorisationConnexion['id'];
-        $_SESSION['identifiant'] = $identifiant;
-        $_SESSION['motDePasse'] = $motDePasse;
+        $_SESSION['utilisateur'] = $utilisateur;
         $_SESSION['jeton'] = bin2hex(openssl_random_pseudo_bytes(6));
-        
+
         header('Location:?page=membre');
 
     } else {
         $msgErreur = "Identifant ou mot de passe incorrect !";
     }
 
+
 }
 
+// Fichiers de vues
+require_once './vue/elements/header.php';
 if(!estConnecte()) {
     require_once './vue/v_connexion.php';
 }
-
 require_once './vue/elements/footer.php';

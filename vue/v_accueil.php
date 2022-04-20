@@ -33,18 +33,21 @@
 
                 <div class="carteLoc">
                     <div class="carteLoc_entete">
-                        <?php if ($laLocation->image != null) :?>
+                        <?php if (isset($laLocation->image)) :?>
                         <img src="http://172.24.2.143:8055/assets/<?php echo $laLocation->image ?>?width=342&height=222" alt="<?php echo $laLocation->idtype->libtype ?>">
                         <?php else :?>
-                        <img src="./assets/img/appart.jpg" width="100%" alt="<?php echo $laLocation->idtype->libtype; ?>">
+                        <img src="./assets/img/appart.jpg" width="100%" alt="<?php echo $laLocation->LIBETYPE; ?>">
                         <?php endif; ?>
                     </div>
                     <div class="carteLoc_contenu">
-                        <h2><?php echo $laLocation->idtype->libtype; ?></h2>
+                        <h2><?php echo $laLocation->TITRE; ?></h2>
                         <span class="infoLoca">
-                            <i class="las la-map-marker"></i><?php echo $laLocation->idimm->ville; ?>
+                            <i class="las la-map-marker"></i><?php echo $laLocation->VILLE; ?>
                         </span>
-                        <a href="?page=location&id=<?php echo $laLocation->id; ?>" class="bouton">Consulter</a>
+                        <span class="infoLoca">
+                            <i class="las la-home"></i><?php echo $laLocation->LIBETYPE; ?>
+                        </span>
+                        <a href="?page=location&id=<?php echo $laLocation->ID; ?>" class="bouton">Consulter</a>
                     </div>
                 </div>
                 
@@ -63,7 +66,7 @@
 
             <nav>
                 <ul class="pagination">
-                    <?php if($pageCourante != 1) :?>
+                    <?php if($pageCourante != 1):?>
                     <li>
                         <a href="?page=accueil&n=<?php echo $pageCourante - 1 ?>">Précédente</a>
                     </li>
@@ -75,7 +78,7 @@
                     </li>
                     <?php endif;?>
 
-                    <?php if($afficheLocation != null) :?>
+                    <?php if($afficheLocation != null && count($afficheLocation) > $locationParPage) :?>
                     <li>
                         <a href="?page=accueil&n=<?php echo $pageCourante + 1 ?>">Suivante</a>
                     </li>

@@ -15,7 +15,7 @@
 
             <div class="boutonConnecte">
                 <ul>
-                    <?php if (!estConnecte()) :?>
+                    <?php if (!isset($_SESSION['utilisateur']) && !isset($_SESSION['jeton'])) :?>
                     <li>
                         <a class="boutonMenu" href="?page=connexion">Connexion</a>
                     </li>

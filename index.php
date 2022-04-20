@@ -1,14 +1,15 @@
 <?php
+// Autoloader de composer
+require_once './vendor/autoload.php';
+
+// Fichier par défaut
 require_once './modele/fonctions.php';
 require_once './modele/authentification.php';
-
 require_once './vue/elements/head.php';
-
 require_once './controleur/controleurPrincipal.php';
 
 if(!isset($_SESSION)) {
     session_start();
-    $_SESSION['connecte'] = false;
 }
 
 if(isset($_GET['page'])) {

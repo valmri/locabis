@@ -1,5 +1,4 @@
-<?php 
-unset($_SESSION['identifiant']);
-unset($_SESSION['motDePasse']);
+<?php
+unset($_SESSION['utilisateur']);
 unset($_SESSION['jeton']);
 header('Location:?page=accueil');
