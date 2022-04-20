@@ -1,1 +1,6 @@
 /.vscode
+/.idea
+/composer.json
+/composer.lock
+/vendor
+/modele/dao/dao.php
