@@ -4,6 +4,7 @@ require_once './modele/dao/dao.php';
 require_once './modele/dao/authentification_dao.php';
 require_once './modele/entite/utilisateur.php';
 require_once './modele/dao/appartement_dao.php';
+require_once './modele/dao/reservation_dao.php';
 
 // Vérification de l'authentification
 if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
@@ -46,15 +47,11 @@ if(isset($autorisation) && $autorisation) {
             $heureFin = filter_input(INPUT_POST, 'heureFin', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             // Création du tableau de données
-            $donnees = array(
-                "utilisateur" => $idUtilisateur,
-                "appartement" => $idLocation,
-                "date_debut" => $dateDebut.'T'.$heureDebut.':00',
-                "date_fin" => $dateFin.'T'.$heureFin.':00'
-            );
+
+            $reservationDAO = new Reservation_DAO();
 
             try {
-                add("reservaion", $donnees);
+                $reservationDAO->addReservation($idUtilisateur,$idLocation, $dateDebut.' '.$heureDebut, $dateFin.' '.$heureFin);
                 $msgInfo = "Réservation effectuée avec succès !";
             } catch (Exception $e) {
                 $msgErreur = "Erreur lors de la réservation.";
