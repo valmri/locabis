@@ -12,8 +12,6 @@ if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
     $autorisation = $unUtilisateur->estConnecte();
 }
 
-// TODO : Afficher un récap des réservations effectuées par un utilisateur.
-
 if(isset($autorisation) && $autorisation) {
 
     if(

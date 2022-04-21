@@ -2,18 +2,20 @@
 // Fichier de base de données
 require_once './modele/dao/dao.php';
 require_once './modele/dao/authentification_dao.php';
+require_once './modele/dao/utilisateur_dao.php';
 require_once './modele/entite/utilisateur.php';
 
 // Vérification de l'authentification
 if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
-    $unUtilisateur = new Authentification($_SESSION['utilisateur']['MEL'], $_SESSION['utilisateur']['MOTDEPASSE']);
-    $autorisation = $unUtilisateur->estConnecte();
+    $authentification = new Authentification($_SESSION['utilisateur']['MEL'], $_SESSION['utilisateur']['MOTDEPASSE']);
+    $autorisation = $authentification->estConnecte();
 }
 
 if(isset($autorisation) && $autorisation) {
 
     // Récupération des infos utilisateurs
-    $utilisateur = $unUtilisateur->getUtilisateur();
+    $utilisateurDAO = new Utilisateur_DAO();
+    $utilisateur = $utilisateurDAO->getUtilisateur($_SESSION['utilisateur']['ID']);
     $dateConnexion = strtotime($utilisateur->getDerniereConnexion());
     $derniereConnexion = date('d/m/Y H:m', $dateConnexion);
 

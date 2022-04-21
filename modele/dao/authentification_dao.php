@@ -82,39 +82,4 @@ class Authentification extends DAO
 
     }
 
-    public function getUtilisateur() {
-
-        $resultat = false;
-
-        // Requête SQL
-        $bdd = $this->getPDO();
-        $sql = "Select * from utilisateur where MEL = :identifiant;";
-        $requete = $bdd->prepare($sql);
-        $requete->bindValue(':identifiant', $this->identifiant, PDO::PARAM_STR);
-        $requete->execute();
-        $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
-
-        if(!empty($utilisateur)) {
-
-            $identifiantUtilisateur = $utilisateur['MEL'];
-            $mdpUtilisateur = $utilisateur['MOTDEPASSE'];
-
-            if ($this->identifiant ===  $identifiantUtilisateur && password_verify($this->motDePasse, $mdpUtilisateur)) {
-
-                $resultat = new Utilisateur(
-                    $utilisateur['ID'],
-                    'null',
-                    $utilisateur['NOM'],
-                    $utilisateur['PRENOM'],
-                    $utilisateur['MEL'],
-                    $this->motDePasse,
-                    $utilisateur['DATE_CONNEXION'],
-                    $utilisateur['DATE_INSCRIPTION']);
-
-            }
-        }
-
-        return $resultat;
-
-    }
 }
