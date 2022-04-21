@@ -69,4 +69,5 @@ class Appartement_DAO extends DAO
         return $resultat;
 
     }
+
 }

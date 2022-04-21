@@ -43,7 +43,7 @@
                         <h2><?php echo $laLocation->TITRE; ?></h2>
                         <span class="infoLoca">
                             <i class="las la-map-marker"></i><?php echo $laLocation->VILLE; ?>
-                        </span>
+                        </span></br>
                         <span class="infoLoca">
                             <i class="las la-home"></i><?php echo $laLocation->LIBETYPE; ?>
                         </span>

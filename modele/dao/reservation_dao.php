@@ -21,4 +21,26 @@ class Reservation_DAO extends DAO
 
     }
 
+    public function getReservationByUserId(int $idUtilisateur) {
+
+        $resultat = false;
+
+        // Requête SQL
+        $bdd = $this->getPDO();
+        $sql = "Select * from reservation r 
+                join appartement a on r.ID_APPARTEMENT = a.ID    
+                where ID_UTILISATEUR = :id";
+        $requete = $bdd->prepare($sql);
+        $requete->bindValue(':id', $idUtilisateur, PDO::PARAM_INT);
+        $requete->execute();
+        $reponse = $requete->fetchAll(PDO::FETCH_OBJ);
+
+        if(count($reponse) > 0) {
+            $resultat = $reponse;
+        }
+
+        return $resultat;
+
+    }
+
 }

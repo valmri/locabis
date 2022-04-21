@@ -10,6 +10,7 @@ class Utilisateur
     private $motDePasse;
     private $derniere_connexion;
     private $date_inscription;
+    private $reservations;
 
     public function __construct(
         int $id,
@@ -30,6 +31,7 @@ class Utilisateur
         $this->motDePasse = $motDePasse;
         $this->derniere_connexion = $derniere_connexion;
         $this->date_inscription = $date_inscription;
+        $this->reservations = new \Ds\Vector();
 
     }
 
@@ -71,6 +73,16 @@ class Utilisateur
     public function getDateInscription(): string
     {
         return $this->date_inscription;
+    }
+
+    public function getReservations(): \Ds\Vector
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation)
+    {
+        $this->reservations->push($reservation);
     }
 
 

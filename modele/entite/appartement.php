@@ -3,14 +3,16 @@
 class Appartement
 {
     private $id;
+    private $image;
     private $titre;
     private $description;
     private $numero;
     private $etage;
 
-    public function __construct(int $id, string $titre, string $description, string $numero, int $etage) {
+    public function __construct(int $id, string $image, string $titre, string $description, string $numero, int $etage) {
 
         $this->id = $id;
+        $this->image = $image;
         $this->titre = $titre;
         $this->description = $description;
         $this->numero = $numero;
@@ -21,6 +23,11 @@ class Appartement
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getImage(): string
+    {
+        return $this->image;
     }
 
     public function getTitre(): string
