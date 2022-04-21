@@ -30,7 +30,7 @@ class Appartement_DAO extends DAO
         $resultat = false;
 
         $bdd = $this->getPDO();
-        $sql = "Select a.ID, a.TITRE, t.LIBETYPE, i.VILLE from appartement a 
+        $sql = "Select a.ID, a.TITRE, a.IMAGE, t.LIBETYPE, i.VILLE from appartement a 
                 join typeappart t on a.ID_TYPEAPPART = t.ID 
                 join immeuble i on a.ID_IMMEUBLE = i.ID LIMIT :premier, :parpage";
         $requete = $bdd->prepare($sql);
@@ -52,7 +52,7 @@ class Appartement_DAO extends DAO
         $resultat = false;
 
         $bdd = $this->getPDO();
-        $sql = "Select a.ID, a.TITRE, a.DESCRIPTION, t.LIBETYPE, t.TARIFLOCABASE, i.ADRESSE, i.VILLE, i.ASCENSSEUR from appartement a 
+        $sql = "Select a.ID, a.TITRE, a.IMAGE, a.DESCRIPTION, t.LIBETYPE, t.TARIFLOCABASE, i.ADRESSE, i.VILLE, i.ASCENSSEUR from appartement a 
                 join typeappart t on a.ID_TYPEAPPART = t.ID 
                 join immeuble i on a.ID_IMMEUBLE = i.ID
                 where a.ID = :id";
