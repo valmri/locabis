@@ -18,6 +18,7 @@ class ManagerPrincipal {
         $this->identifiant = '';
         $this->mdp = '';
 
+
     }
 
     protected function getPDO() {
