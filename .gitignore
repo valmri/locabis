@@ -3,4 +3,7 @@
 /composer.json
 /composer.lock
 /vendor
-/modele/dao/dao.php
+/modele/manager/ManagerPrincipal.php
+/node_modules
+/package-lock.json
+/package.json
