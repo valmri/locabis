@@ -29,7 +29,9 @@ if(
     if($authentification) {
 
         session_start();
-        $_SESSION['utilisateur'] = $utilisateur;
+        $_SESSION['utilisateur']['id'] = $authentification['id'];
+        $_SESSION['utilisateur']['mel'] = $authentification['mel'];
+        $_SESSION['utilisateur']['motDePasse'] = $authentification['motDePasse'];
         $_SESSION['jeton'] = bin2hex(openssl_random_pseudo_bytes(6));
 
         header('Location:?page=membre');
