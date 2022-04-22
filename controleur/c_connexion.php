@@ -1,8 +1,12 @@
 <?php
-// Fichier de base de données
-require_once './modele/dao/dao.php';
-require_once './modele/dao/authentification_dao.php';
-require_once './modele/entite/utilisateur.php';
+// Chargement des managers
+require_once './modele/manager/ManagerPrincipal.php';
+require_once './modele/manager/UtilisateurManager.php';
+require_once './modele/entite/Utilisateur.php';
+
+use modele\manager\UtilisateurManager;
+
+$utilisateurManager = new UtilisateurManager();
 
 // Récupération des données
 if(
@@ -16,10 +20,13 @@ if(
     $identifiant = filter_input(INPUT_POST, 'identifiant', FILTER_SANITIZE_STRING);
     $motDePasse = filter_input(INPUT_POST, 'motDePasse', FILTER_SANITIZE_STRING);
 
-    $authentification = new Authentification($identifiant,$motDePasse);
-    $utilisateur = $authentification->connexion();
+    $utilisateur = new \modele\entite\Utilisateur();
+    $utilisateur->setMel($identifiant);
+    $utilisateur->setMotDePasse($motDePasse);
 
-    if($utilisateur) {
+    $authentification = $utilisateurManager->connexion($utilisateur);
+
+    if($authentification) {
 
         session_start();
         $_SESSION['utilisateur'] = $utilisateur;
