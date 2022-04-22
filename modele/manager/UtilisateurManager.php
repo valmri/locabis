@@ -146,9 +146,9 @@ class UtilisateurManager extends ManagerPrincipal
 
                 // Données renvoyées
                 $resultat =  array(
-                    'ID' => $id,
-                    'MEL' => $mel,
-                    'MOTDEPASSE' => $utilisateur->getMotDePasse()
+                    'id' => $id,
+                    'mel' => $mel,
+                    'motDePasse' => $utilisateur->getMotDePasse()
                 );
 
                 // Mise à jour date connexion
@@ -164,6 +164,42 @@ class UtilisateurManager extends ManagerPrincipal
         }
 
         return $resultat;
+
+    }
+
+    /**
+     * Vérification de l'authentification
+     * @return bool
+     */
+    public function estConnecte() {
+
+        $resultat = false;
+        $identifiant = $_SESSION['utilisateur']['id'];
+        $melSession = $_SESSION['utilisateur']['mel'];
+        $mdpSession = $_SESSION['utilisateur']['motDePasse'];
+
+        // Requête SQL
+        $bdd = $this->getPDO();
+        $sql = "Select mel, motDePasse from utilisateur where id = :identifiant;";
+        $requete = $bdd->prepare($sql);
+        $requete->bindValue(':identifiant', $identifiant, PDO::PARAM_STR);
+        $requete->execute();
+        $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
+
+        if(!empty($utilisateur)) {
+
+            $melServeur = $utilisateur['mel'];
+            $mdpServeur = $utilisateur['motDePasse'];
+
+            if ($melSession ===  $melServeur && password_verify($mdpSession, $mdpServeur)) {
+
+                $resultat = true;
+
+            }
+        }
+
+        return $resultat;
+
 
     }
 
