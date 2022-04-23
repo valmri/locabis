@@ -40,12 +40,12 @@ class Appartement
     private $proprietaire;
 
     /**
-     * @var int Identifiant de l'immeuble de l'appartement
+     * @var mixed Identifiant de l'immeuble de l'appartement
      */
     private $immeuble;
 
     /**
-     * @var string Identifiant du type de l'appartement
+     * @var mixed Identifiant du type de l'appartement
      */
     private $type;
 
@@ -110,17 +110,17 @@ class Appartement
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getImmeuble(): int
+    public function getImmeuble()
     {
         return $this->immeuble;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getType(): string
+    public function getType()
     {
         return $this->type;
     }
@@ -174,17 +174,17 @@ class Appartement
     }
 
     /**
-     * @param int $immeuble
+     * @param mixed $immeuble
      */
-    public function setImmeuble(int $immeuble)
+    public function setImmeuble($immeuble)
     {
         $this->immeuble = $immeuble;
     }
 
     /**
-     * @param string $type
+     * @param mixed $type
      */
-    public function setType(string $type)
+    public function setType($type)
     {
         $this->type = $type;
     }

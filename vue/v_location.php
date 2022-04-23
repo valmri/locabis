@@ -11,20 +11,20 @@
                 </div>
 
                 <div class="contenuInfo">
-                    <p><span class="titreInfo">Type :</span> <?php echo $typeLocation->getLibeType(); ?></p>
-                    <p><span class="titreInfo">Adresse :</span> <?php echo $laLocation->getAdresse(); ?> </p>
-                    <p><span class="titreInfo">Ville :</span> <?php echo $laLocation->getVille(); ?> </p>
+                    <p><span class="titreInfo">Type :</span> <?php echo $appartement->getType()->getLibeType(); ?></p>
+                    <p><span class="titreInfo">Adresse :</span> <?php echo $appartement->getImmeuble()->getAdresse(); ?> </p>
+                    <p><span class="titreInfo">Ville :</span> <?php echo $appartement->getImmeuble()->getVille(); ?> </p>
 
-                    <?php if ($laLocation->ASCENSSEUR) : ?>
+                    <?php if ($appartement->getImmeuble()->isAscensseur()) : ?>
                         <p><span class="titreInfo">Ascenseur :</span> Oui</p>
                     <?php else : ?>
                         <p><span class="titreInfo">Ascenseur :</span> Non</p>
                     <?php endif; ?>
 
-                    <p><span class="titreInfo">Prix :</span> <?php echo $laLocation->TARIFLOCABASE; ?>€</p>
+                    <p><span class="titreInfo">Prix :</span> <?php echo $appartement->getType()->getTarifLocaBase(); ?>€</p>
 
                     <?php if (isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) :?>
-                        <a href="?page=reserver&id=<?php echo $laLocation->ID; ?>" class="bouton">Louer</a>
+                        <a href="?page=reserver&id=<?php echo $appartement->getId(); ?>" class="bouton">Louer</a>
                     <?php endif; ?>
                 </div>
 
@@ -35,16 +35,16 @@
         <div class="page">
 
             <div class="entetePage">
-                <?php if ($laLocation->IMAGE != null) :?>
-                    <img src="./images/apparts/<?php echo $laLocation->IMAGE; ?>.jpg" width="50%" alt="<?php echo $laLocation->LIBETYPE; ?>">
+                <?php if ($appartement->getPhoto() != null) : ?>
+                    <img src="./images/apparts/<?php echo $appartement->getPhoto(); ?>.jpg" width="50%" alt="<?php $appartement->getType()->getLibeType(); ?>">
                 <?php else :?>
-                    <img src="./assets/img/appart.jpg" width="50%" alt="<?php echo $laLocation->LIBETYPE; ?>">
+                    <img src="./assets/img/appart.jpg" width="50%" alt="<?php echo $appartement->getType()->getLibeType(); ?>">
                 <?php endif; ?>
-                <h1><?php echo $laLocation->TITRE; ?></h1>
+                <h1><?php echo $appartement->getTitre(); ?></h1>
             </div>
 
             <div class="contenuPage">
-                <p><?php echo $laLocation->DESCRIPTION; ?></p>
+                <p><?php echo $appartement->getDescription(); ?></p>
             </div>
 
         </div>
