@@ -43,8 +43,8 @@
                     <div class="carteLoc">
                         <div class="carteLoc_contenu">
                             <h2><?php echo $reservation->getAppartement()->getTitre(); ?></h2>
-                            <span class="infoLoca">
-                                <i class="las <?php echo $reservation->getEtat()->getIcone();?>"></i><strong>Statut : </strong><?php echo $reservation->getEtat()->getLibelle();?>
+                            <span id="statutReservation" class="infoLoca">
+                                <i class="<?php echo $reservation->getEtat()->getIcone();?>"></i><strong>Statut : </strong><?php echo $reservation->getEtat()->getLibelle();?>
                             </span></br>
                             <span class="infoLoca">
                                 <i class="las la-calendar"></i><strong>Début : </strong><?php echo date('d/m/Y H:m', strtotime($reservation->getDateDebut())); ?>
@@ -52,8 +52,9 @@
                             <span class="infoLoca">
                                 <i class="las la-calendar"></i><strong>Fin : </strong><?php echo date('d/m/Y H:m', strtotime($reservation->getDateFin())); ?>
                             </span>
+                            <input class="idReservations" type="hidden" value="<?= $reservation->getId(); ?>">
                             <a href="?page=location&id=<?php echo $reservation->getAppartement()->getId(); ?>" class="bouton">Consulter</a>
-                            <a onclick="test()" href="#" class="bouton">Annuler</a>
+                            <button onclick='annulationReservation(<?= $reservation->getId(); ?>, "<?= $reservation->getAppartement()->getTitre(); ?>")' class='bouton'>Annuler</button>
                         </div>
                     </div>
 

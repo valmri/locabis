@@ -138,4 +138,30 @@ class ReservationManager extends ManagerPrincipal
 
     }
 
+    /**
+     * Mise à jour de l'état d'une réservation
+     * @param Reservation $reservation
+     * @return bool
+     */
+    public function updateEtat(Reservation $reservation) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Update reservation set etat = :etat where id = :id";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':etat', $reservation->getEtat(), PDO::PARAM_INT);
+            $requete->bindValue(':id', $reservation->getId(), PDO::PARAM_INT);
+            $requete->execute();
+
+            $resultat = true;
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
 }
