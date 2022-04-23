@@ -11,9 +11,9 @@
                 </div>
 
                 <div class="contenuInfo">
-                    <p><span class="titreInfo">Identité :</span> <?php echo $utilisateur->getPrenom().' '.$utilisateur->getNom(); ?></p>
-                    <p><span class="titreInfo">Adresse-mel :</span> <?php echo $utilisateur->getMel(); ?></p>
-                    <p><span class="titreInfo">Dernière connexion :</span> <?php echo $derniereConnexion; ?></p>
+                    <p><span class="titreInfo">Identité :</span> <?= $utilisateur->getPrenom().' '.$utilisateur->getNom(); ?></p>
+                    <p><span class="titreInfo">Adresse-mel :</span> <?= $utilisateur->getMel(); ?></p>
+                    <p><span class="titreInfo">Dernière connexion :</span> <?= date('d/m/Y H:m', strtotime($utilisateur->getDateConnexion())); ?></p>
                 </div>
 
             </div>
@@ -28,11 +28,11 @@
 
             <div class="contenuPage">
 
-                <?php if(empty($utilisateur->getReservations())): ?>
+                <?php if(empty($reservations)): ?>
                 <p>Vous n'avez réaliser aucunes réservations.</p>
                 <?php
                 else :
-                foreach ($reservationsUtilisateur as $uneReservation) :
+                foreach ($reservations as $reservation) :
                 ?>
 
                     <?php if ($nbCase === 0) :?>
@@ -41,14 +41,18 @@
 
                     <div class="carteLoc">
                         <div class="carteLoc_contenu">
-                            <h2><?php echo $uneReservation->getAppartement()->getTitre(); ?></h2>
+                            <h2><?php echo $reservation->getAppartement()->getTitre(); ?></h2>
                             <span class="infoLoca">
-                                <i class="las la-calendar"></i><strong>Début : </strong><?php echo date('d/m/Y H:m', strtotime($uneReservation->getDateDebut())); ?>
+                                <i class="las <?php echo $reservation->getEtat()->getIcone();?>"></i><strong>Statut : </strong><?php echo $reservation->getEtat()->getLibelle();?>
                             </span></br>
                             <span class="infoLoca">
-                                <i class="las la-calendar"></i><strong>Fin : </strong><?php echo date('d/m/Y H:m', strtotime($uneReservation->getDateFin())); ?>
+                                <i class="las la-calendar"></i><strong>Début : </strong><?php echo date('d/m/Y H:m', strtotime($reservation->getDateDebut())); ?>
+                            </span></br>
+                            <span class="infoLoca">
+                                <i class="las la-calendar"></i><strong>Fin : </strong><?php echo date('d/m/Y H:m', strtotime($reservation->getDateFin())); ?>
                             </span>
-                            <a href="?page=location&id=<?php echo $uneReservation->getAppartement()->getId(); ?>" class="bouton">Consulter</a>
+                            <a href="?page=location&id=<?php echo $reservation->getAppartement()->getId(); ?>" class="bouton">Consulter</a>
+                            <a onclick="test()" href="#" class="bouton">Annuler</a>
                         </div>
                     </div>
 

@@ -1,37 +1,59 @@
 <?php
-// Fichier de base de données
-require_once './modele/dao/dao.php';
-require_once './modele/dao/authentification_dao.php';
-require_once './modele/dao/utilisateur_dao.php';
-require_once './modele/dao/reservation_dao.php';
-require_once './modele/entite/utilisateur.php';
-require_once './modele/entite/reservation.php';
-require_once './modele/entite/appartement.php';
+// Chargement des managers
+require_once './modele/manager/ManagerPrincipal.php';
+require_once './modele/manager/UtilisateurManager.php';
+require_once './modele/manager/ReservationManager.php';
+require_once './modele/manager/AppartementManager.php';
+require_once './modele/manager/TypeEtatManager.php';
+require_once './modele/entite/Utilisateur.php';
+require_once './modele/entite/Reservation.php';
+require_once './modele/entite/Appartement.php';
+require_once './modele/entite/TypeEtat.php';
+
+use modele\manager\UtilisateurManager;
+use modele\entite\Utilisateur;
+
+use modele\manager\ReservationManager;
+use modele\entite\Reservation;
+
+use modele\manager\AppartementManager;
+use modele\entite\Appartement;
+
+use modele\manager\TypeEtatManager;
+use modele\entite\TypeEtat;
+
+$utilisateurManager = new UtilisateurManager();
+$reservationManager = new ReservationManager();
+$appartementManager = new AppartementManager();
+$typeEtatManager = new TypeEtatManager();
 
 // Vérification de l'authentification
 if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
-    $authentification = new Authentification($_SESSION['utilisateur']['MEL'], $_SESSION['utilisateur']['MOTDEPASSE']);
-    $autorisation = $authentification->estConnecte();
+    $authentification = $utilisateurManager->estConnecte();
+
 }
 
-if(isset($autorisation) && $autorisation) {
+if(isset($authentification) && $authentification) {
 
     // Récupération des infos utilisateurs
-    $utilisateurDAO = new Utilisateur_DAO();
-    $utilisateur = $utilisateurDAO->getUtilisateur($_SESSION['utilisateur']['ID']);
-    $dateConnexion = strtotime($utilisateur->getDerniereConnexion());
-    $derniereConnexion = date('d/m/Y H:m', $dateConnexion);
+    $utilisateur = $utilisateurManager->read($_SESSION['utilisateur']['id']);
 
     // Récupération des réservations
-    $reservationDAO = new Reservation_DAO();
-    $reservations = $reservationDAO->getReservationByUserId($utilisateur->getId());
-    foreach ($reservations as $uneReservation) {
-        $appartAjoute = new Appartement($uneReservation->ID_APPARTEMENT, $uneReservation->IMAGE,$uneReservation->TITRE, $uneReservation->DESCRIPTION, $uneReservation->NUMERO, $uneReservation->ETAGE);
-        $reservationAjoutee = new Reservation($uneReservation->ID, $uneReservation->DATE_DEBUT, $uneReservation->DATE_FIN, $appartAjoute);
-        $utilisateur->addReservation($reservationAjoutee);
+    $reservations = $reservationManager->readAll($utilisateur->getId());
+
+
+    foreach ($reservations as $reservation) {
+        // Récupération des appartements attachés aux réservations
+        $appart = $appartementManager->read($reservation->getAppartement());
+        $reservation->setAppartement($appart);
+
+        // Récupération des états des réservations
+        $etat = $typeEtatManager->read($reservation->getEtat());
+        $reservation->setEtat($etat);
     }
 
-    $reservationsUtilisateur = $utilisateur->getReservations();
+
+
 
     $nbCase = 0;
 
