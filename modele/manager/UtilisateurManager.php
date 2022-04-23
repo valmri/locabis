@@ -28,8 +28,8 @@ class UtilisateurManager extends ManagerPrincipal
             $requete->bindValue(':nom', $utilisateur->getNom(), PDO::PARAM_STR);
             $requete->bindValue(':prenom', $utilisateur->getPrenom(), PDO::PARAM_STR);
             $requete->bindValue(':mel', $utilisateur->getMel(), PDO::PARAM_STR);
-            $requete->bindValue(':mdp', $utilisateur->getMotDePasse(), PDO::PARAM_STR);
-            $requete->bindValue(':date_inscription', $utilisateur->getDateInscription(), PDO::PARAM_STR);
+            $requete->bindValue(':mdp', password_hash($utilisateur->getMotDePasse(), PASSWORD_BCRYPT), PDO::PARAM_STR);
+            $requete->bindValue(':date_inscription', date('Y-m-d H:m:s'), PDO::PARAM_STR);
             $requete->execute();
 
             $resultat = true;
@@ -245,6 +245,37 @@ class UtilisateurManager extends ManagerPrincipal
             $requete->execute();
 
             $resultat = true;
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
+    /**
+     * Vérification d'une adresse mél
+     * @param Utilisateur $utilisateur
+     * @return bool
+     */
+    public function verifMel(Utilisateur $utilisateur) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Select count(*) as melExiste from utilisateur where mel = :mel";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':mel', $utilisateur->getMel(), PDO::PARAM_STR);
+            $requete->execute();
+            $reponse = $requete->fetch(PDO::FETCH_ASSOC);
+
+            if($reponse['melExiste'] <= 0) {
+                $resultat = true;
+            } else {
+                $resultat = false;
+            }
+
 
         } catch (Exception $e) {
             $resultat = false;

@@ -9,6 +9,7 @@ function controleur(string $page) {
     $actions['membre'] = 'membre/c_membre.php';
     $actions['deconnexion'] = 'membre/c_deconnexion.php';
     $actions['compte'] = 'membre/c_compte.php';
+    $actions['inscription'] = 'c_inscription.php';
 
     if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
         $actions['location'] = 'c_location.php';

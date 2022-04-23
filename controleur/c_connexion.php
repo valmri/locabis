@@ -45,7 +45,9 @@ if(
 
 // Fichiers de vues
 require_once './vue/elements/header.php';
-if(!estConnecte()) {
+if(!isset($_SESSION['utilisateur']) && !isset($_SESSION['jeton'])) {
     require_once './vue/v_connexion.php';
+} else {
+    header('Location:?page=membre');
 }
 require_once './vue/elements/footer.php';
