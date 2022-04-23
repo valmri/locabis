@@ -151,48 +151,59 @@ class AppartementManager extends ManagerPrincipal
     }
 
     /**
-     * Méthodes ancestrales
-     *
-     public function getNbAppartements() {
+     * Retourne le nombre total d'appartement présent en base de données
+     * @return false|int
+     */
+    public function getNbAppartements() {
 
-    $resultat = false;
+        $resultat = false;
 
-    $bdd = $this->getPDO();
-    $sql = "Select count(*) as nbAppart from appartement";
-    $requete = $bdd->prepare($sql);
-    $requete->execute();
-    $reponse = $requete->fetch();
+        $bdd = $this->getPDO();
+        $sql = "Select count(*) as nbAppart from appartement";
+        $requete = $bdd->prepare($sql);
+        $requete->execute();
+        $reponse = $requete->fetch();
 
-    if(count($reponse) > 0) {
-    $resultat = (int)$reponse['nbAppart'];
+        if(count($reponse) > 0) {
+            $resultat = (int)$reponse['nbAppart'];
+        }
+
+        return $resultat;
+
     }
 
-    return $resultat;
-
-    }
-
+    /**
+     * Récupération des appartements pour la page d'accueil
+     * @param int $numPremierePage
+     * @param int $nbParPage
+     * @return array|false
+     */
     public function getAppartements(int $numPremierePage, int $nbParPage) {
 
-    $resultat = false;
+        $resultat = false;
 
-    $bdd = $this->getPDO();
-    $sql = "Select a.ID, a.TITRE, a.IMAGE, t.LIBETYPE, i.VILLE from appartement a
-    join typeappart t on a.ID_TYPEAPPART = t.ID
-    join immeuble i on a.ID_IMMEUBLE = i.ID LIMIT :premier, :parpage";
-    $requete = $bdd->prepare($sql);
-    $requete->bindValue(':premier', $numPremierePage, PDO::PARAM_INT);
-    $requete->bindValue(':parpage', $nbParPage, PDO::PARAM_INT);
-    $requete->execute();
-    $reponse = $requete->fetchAll(PDO::FETCH_OBJ);
+        $bdd = $this->getPDO();
+        $sql = "select a.id, a.titre, a.photo, t.libetype, i.ville from appartement a 
+                join typeappart t on a.type = t.id 
+                join immeuble i on a.immeuble = i.id 
+                limit :premier, :parpage;";
+        $requete = $bdd->prepare($sql);
+        $requete->bindValue(':premier', $numPremierePage, PDO::PARAM_INT);
+        $requete->bindValue(':parpage', $nbParPage, PDO::PARAM_INT);
+        $requete->execute();
+        $reponse = $requete->fetchAll(PDO::FETCH_OBJ);
 
-    if(count($reponse) > 0) {
-    $resultat = $reponse;
+        if(count($reponse) > 0) {
+            $resultat = $reponse;
+        }
+
+        return $resultat;
+
     }
 
-    return $resultat;
-
-    }
-
+    /**
+     * Méthodes ancestrales
+     *
     public function getAppartementById(int $idAppartement) {
 
     $resultat = false;

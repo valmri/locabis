@@ -1,9 +1,16 @@
 <?php
-// Fichier de base de données
+// Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/AppartementManager.php';
+require_once './modele/manager/TypeAppartManager.php';
+require_once './modele/manager/ImmeubleManager.php';
+require_once './modele/entite/Appartement.php';
+require_once './modele/entite/TypeAppart.php';
+require_once './modele/entite/Immeuble.php';
 
-$appartementDAO = new Appartement_DAO();
+use modele\manager\AppartementManager;
+
+$appartementManager = new AppartementManager();
 
 // Récupération numero page
 if(isset($_GET['n']) && !empty($_GET['n']) && is_numeric($_GET['n'])) {
@@ -14,7 +21,7 @@ if(isset($_GET['n']) && !empty($_GET['n']) && is_numeric($_GET['n'])) {
 
 // Système de pagination
 // Connaitre le nombre d'appart
-$nbLocations = $appartementDAO->getNbAppartements();
+$nbLocations = $appartementManager->getNbAppartements();
 
 // Définition du nombre de page
 $locationParPage = 9;
@@ -24,7 +31,7 @@ $pages = ceil($nbLocations/$locationParPage);
 $premierePage = ($pageCourante * $locationParPage) - $locationParPage;
 
 // Récupération des locations
-$afficheLocation = $appartementDAO->getAppartements($premierePage, $locationParPage);
+$afficheLocation = $appartementManager->getAppartements($premierePage, $locationParPage);
 $nbCase = 0;
 
 // Chargement des vues

@@ -33,21 +33,21 @@
 
                 <div class="carteLoc">
                     <div class="carteLoc_entete">
-                        <?php if ($laLocation->IMAGE != null) :?>
-                            <img src="./images/apparts/<?php echo $laLocation->IMAGE; ?>.jpg" width="100%" alt="<?php echo $laLocation->LIBETYPE; ?>">
+                        <?php if ($laLocation->photo != null) :?>
+                            <img src="./images/apparts/<?php echo $laLocation->photo; ?>.jpg" width="100%" alt="<?php echo $laLocation->libetype; ?>">
                         <?php else :?>
-                        <img src="./assets/img/appart.jpg" width="100%" alt="<?php echo $laLocation->LIBETYPE; ?>">
+                        <img src="./assets/img/appart.jpg" width="100%" alt="<?php echo $laLocation->libetype; ?>">
                         <?php endif; ?>
                     </div>
                     <div class="carteLoc_contenu">
-                        <h2><?php echo $laLocation->TITRE; ?></h2>
+                        <h2><?php echo $laLocation->titre; ?></h2>
                         <span class="infoLoca">
-                            <i class="las la-map-marker"></i><?php echo $laLocation->VILLE; ?>
+                            <i class="las la-map-marker"></i><?php echo $laLocation->ville; ?>
                         </span></br>
                         <span class="infoLoca">
-                            <i class="las la-home"></i><?php echo $laLocation->LIBETYPE; ?>
+                            <i class="las la-home"></i><?php echo $laLocation->libetype; ?>
                         </span>
-                        <a href="?page=location&id=<?php echo $laLocation->ID; ?>" class="bouton">Consulter</a>
+                        <a href="?page=location&id=<?php echo $laLocation->id; ?>" class="bouton">Consulter</a>
                     </div>
                 </div>
                 
