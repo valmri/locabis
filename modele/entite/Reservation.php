@@ -30,12 +30,12 @@ class Reservation
     private $utilisateur;
 
     /**
-     * @var int Identifiant de l'appartement
+     * @var mixed Identifiant de l'appartement
      */
     private $appartement;
 
     /**
-     * @var int Identifiant de l'état de la réservation
+     * @var mixed Identifiant de l'état de la réservation
      */
     private $etat;
 
@@ -84,17 +84,17 @@ class Reservation
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getAppartement(): int
+    public function getAppartement()
     {
         return $this->appartement;
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getEtat(): int
+    public function getEtat()
     {
         return $this->etat;
     }
@@ -124,13 +124,19 @@ class Reservation
     }
 
     /**
-     * @param int $appartement
+     * @param mixed $appartement
      */
-    public function setAppartement(int $appartement)
+    public function setAppartement($appartement)
     {
         $this->appartement = $appartement;
     }
 
-
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    }
 
 }
