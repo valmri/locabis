@@ -30,7 +30,6 @@ $typeEtatManager = new TypeEtatManager();
 // Vérification de l'authentification
 if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
     $authentification = $utilisateurManager->estConnecte();
-
 }
 
 if(isset($authentification) && $authentification) {
@@ -41,7 +40,6 @@ if(isset($authentification) && $authentification) {
     // Récupération des réservations
     $reservations = $reservationManager->readAll($utilisateur->getId());
 
-
     foreach ($reservations as $reservation) {
         // Récupération des appartements attachés aux réservations
         $appart = $appartementManager->read($reservation->getAppartement());
@@ -51,9 +49,6 @@ if(isset($authentification) && $authentification) {
         $etat = $typeEtatManager->read($reservation->getEtat());
         $reservation->setEtat($etat);
     }
-
-
-
 
     $nbCase = 0;
 

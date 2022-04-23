@@ -1,18 +1,44 @@
 <?php
-// Fichier de base de données
+// Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
-require_once './modele/manager/authentification_dao.php';
-require_once './modele/entite/Utilisateur.php';
+require_once './modele/manager/UtilisateurManager.php';
+require_once './modele/manager/ReservationManager.php';
 require_once './modele/manager/AppartementManager.php';
-require_once './modele/manager/reservation_dao.php';
+require_once './modele/manager/TypeAppartManager.php';
+require_once './modele/manager/ImmeubleManager.php';
+require_once './modele/entite/Utilisateur.php';
+require_once './modele/entite/Reservation.php';
+require_once './modele/entite/Appartement.php';
+require_once './modele/entite/TypeAppart.php';
+require_once './modele/entite/Immeuble.php';
+
+use modele\manager\UtilisateurManager;
+use modele\entite\Utilisateur;
+
+use modele\manager\ReservationManager;
+use modele\entite\Reservation;
+
+use modele\manager\AppartementManager;
+use modele\entite\Appartement;
+
+use modele\manager\TypeAppartManager;
+use modele\entite\TypeAppart;
+
+use modele\manager\ImmeubleManager;
+use modele\entite\Immeuble;
+
+$utilisateurManager = new UtilisateurManager();
+$reservationManager = new ReservationManager();
+$appartementManager = new AppartementManager();
+$typeAppartManager = new TypeAppartManager();
+$immeubleManager = new ImmeubleManager();
 
 // Vérification de l'authentification
 if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
-    $unUtilisateur = new Authentification($_SESSION['utilisateur']['MEL'], $_SESSION['utilisateur']['MOTDEPASSE']);
-    $autorisation = $unUtilisateur->estConnecte();
+    $authentification = $utilisateurManager->estConnecte();
 }
 
-if(isset($autorisation) && $autorisation) {
+if(isset($authentification) && $authentification) {
 
     if(
         isset($_GET['id']) &&
@@ -22,11 +48,19 @@ if(isset($autorisation) && $autorisation) {
     
         // Récupération des données
         $idLocation = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-        $idUtilisateur = $_SESSION['utilisateur']['ID'];
+        $idUtilisateur = $_SESSION['utilisateur']['id'];
     
         // Récupération des informations de la location
-        $appartementDAO = new Appartement_DAO();
-        $laLocation = $appartementDAO->getAppartementById($idLocation);
+        $laLocation = $appartementManager->read($idLocation);
+
+        // Récupération du type
+        $type = $typeAppartManager->read($laLocation->getType());
+        $laLocation->setType($type);
+
+        // Récupération de l'immeuble
+        $immeuble = $immeubleManager->read($laLocation->getImmeuble());
+        $laLocation->setImmeuble($immeuble);
+
 
         if(
             isset($_POST['dateDebut']) &&
@@ -46,14 +80,17 @@ if(isset($autorisation) && $autorisation) {
             $heureDebut = filter_input(INPUT_POST, 'heureDebut', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $heureFin = filter_input(INPUT_POST, 'heureFin', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            // Création du tableau de données
+            $reservation = new Reservation();
 
-            $reservationDAO = new Reservation_DAO();
+            $reservation->setUtilisateur($idUtilisateur);
+            $reservation->setAppartement($idLocation);
+            $reservation->setDateDebut($dateDebut.' '.$heureDebut);
+            $reservation->setDateFin($dateFin.' '.$heureFin);
+            $reponse = $reservationManager->create($reservation);
 
-            try {
-                $reservationDAO->addReservation($idUtilisateur,$idLocation, $dateDebut.' '.$heureDebut, $dateFin.' '.$heureFin);
+            if($reponse) {
                 $msgInfo = "Réservation effectuée avec succès !";
-            } catch (Exception $e) {
+            } else {
                 $msgErreur = "Erreur lors de la réservation.";
             }
 
