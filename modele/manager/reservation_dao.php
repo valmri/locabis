@@ -27,15 +27,34 @@ class Reservation_DAO extends DAO
 
         // Requête SQL
         $bdd = $this->getPDO();
-        $sql = "Select * from reservation r 
-                join appartement a on r.ID_APPARTEMENT = a.ID    
-                where ID_UTILISATEUR = :id";
+        $sql = "Select * from reservation r where ID_UTILISATEUR = :id";
         $requete = $bdd->prepare($sql);
         $requete->bindValue(':id', $idUtilisateur, PDO::PARAM_INT);
         $requete->execute();
         $reponse = $requete->fetchAll(PDO::FETCH_OBJ);
 
         if(count($reponse) > 0) {
+            $resultat = $reponse;
+        }
+
+        return $resultat;
+
+    }
+
+    public function getEtat(int $idEtat) {
+
+        $resultat = false;
+
+        $bdd = $this->getPDO();
+        $sql = "Select * from typeetat 
+                where ID = :id";
+        $requete = $bdd->prepare($sql);
+        $requete->bindValue(':id', $idEtat, PDO::PARAM_INT);
+        $requete->execute();
+        $reponse = $requete->fetch(PDO::FETCH_OBJ);
+
+
+        if(!empty($reponse)) {
             $resultat = $reponse;
         }
 
