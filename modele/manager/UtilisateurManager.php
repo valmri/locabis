@@ -200,6 +200,57 @@ class UtilisateurManager extends ManagerPrincipal
 
         return $resultat;
 
+    }
+
+    /**
+     * Mise à jour de l'adresse mel de l'utilisateur
+     * @param Utilisateur $utilisateur
+     * @return bool
+     */
+    public function updateMel(Utilisateur $utilisateur) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Update utilisateur set mel = :mel where id = :id";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':mel', $utilisateur->getMel(), PDO::PARAM_STR);
+            $requete->bindValue(':id', $utilisateur->getId(), PDO::PARAM_INT);
+            $requete->execute();
+
+            $resultat = true;
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
+    /**
+     * Mise à jour du mot de passe de l'utilisateur
+     * @param Utilisateur $utilisateur
+     * @return bool
+     */
+    public function updateMotDePasse(Utilisateur $utilisateur) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Update utilisateur set motDePasse = :mdp where id = :id";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':mdp', $utilisateur->getMotDePasse(), PDO::PARAM_STR);
+            $requete->bindValue(':id', $utilisateur->getId(), PDO::PARAM_INT);
+            $requete->execute();
+
+            $resultat = true;
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
 
     }
 
