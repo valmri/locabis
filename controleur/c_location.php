@@ -1,7 +1,9 @@
 <?php
 // Fichier de base de données
-require_once './modele/dao/dao.php';
-require_once './modele/dao/appartement_dao.php';
+require_once './modele/manager/ManagerPrincipal.php';
+require_once './modele/manager/AppartementManager.php';
+require_once './modele/entite/Appartement.php';
+require_once './modele/entite/typeappart.php';
 
 $appartementDAO = new Appartement_DAO();
 
@@ -13,8 +15,14 @@ if(
 
     $idLocation = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-    // Récupération des informations de la location
-    $laLocation = $appartementDAO->getAppartementById($idLocation);
+    // Récupération d'un appartement
+    $appartement = $appartementDAO->getAppartementById($idLocation);
+    $laLocation = new Appartement($appartement->ID, $appartement->IMAGE,$appartement->TITRE, $appartement->DESCRIPTION, $appartement->NUMERO, $appartement->ETAGE);
+
+    // Récupération type appart
+    $typeAppart = $appartementDAO->getTypeAppart($idLocation);
+    $typeLocation = new TypeAppart((int)$typeAppart->ID, $typeAppart->LIBETYPE, $typeAppart->TARIFLOCABASE);
+    var_dump($typeLocation);
 
     // Chargements des vues
     require_once './vue/elements/header.php';

@@ -1,10 +1,10 @@
 <?php
 // Fichier de base de données
-require_once './modele/dao/dao.php';
-require_once './modele/dao/authentification_dao.php';
-require_once './modele/entite/utilisateur.php';
-require_once './modele/dao/appartement_dao.php';
-require_once './modele/dao/reservation_dao.php';
+require_once './modele/manager/ManagerPrincipal.php';
+require_once './modele/manager/authentification_dao.php';
+require_once './modele/entite/Utilisateur.php';
+require_once './modele/manager/AppartementManager.php';
+require_once './modele/manager/reservation_dao.php';
 
 // Vérification de l'authentification
 if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {

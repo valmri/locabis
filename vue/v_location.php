@@ -11,9 +11,9 @@
                 </div>
 
                 <div class="contenuInfo">
-                    <p><span class="titreInfo">Type :</span> <?php echo $laLocation->LIBETYPE; ?></p>
-                    <p><span class="titreInfo">Adresse :</span> <?php echo $laLocation->ADRESSE; ?> </p>
-                    <p><span class="titreInfo">Ville :</span> <?php echo $laLocation->VILLE; ?> </p>
+                    <p><span class="titreInfo">Type :</span> <?php echo $typeLocation->getLibeType(); ?></p>
+                    <p><span class="titreInfo">Adresse :</span> <?php echo $laLocation->getAdresse(); ?> </p>
+                    <p><span class="titreInfo">Ville :</span> <?php echo $laLocation->getVille(); ?> </p>
 
                     <?php if ($laLocation->ASCENSSEUR) : ?>
                         <p><span class="titreInfo">Ascenseur :</span> Oui</p>

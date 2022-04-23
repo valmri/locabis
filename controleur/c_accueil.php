@@ -1,7 +1,7 @@
 <?php
 // Fichier de base de données
-require_once './modele/dao/dao.php';
-require_once './modele/dao/appartement_dao.php';
+require_once './modele/manager/ManagerPrincipal.php';
+require_once './modele/manager/AppartementManager.php';
 
 $appartementDAO = new Appartement_DAO();
 
