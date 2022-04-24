@@ -164,4 +164,28 @@ class ReservationManager extends ManagerPrincipal
 
     }
 
+    /**
+     * Retourne les dates de réservation d'un appartement
+     * @param int $idAppartement
+     * @return bool|array
+     */
+    public function getDatesReservees(int $idAppartement) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Select date_debut, date_fin from reservation where appartement = :id";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':id', $idAppartement, PDO::PARAM_INT);
+            $requete->execute();
+            $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
 }

@@ -61,7 +61,6 @@ if(isset($authentification) && $authentification) {
         $immeuble = $immeubleManager->read($laLocation->getImmeuble());
         $laLocation->setImmeuble($immeuble);
 
-
         if(
             isset($_POST['dateDebut']) &&
             isset($_POST['dateFin']) &&

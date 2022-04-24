@@ -17,6 +17,9 @@
                 <ul>
                     <?php if (!isset($_SESSION['utilisateur']) && !isset($_SESSION['jeton'])) :?>
                     <li>
+                        <a class="boutonMenu" href="?page=inscription">Inscription</a>
+                    </li>
+                    <li>
                         <a class="boutonMenu" href="?page=connexion">Connexion</a>
                     </li>
                     <?php else :?>
