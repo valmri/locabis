@@ -47,10 +47,10 @@
                                 <i class="<?php echo $reservation->getEtat()->getIcone();?>"></i><strong>Statut : </strong><?php echo $reservation->getEtat()->getLibelle();?>
                             </span></br>
                             <span class="infoLoca">
-                                <i class="las la-calendar"></i><strong>Début : </strong><?php echo date('d/m/Y H:m', strtotime($reservation->getDateDebut())); ?>
+                                <i class="las la-calendar"></i><strong>Début : </strong><?php echo date('d/m/Y', strtotime($reservation->getDateDebut())); ?>
                             </span></br>
                             <span class="infoLoca">
-                                <i class="las la-calendar"></i><strong>Fin : </strong><?php echo date('d/m/Y H:m', strtotime($reservation->getDateFin())); ?>
+                                <i class="las la-calendar"></i><strong>Fin : </strong><?php echo date('d/m/Y', strtotime($reservation->getDateFin())); ?>
                             </span>
                             <input class="idReservations" type="hidden" value="<?= $reservation->getId(); ?>">
                             <a href="?page=location&id=<?php echo $reservation->getAppartement()->getId(); ?>" class="bouton">Consulter</a>
