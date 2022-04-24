@@ -47,6 +47,7 @@
                 <p><?php echo $appartement->getDescription(); ?></p>
             </div>
 
+
             <?php if ($estEquipe) : ?>
             <h3>Equipements :</h3>
             <div class="equipements">
