@@ -1,4 +1,4 @@
-<body>
+<body onload="recuperationDatesReservees(<?= $laLocation->getId() ?>)">
 
     <div class="contenu">
 
@@ -53,7 +53,6 @@
             <?php endif; ?>
 
             <div class="contenuPage">
-
                 <form action="#" method="post">
                     <label for="dateDebut">Date de début :</label>
                     <input type="text" name="dateDebut" id="dateDebut" placeholder="Début du séjour" required>

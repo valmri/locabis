@@ -24,8 +24,8 @@ function getRequeteHttp() {
     return requeteHttp;
 }
 
-// Récupération des dates déjà réservées (fonction anonyme)
-let recuperationDatesReservees = function (idAppartement) {
+// Récupération des dates déjà réservées
+function recuperationDatesReservees(idAppartement) {
 
     let requeteHTTP = getRequeteHttp();
 
@@ -47,17 +47,48 @@ let recuperationDatesReservees = function (idAppartement) {
     }
 
 }
-recuperationDatesReservees(1);
 
 function constructionCalendrier(requeteHTTP) {
 
-    /**
-     * Todo: Faire les dates
-     * 1 - Récupérer les dates
-     * 2 - Les transformer au bon format
-     * 3 - Les ajoutés dans un tableau
-     * /!\ Revoir le mécanisme
-     */
-    console.log(requeteHTTP);
+    let lesDates = requeteHTTP.responseXML.childNodes.item(0).childNodes;
+
+    // Création de l'objet fichier
+    let fichier = new Array();
+
+    lesDates.forEach(uneDate=>{
+
+        // Création des objets de dates
+        let dateDebut = new Date(uneDate.childNodes.item(0).childNodes.item(0).data);
+        let dateFin = new Date(uneDate.childNodes.item(1).childNodes.item(0).data);
+
+        // Ajout des dates dans le tableau
+        fichier.push({
+            from: dateDebut.toLocaleDateString('fr'),
+            to: dateFin.toLocaleDateString('fr')
+        })
+
+    });
+
+    // Définition du calendrier
+    // Date courante
+    let dateCourante = new Date();
+
+    // Configuration
+    let config = {
+        plugins: [
+            new rangePlugin({ input: "#dateFin"})
+        ],
+        locale: "fr",
+        dateFormat: "d-m-Y",
+        minDate: dateCourante.toLocaleDateString('fr'),
+        disable: {}
+    };
+
+    config.disable = fichier;
+
+    console.log(config)
+
+    // Construction du calendrier
+    const calendar = flatpickr('#dateDebut', config);
 
 }

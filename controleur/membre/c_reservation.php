@@ -64,27 +64,21 @@ if(isset($authentification) && $authentification) {
         if(
             isset($_POST['dateDebut']) &&
             isset($_POST['dateFin']) &&
-            isset($_POST['heureDebut']) &&
-            isset($_POST['heureFin']) &&
             !empty($_POST['dateDebut']) &&
-            !empty($_POST['dateFin']) &&
-            !empty($_POST['heureDebut']) &&
-            !empty($_POST['heureFin'])
+            !empty($_POST['dateFin'])
         ) {
 
             // Nettoyage des données
             $dateDebut = filter_input(INPUT_POST, 'dateDebut', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $dateFin = filter_input(INPUT_POST, 'dateFin', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            $heureDebut = filter_input(INPUT_POST, 'heureDebut', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $heureFin = filter_input(INPUT_POST, 'heureFin', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
             $reservation = new Reservation();
 
             $reservation->setUtilisateur($idUtilisateur);
             $reservation->setAppartement($idLocation);
-            $reservation->setDateDebut($dateDebut.' '.$heureDebut);
-            $reservation->setDateFin($dateFin.' '.$heureFin);
+            $reservation->setDateDebut(date('Y-m-d', strtotime($dateDebut)));
+            $reservation->setDateFin(date('Y-m-d', strtotime($dateFin)));
+
             $reponse = $reservationManager->create($reservation);
 
             if($reponse) {

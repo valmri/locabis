@@ -15,7 +15,7 @@ $reservationManager = new ReservationManager();
 // Récupération de l'identifiant de l'appart
 if(isset($_POST['id']) && !empty($_POST['id']) && is_numeric($_POST['id'])) {
 
-    // Nettoyage de la donnée
+    // Nettoyage de l'identifiant
     $idAppartement = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 
     // Récupération des dates
