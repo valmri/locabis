@@ -157,3 +157,15 @@ h1 {
     color: #000;
     text-transform: none;
 }
+
+.equipements {
+    display: flex;
+}
+
+.equipement {
+    display: inherit;
+    align-items: center;
+    padding: 5px 20px;
+    margin-right: 10px;
+    border: 1px solid #241F14;
+}

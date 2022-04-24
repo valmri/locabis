@@ -19,6 +19,11 @@ class Equipement
      */
     private $libelle;
 
+    /**
+     * @var int $quantite Quantité d'équipement
+     */
+    private $quantite;
+
     public function __construct() {
 
     }
@@ -61,6 +66,22 @@ class Equipement
     public function setLibelle(string $libelle)
     {
         $this->libelle = $libelle;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantite(): int
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * @param int $quantite
+     */
+    public function setQuantite(int $quantite)
+    {
+        $this->quantite = $quantite;
     }
 
 }

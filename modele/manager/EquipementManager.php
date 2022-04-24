@@ -2,6 +2,8 @@
 
 namespace modele\manager;
 
+use Ds\Vector;
+use modele\entite\Appartement;
 use modele\entite\Equipement;
 use PDO;
 
@@ -124,6 +126,43 @@ class EquipementManager extends ManagerPrincipal
             $requete->execute();
 
             $resultat = true;
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
+    public function getEquipementsByIdAppart(int $idAppartement) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Select * from equipement_appart where id_appartement = :idappart";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':idappart', $idAppartement, PDO::PARAM_INT);
+            $requete->execute();
+            $equipements = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+            if(count($equipements) > 0) {
+                $collectionEquipement = new Vector();
+
+                foreach ($equipements as $equipement) {
+
+                    $unEquipement = $this->read($equipement['id_equipement']);
+                    $unEquipement->setQuantite($equipement['quantite']);
+                    $collectionEquipement->push($unEquipement);
+
+                }
+
+                $resultat = $collectionEquipement;
+
+            } else {
+                $resultat = false;
+            }
+
 
         } catch (Exception $e) {
             $resultat = false;

@@ -47,6 +47,19 @@
                 <p><?php echo $appartement->getDescription(); ?></p>
             </div>
 
+            <?php if ($estEquipe) : ?>
+            <h3>Equipements :</h3>
+            <div class="equipements">
+                <?php foreach ($appartement->getEquipements() as $equipement) : ?>
+                <div class="equipement">
+                    <i class="<?= $equipement->getIcone(); ?>"></i>
+                    <p><?= $equipement->getQuantite().' '.$equipement->getLibelle(); ?></p>
+                </div>
+                <?php endforeach; ?>
+                
+            </div>
+            <?php endif; ?>
+
         </div>
 
     </div>

@@ -2,6 +2,8 @@
 
 namespace modele\entite;
 
+use Ds\Vector;
+
 class Appartement
 {
     /**
@@ -48,6 +50,11 @@ class Appartement
      * @var mixed Identifiant du type de l'appartement
      */
     private $type;
+
+    /**
+     * @var Vector Collection d'équipements
+     */
+    private $equipements;
 
     public function __construct() {
 
@@ -189,5 +196,20 @@ class Appartement
         $this->type = $type;
     }
 
+    /**
+     * @return Vector
+     */
+    public function getEquipements(): Vector
+    {
+        return $this->equipements;
+    }
+
+    /**
+     * @param Vector $equipements
+     */
+    public function setEquipements(Vector $equipements)
+    {
+        $this->equipements = $equipements;
+    }
 
 }
