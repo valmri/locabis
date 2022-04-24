@@ -52,12 +52,10 @@
             <div class="contenuPage">
                 <form action="#" method="post">
                     <label for="dateDebut">Date de début :</label>
-                    <input type="text" name="dateDebut" id="dateDebut" placeholder="Début du séjour" required>
-                    <input type="time" name="heureDebut" id="heureDebut" ><br>
+                    <input type="text" name="dateDebut" id="dateDebut" placeholder="Début du séjour" required></br>
 
                     <label for="dateFin">Date de fin :</label>
-                    <input type="text" name="dateFin" id="dateFin" placeholder="Fin du séjour" required>
-                    <input type="time" name="heureFin" id="heureFin" ><br>
+                    <input type="text" name="dateFin" id="dateFin" placeholder="Fin du séjour" required></br>
 
                     <button type="submit">Réserver</button>
                 </form>
