@@ -23,9 +23,6 @@
 
                     <p><span class="titreInfo">Prix :</span> <?php echo $laLocation->getType()->getTarifLocaBase(); ?>€</p>
 
-                    <?php if (isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) :?>
-                        <a href="?page=reserver&id=<?php echo $laLocation->getId(); ?>" class="bouton">Louer</a>
-                    <?php endif; ?>
                 </div>
 
             </div>
