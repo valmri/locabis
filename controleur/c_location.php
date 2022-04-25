@@ -116,6 +116,10 @@ if(
 
                         $avisManager->create($avis);
 
+                        // Modification de l'état d'une réservation
+                        $reservation->setEtat(5);
+                        $reservationManager->updateEtat($reservation);
+
                         $msgInfo = "Votre avis a bien été enregistré !";
 
                     } else {

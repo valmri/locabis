@@ -76,7 +76,7 @@
             <div class="carteAvis">
 
                 
-                <h3>Avis :</h3>
+                <h3 id="avis">Avis :</h3>
                 <?php if(isset($reservation) && $reservation) : ?>
 
                 <?php if(!$avisExiste && $reservation->getEtat() === "3") : ?>

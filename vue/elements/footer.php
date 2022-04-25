@@ -8,6 +8,7 @@
 <script src="./node_modules/flatpickr/dist/plugins/minMaxTimePlugin.js"></script>
 <script src="./assets/js/ajax/annulationReservation.js"></script>
 <script src="./assets/js/ajax/constructionCalendrier.js"></script>
+<script src="../../assets/js/ajax/archiverReservation.js"></script>
 
 </body>
 </html>

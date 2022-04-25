@@ -54,7 +54,10 @@
                             </span>
                             <input class="idReservations" type="hidden" value="<?= $reservation->getId(); ?>">
                             <a href="?page=location&id=<?php echo $reservation->getAppartement()->getId(); ?>" class="bouton">Consulter</a>
-                            <?php if($reservation->getEtat()->getId() !== 4): ?>
+                            <?php if($reservation->getEtat()->getId() === 3): ?>
+                            <button onclick="archiverReservation(<?= $reservation->getAppartement()->getId(); ?>, <?= $reservation->getId(); ?>)" class="bouton">Archiver</button>
+                            <?php endif; ?>
+                            <?php if($reservation->getEtat()->getId() === 1 && $reservation->getEtat()->getId() === 3 && $reservation->getEtat()->getId() === 3): ?>
                             <button onclick='annulationReservation(<?= $reservation->getId(); ?>, "<?= $reservation->getAppartement()->getTitre(); ?>")' class='bouton'>Annuler</button>
                             <?php endif; ?>
                         </div>
