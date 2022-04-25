@@ -98,40 +98,42 @@ if(
                     && isset($_POST['commentaire'])
                     && !empty($_POST['note'])
                     && !empty($_POST['commentaire'])
-                    && is_numeric($_POST['note'])
                 ) {
-                    if($_POST['note'] <= 5) {
 
-                        // Nettoyage des valeurs
-                        $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_INT);
-                        $commentaire = filter_input(INPUT_POST, 'commentaire', FILTER_SANITIZE_STRING);
+                    if(is_numeric($_POST['note'])) {
+                        if($_POST['note'] <= 5) {
 
-                        // Enregistrement de l'avis
-                        $avis = new Avis();
-                        $avis->setReservation($reservation->getId());
-                        $avis->setUtilisateur($utilisateur->getId());
-                        $avis->setAppartement($idAppartement);
-                        $avis->setNote($note);
-                        $avis->setCommentaire($commentaire);
+                            // Nettoyage des valeurs
+                            $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_INT);
+                            $commentaire = filter_input(INPUT_POST, 'commentaire', FILTER_SANITIZE_STRING);
 
-                        $avisManager->create($avis);
+                            // Enregistrement de l'avis
+                            $avis = new Avis();
+                            $avis->setReservation($reservation->getId());
+                            $avis->setUtilisateur($utilisateur->getId());
+                            $avis->setAppartement($idAppartement);
+                            $avis->setNote($note);
+                            $avis->setCommentaire($commentaire);
 
-                        // Modification de l'état d'une réservation
-                        $reservation->setEtat(5);
-                        $reservationManager->updateEtat($reservation);
+                            $avisManager->create($avis);
 
-                        $msgInfo = "Votre avis a bien été enregistré !";
+                            // Modification de l'état d'une réservation
+                            $reservation->setEtat(5);
+                            $reservationManager->updateEtat($reservation);
 
+                            $msgInfo = "Votre avis a bien été enregistré !";
+
+                        } else {
+                            $msgErreur = "La note doit être inférieure ou égale à 5.";
+                        }
                     } else {
-                        $msgErreur = "La note doit être inférieure ou égale à 5.";
+                        $msgErreur = "La note doit être un entier.";
                     }
 
             }
 
         }
 
-        } else {
-            $msgErreur = "Erreur lors de l'ajout de l'avis.";
         }
 
     }
