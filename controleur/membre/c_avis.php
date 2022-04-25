@@ -53,7 +53,6 @@ if(
     $idAvis = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
     $avis = $avisManager->read($idAvis);
 
-
     // Récupération du commentaire modifier
     if(
         isset($_POST['commentaire'])
@@ -97,12 +96,7 @@ if(
             header("Location:?page=deconnexion");
         }
 
-
     }
-
-
-
-
 
     // Chargement des vues
     require_once './vue/elements/header.php';
