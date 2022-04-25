@@ -4,6 +4,7 @@ namespace modele\manager;
 
 use Ds\Vector;
 use modele\entite\Avis;
+use modele\entite\Utilisateur;
 use PDO;
 
 class AvisManager extends ManagerPrincipal
@@ -23,7 +24,7 @@ class AvisManager extends ManagerPrincipal
         try {
 
             $bdd = $this->getPDO();
-            $sql = "Insert into avis(id_reservation, id_appartement, utilisateur, note, commentaire, date_publication) values (:idreservation, :idappart, :idutil, :note, :commentaire, now());";
+            $sql = "Insert into avis(reservation, appartement, utilisateur, note, commentaire, date_publication) values (:idreservation, :idappart, :idutil, :note, :commentaire, now());";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idreservation', $avis->getReservation(), PDO::PARAM_INT);
             $requete->bindValue(':idappart', $avis->getAppartement(), PDO::PARAM_INT);
@@ -48,14 +49,13 @@ class AvisManager extends ManagerPrincipal
      * @param int $idAppart
      * @return false|mixed|object|\stdClass|null
      */
-    public function read(int $idReservation, int $idAppart) {
+    public function read(int $idReservation) {
 
         try {
             $bdd = $this->getPDO();
-            $sql = "Select * from avis where id_reservation = :idr and id_appartement = :ida;";
+            $sql = "Select * from avis where reservation = :idr;";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idr', $idReservation, PDO::PARAM_INT);
-            $requete->bindValue(':ida', $idAppart, PDO::PARAM_INT);
             $requete->execute();
             $resultat =$requete->fetchObject('modele\entite\Avis');
         } catch (Exception $e) {
@@ -97,7 +97,7 @@ class AvisManager extends ManagerPrincipal
         try {
 
             $bdd = $this->getPDO();
-            $sql = "Update avis set note = :note, commentaire = :com, date_publication = now() where id_appartement = :ida and id_reservation = :idr;";
+            $sql = "Update avis set note = :note, commentaire = :com, date_publication = now() where appartement = :ida and reservation = :idr;";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':note', $avis->getNote(), PDO::PARAM_INT);
             $requete->bindValue(':com', $avis->getCommentaire(), PDO::PARAM_STR);
@@ -125,7 +125,7 @@ class AvisManager extends ManagerPrincipal
         try {
 
             $bdd = $this->getPDO();
-            $sql = "Delete from avis where id_reservation = :idr and id_appartement = :ida limit 1;";
+            $sql = "Delete from avis where reservation = :idr and appartement = :ida limit 1;";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':id', $avis->getId(), PDO::PARAM_INT);
             $requete->execute();
@@ -150,10 +150,10 @@ class AvisManager extends ManagerPrincipal
         try {
 
             $bdd = $this->getPDO();
-            $sql = "Select a.note, a.commentaire, a.date_publication, u.prenom from avis a
-                    join reservation r on a.id_reservation = r.id
+            $sql = "Select a.note, a.commentaire, a.date_publication, u.id as id_utilisateur, u.prenom from avis a
+                    join reservation r on a.reservation = r.id
                     join utilisateur u on r.utilisateur = u.id
-                    where id_appartement = :idappart 
+                    where a.appartement = :idappart 
                     order by a.date_publication desc";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idappart', $idAppartement, PDO::PARAM_INT);
@@ -163,10 +163,13 @@ class AvisManager extends ManagerPrincipal
             if(count($tableauAvis) > 0) {
                 $collectionAvis = new Vector();
 
+                $utilisateurManager = new UtilisateurManager();
+
                 foreach ($tableauAvis as $avis) {
 
                     $unAvis = new Avis();
-                    $unAvis->setUtilisateur($avis['prenom']);
+                    $utilisateur = $utilisateurManager->read($avis['id_utilisateur']);
+                    $unAvis->setUtilisateur($utilisateur);
                     $unAvis->setDatePublication(date('d/m/Y', strtotime($avis['date_publication'])));
                     $unAvis->setNote($avis['note']);
                     $unAvis->setCommentaire($avis['commentaire']);
@@ -199,7 +202,7 @@ class AvisManager extends ManagerPrincipal
 
         try {
             $bdd = $this->getPDO();
-            $sql = "Select * from avis where utilisateur = :idu and id_appartement = :ida;";
+            $sql = "Select * from avis where utilisateur = :idu and appartement = :ida;";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idu', $idUtilisateur, PDO::PARAM_INT);
             $requete->bindValue(':ida', $idAppart, PDO::PARAM_INT);

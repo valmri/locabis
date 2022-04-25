@@ -100,7 +100,12 @@
                 <?php foreach ($appartement->getAvis() as $avis) : ?>
                 <div class="avis">
                     <div class="avisEntete">
-                        <p><?= $avis->getUtilisateur();?> - <?= $avis->getDatePublication();?></p>
+                        <p><?= $avis->getUtilisateur()->getPrenom();?> - <?= $avis->getDatePublication();?></p>
+
+                        <?php if(isset($avisExiste) && $avisExiste && $utilisateur->getId() === $avis->getUtilisateur()->getId()) :?>
+                            <a href="?page=avis&id=<?= $reservation->getId() ?>">Modifier</a>
+                        <?php endif; ?>
+
                         <span>Note : <?= $avis->getNote();?>/5</span>
                     </div>
                     <div class="avisCorps">
