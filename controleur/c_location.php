@@ -71,12 +71,6 @@ if(
         $appartement->setEquipements($equipements);
     }
 
-    // Récupération des avis
-    $lesAvis = $avisManager->getAvisByIdAppart($appartement->getId());
-    if($lesAvis) {
-        $appartement->setAvis($lesAvis);
-    }
-
     // Vérification de l'authentification
     if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
         $authentification = $utilisateurManager->estConnecte();
@@ -122,6 +116,8 @@ if(
 
                         $avisManager->create($avis);
 
+                        $msgInfo = "Votre avis a bien été enregistré !";
+
                     } else {
                         $msgErreur = "La note doit être inférieure ou égale à 5.";
                     }
@@ -134,6 +130,12 @@ if(
             $msgErreur = "Erreur lors de l'ajout de l'avis.";
         }
 
+    }
+
+    // Récupération des avis
+    $lesAvis = $avisManager->getAvisByIdAppart($appartement->getId());
+    if($lesAvis) {
+        $appartement->setAvis($lesAvis);
     }
 
 

@@ -34,6 +34,20 @@
 
         <div class="page">
 
+            <?php if (isset($msgErreur)) :?>
+                <div class="message msgErreur">
+                    <i class="las la-exclamation-triangle"></i>
+                    <p><?php echo $msgErreur; ?></p>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($msgInfo)) :?>
+                <div class="message msgInfo">
+                    <i class="las la-info-circle"></i>
+                    <p><?php echo $msgInfo; ?></p>
+                </div>
+            <?php endif; ?>
+
             <div class="entetePage">
                 <?php if ($appartement->getPhoto() != null) : ?>
                     <img src="./images/apparts/<?php echo $appartement->getPhoto(); ?>.jpg" width="50%" alt="<?php $appartement->getType()->getLibeType(); ?>">
