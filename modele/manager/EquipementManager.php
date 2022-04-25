@@ -135,6 +135,11 @@ class EquipementManager extends ManagerPrincipal
 
     }
 
+    /**
+     * Récupère tous les équipements d'un appartement
+     * @param int $idAppartement
+     * @return Vector|false
+     */
     public function getEquipementsByIdAppart(int $idAppartement) {
 
         try {

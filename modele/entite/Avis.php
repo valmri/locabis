@@ -29,6 +29,10 @@ class Avis
      */
     private $appartement;
 
+    /**
+     * @var string Prénom de l'utilisateur
+     */
+    private $utilisateur;
 
     public function __construct() {
 
@@ -88,6 +92,46 @@ class Avis
     public function setAppartement(int $appartement)
     {
         $this->appartement = $appartement;
+    }
+
+    /**
+     * @param int $note
+     */
+    public function setNote(int $note)
+    {
+        $this->note = $note;
+    }
+
+    /**
+     * @param string $commentaire
+     */
+    public function setCommentaire(string $commentaire)
+    {
+        $this->commentaire = $commentaire;
+    }
+
+    /**
+     * @param string $date_publication
+     */
+    public function setDatePublication(string $date_publication)
+    {
+        $this->date_publication = $date_publication;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUtilisateur(): string
+    {
+        return $this->utilisateur;
+    }
+
+    /**
+     * @param string $utilisateur
+     */
+    public function setUtilisateur(string $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
     }
 
 }

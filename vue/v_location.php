@@ -61,15 +61,20 @@
 
             <div class="carteAvis">
 
+                <?php if ($lesAvis) : ?>
+                <h3>Avis :</h3>
+                <?php foreach ($appartement->getAvis() as $avis) : ?>
                 <div class="avis">
                     <div class="avisEntete">
-                        <p>Utilisateur - 00/00/0000</p>
-                        <span>Note/5</span>
+                        <p><?= $avis->getUtilisateur();?> - <?= $avis->getDatePublication();?></p>
+                        <span>Note : <?= $avis->getNote();?>/5</span>
                     </div>
                     <div class="avisCorps">
-                        <p>Blablabla</p>
+                        <p><?= $avis->getCommentaire();?></p>
                     </div>
                 </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
 
             </div>
 

@@ -2,7 +2,9 @@
 
 namespace modele\manager;
 
+use Ds\Vector;
 use modele\entite\Avis;
+use PDO;
 
 class AvisManager extends ManagerPrincipal
 {
@@ -65,17 +67,15 @@ class AvisManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération de tous les avis d'un appart
-     * @param int $idAppartement
+     * Récupère tous les avis
      * @return array|false
      */
-    public function readAll(int $idAppartement) {
+    public function readAll() {
 
         try {
             $bdd = $this->getPDO();
-            $sql = "Select * from avis where id_appartement = :idappart;";
+            $sql = "Select * from avis;";
             $requete = $bdd->prepare($sql);
-            $requete->bindValue(':idappart', $idAppartement, PDO::PARAM_INT);
             $requete->execute();
             $requete->setFetchMode(PDO::FETCH_CLASS, 'modele\entite\Avis');
             $resultat =$requete->fetchAll();
@@ -131,6 +131,50 @@ class AvisManager extends ManagerPrincipal
             $requete->execute();
 
             $resultat = true;
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
+    public function getAvisByIdAppart(int $idAppartement) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Select a.note, a.commentaire, a.date_publication, u.prenom from avis a
+                    join reservation r on a.id_reservation = r.id
+                    join utilisateur u on r.utilisateur = u.id
+                    where id_appartement = :idappart 
+                    order by a.date_publication desc";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':idappart', $idAppartement, PDO::PARAM_INT);
+            $requete->execute();
+            $tableauAvis = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+            if(count($tableauAvis) > 0) {
+                $collectionAvis = new Vector();
+
+                foreach ($tableauAvis as $avis) {
+
+                    $unAvis = new Avis();
+                    $unAvis->setUtilisateur($avis['prenom']);
+                    $unAvis->setDatePublication(date('d/m/Y', strtotime($avis['date_publication'])));
+                    $unAvis->setNote($avis['note']);
+                    $unAvis->setCommentaire($avis['commentaire']);
+                    $collectionAvis->push($unAvis);
+
+                }
+
+                $resultat = $collectionAvis;
+
+            } else {
+                $resultat = false;
+            }
+
 
         } catch (Exception $e) {
             $resultat = false;

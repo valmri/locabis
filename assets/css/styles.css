@@ -169,3 +169,18 @@ h1 {
     margin-right: 10px;
     border: 1px solid #241F14;
 }
+
+.avis {
+    padding: 5px 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border: 1px solid #241F14;
+    width: 45%;
+}
+
+.avisEntete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #241F14;
+}

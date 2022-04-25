@@ -5,10 +5,12 @@ require_once './modele/manager/AppartementManager.php';
 require_once './modele/manager/TypeAppartManager.php';
 require_once './modele/manager/ImmeubleManager.php';
 require_once './modele/manager/EquipementManager.php';
+require_once './modele/manager/AvisManager.php';
 require_once './modele/entite/Appartement.php';
 require_once './modele/entite/TypeAppart.php';
 require_once './modele/entite/Immeuble.php';
 require_once './modele/entite/Equipement.php';
+require_once './modele/entite/Avis.php';
 
 use modele\manager\AppartementManager;
 use modele\entite\Appartement;
@@ -22,10 +24,14 @@ use modele\entite\Immeuble;
 use modele\manager\EquipementManager;
 use modele\entite\Equipement;
 
+use modele\manager\AvisManager;
+use modele\entite\Avis;
+
 $appartementManager = new AppartementManager();
 $typeAppartManager = new TypeAppartManager();
 $immeubleManager = new ImmeubleManager();
 $equipementManager = new EquipementManager();
+$avisManager = new AvisManager();
 
 if(
     isset($_GET['id']) &&
@@ -54,7 +60,10 @@ if(
     }
 
     // Récupération des avis
-    // TODO: Faire afficher les avis d'une location
+    $lesAvis = $avisManager->getAvisByIdAppart($appartement->getId());
+    if($lesAvis) {
+        $appartement->setAvis($lesAvis);
+    }
 
 
     // Chargements des vues

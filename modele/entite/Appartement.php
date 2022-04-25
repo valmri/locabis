@@ -56,6 +56,11 @@ class Appartement
      */
     private $equipements;
 
+    /**
+     * @var Vector Collection d'avis
+     */
+    private $avis;
+
     public function __construct() {
 
     }
@@ -210,6 +215,22 @@ class Appartement
     public function setEquipements(Vector $equipements)
     {
         $this->equipements = $equipements;
+    }
+
+    /**
+     * @return Vector
+     */
+    public function getAvis(): Vector
+    {
+        return $this->avis;
+    }
+
+    /**
+     * @param Vector $avis
+     */
+    public function setAvis(Vector $avis)
+    {
+        $this->avis = $avis;
     }
 
 }
