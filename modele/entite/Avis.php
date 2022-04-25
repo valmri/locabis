@@ -30,7 +30,7 @@ class Avis
     private $appartement;
 
     /**
-     * @var string Prénom de l'utilisateur
+     * @var Mixed Utilisateur ayant publié l'avis
      */
     private $utilisateur;
 
@@ -119,17 +119,17 @@ class Avis
     }
 
     /**
-     * @return string
+     * @return Mixed
      */
-    public function getUtilisateur(): string
+    public function getUtilisateur()
     {
         return $this->utilisateur;
     }
 
     /**
-     * @param string $utilisateur
+     * @param Mixed $utilisateur
      */
-    public function setUtilisateur(string $utilisateur)
+    public function setUtilisateur($utilisateur)
     {
         $this->utilisateur = $utilisateur;
     }

@@ -61,8 +61,28 @@
 
             <div class="carteAvis">
 
-                <?php if ($lesAvis) : ?>
+                
                 <h3>Avis :</h3>
+                <?php if(isset($reservation) && $reservation) : ?>
+
+                <?php if(!$avisExiste && $reservation->getEtat() === "3") : ?>
+                    <form action="#" method="post">
+                        <label for="note">Note : </label>
+                        <input type="number" name="note" id="note" min="0" max="5" required> <span> / 5</span><br>
+
+                        <label for="commentaire">Commentaire :</label><br>
+                        <textarea name="commentaire" id="commentaire" cols="30" rows="10" required></textarea><br>
+
+                        <button type="submit">Envoyer</button>
+                    </form>
+                <?php elseif($avisExiste) : ?>
+                    <p>Un avis a déjà été donné, vous pouvez modifier votre avis.</p>
+                <?php else : ?>
+                    <p>Une réservation doit être validée pour donner un avis.</p>
+                <?php endif; ?>
+
+                <?php endif; ?>
+                <?php if ($lesAvis) : ?>
                 <?php foreach ($appartement->getAvis() as $avis) : ?>
                 <div class="avis">
                     <div class="avisEntete">
@@ -74,6 +94,8 @@
                     </div>
                 </div>
                 <?php endforeach; ?>
+                <?php else: ?>
+                <p>Aucun avis de publié.</p>
                 <?php endif; ?>
 
             </div>

@@ -188,4 +188,31 @@ class ReservationManager extends ManagerPrincipal
 
     }
 
+    /**
+     * Récupération d'une réservation pour vérifier un avis
+     * @param int $idUtilisateur
+     * @param int $idAppartement
+     * @return false|mixed
+     */
+    public function getReservationForAvis(int $idUtilisateur, int $idAppartement) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Select * from reservation where utilisateur = :idu and appartement = :ida order by id desc limit 1;";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':idu', $idUtilisateur, PDO::PARAM_INT);
+            $requete->bindValue(':ida', $idAppartement, PDO::PARAM_INT);
+            $requete->execute();
+            $requete->setFetchMode(PDO::FETCH_CLASS, 'modele\entite\Reservation');
+            $resultat = $requete->fetch();
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
 }

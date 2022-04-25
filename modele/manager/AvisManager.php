@@ -23,13 +23,13 @@ class AvisManager extends ManagerPrincipal
         try {
 
             $bdd = $this->getPDO();
-            $sql = "Insert into avis(id_reservation, id_appartement, note, commentaire, date_publication) values (:idreservation, :idappart, :note, :commentaire, :date);";
+            $sql = "Insert into avis(id_reservation, id_appartement, utilisateur, note, commentaire, date_publication) values (:idreservation, :idappart, :idutil, :note, :commentaire, now());";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idreservation', $avis->getReservation(), PDO::PARAM_INT);
             $requete->bindValue(':idappart', $avis->getAppartement(), PDO::PARAM_INT);
+            $requete->bindValue(':idutil', $avis->getUtilisateur(), PDO::PARAM_INT);
             $requete->bindValue(':note', $avis->getNote(), PDO::PARAM_INT);
             $requete->bindValue(':commentaire', $avis->getCommentaire(), PDO::PARAM_STR);
-            $requete->bindValue(':date', $avis->getDatePublication(), PDO::PARAM_STR);
             $requete->execute();
 
             $resultat = true;
@@ -57,7 +57,7 @@ class AvisManager extends ManagerPrincipal
             $requete->bindValue(':idr', $idReservation, PDO::PARAM_INT);
             $requete->bindValue(':ida', $idAppart, PDO::PARAM_INT);
             $requete->execute();
-            $resultat =$requete->fetchObject('modele\entite\TypeEtat');
+            $resultat =$requete->fetchObject('modele\entite\Avis');
         } catch (Exception $e) {
             $resultat = false;
         }
@@ -140,6 +140,11 @@ class AvisManager extends ManagerPrincipal
 
     }
 
+    /**
+     * Récupération des avis d'un appartement
+     * @param int $idAppartement
+     * @return Vector|false
+     */
     public function getAvisByIdAppart(int $idAppartement) {
 
         try {
@@ -182,6 +187,29 @@ class AvisManager extends ManagerPrincipal
 
         return $resultat;
 
+    }
+
+    /**
+     * Permet de vérifier l'existence d'un avis
+     * @param int $idUtilisateur
+     * @param int $idAppart
+     * @return false|mixed|object|\stdClass|null
+     */
+    public function avisExistant(int $idUtilisateur, int $idAppart) {
+
+        try {
+            $bdd = $this->getPDO();
+            $sql = "Select * from avis where utilisateur = :idu and id_appartement = :ida;";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':idu', $idUtilisateur, PDO::PARAM_INT);
+            $requete->bindValue(':ida', $idAppart, PDO::PARAM_INT);
+            $requete->execute();
+            $resultat =$requete->fetchObject('modele\entite\Avis');
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
     }
 
 }

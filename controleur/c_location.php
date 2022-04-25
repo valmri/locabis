@@ -6,11 +6,15 @@ require_once './modele/manager/TypeAppartManager.php';
 require_once './modele/manager/ImmeubleManager.php';
 require_once './modele/manager/EquipementManager.php';
 require_once './modele/manager/AvisManager.php';
+require_once './modele/manager/UtilisateurManager.php';
+require_once './modele/manager/ReservationManager.php';
 require_once './modele/entite/Appartement.php';
 require_once './modele/entite/TypeAppart.php';
 require_once './modele/entite/Immeuble.php';
 require_once './modele/entite/Equipement.php';
 require_once './modele/entite/Avis.php';
+require_once './modele/entite/Utilisateur.php';
+require_once './modele/entite/Reservation.php';
 
 use modele\manager\AppartementManager;
 use modele\entite\Appartement;
@@ -27,11 +31,19 @@ use modele\entite\Equipement;
 use modele\manager\AvisManager;
 use modele\entite\Avis;
 
+use modele\manager\UtilisateurManager;
+use modele\entite\Utilisateur;
+
+use modele\manager\ReservationManager;
+use modele\entite\Reservation;
+
 $appartementManager = new AppartementManager();
 $typeAppartManager = new TypeAppartManager();
 $immeubleManager = new ImmeubleManager();
 $equipementManager = new EquipementManager();
 $avisManager = new AvisManager();
+$utilisateurManager = new UtilisateurManager();
+$reservationManager = new ReservationManager();
 
 if(
     isset($_GET['id']) &&
@@ -63,6 +75,65 @@ if(
     $lesAvis = $avisManager->getAvisByIdAppart($appartement->getId());
     if($lesAvis) {
         $appartement->setAvis($lesAvis);
+    }
+
+    // Vérification de l'authentification
+    if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
+        $authentification = $utilisateurManager->estConnecte();
+    }
+
+    // Récupération de l'utilisateur
+    if(isset($authentification) && $authentification) {
+
+        // Récupératop, de l'utilisateur
+        $utilisateur = $utilisateurManager->read($_SESSION['utilisateur']['id']);
+
+        // Récupération d'une réservation
+        $reservation = $reservationManager->getReservationForAvis($utilisateur->getId(), $idAppartement);
+
+        // Vérification de l'existence d'une réservation
+        if($reservation) {
+
+            // Vérification de l'existance d'un avis
+            $avisExiste = $avisManager->avisExistant($utilisateur->getId(), $appartement->getId());
+
+            if(!$avisExiste) {
+                // Création d'un avis
+                if(
+                    isset($_POST['note'])
+                    && isset($_POST['commentaire'])
+                    && !empty($_POST['note'])
+                    && !empty($_POST['commentaire'])
+                    && is_numeric($_POST['note'])
+                ) {
+                    if($_POST['note'] <= 5) {
+
+                        // Nettoyage des valeurs
+                        $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_INT);
+                        $commentaire = filter_input(INPUT_POST, 'commentaire', FILTER_SANITIZE_STRING);
+
+                        // Enregistrement de l'avis
+                        $avis = new Avis();
+                        $avis->setReservation($reservation->getId());
+                        $avis->setUtilisateur($utilisateur->getId());
+                        $avis->setAppartement($idAppartement);
+                        $avis->setNote($note);
+                        $avis->setCommentaire($commentaire);
+
+                        $avisManager->create($avis);
+
+                    } else {
+                        $msgErreur = "La note doit être inférieure ou égale à 5.";
+                    }
+
+            }
+
+        }
+
+        } else {
+            $msgErreur = "Erreur lors de l'ajout de l'avis.";
+        }
+
     }
 
 
