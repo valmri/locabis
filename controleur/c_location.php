@@ -53,6 +53,9 @@ if(
         $appartement->setEquipements($equipements);
     }
 
+    // Récupération des avis
+    // TODO: Faire afficher les avis d'une location
+
 
     // Chargements des vues
     require_once './vue/elements/header.php';

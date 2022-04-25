@@ -59,6 +59,21 @@
             </div>
             <?php endif; ?>
 
+            <div class="carteAvis">
+
+                <div class="avis">
+                    <div class="avisEntete">
+                        <p>Utilisateur - 00/00/0000</p>
+                        <span>Note/5</span>
+                    </div>
+                    <div class="avisCorps">
+                        <p>Blablabla</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
+
 
     </div>
