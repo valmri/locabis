@@ -152,6 +152,8 @@ if(
         require_once './vue/elements/header.php';
         $titreErreur = "Location innexistante !";
         $msgErreur = "La location recherché est innexistante ou a été retiré.";
+        $redirection = "accueil";
+        $redirectionLibelle = "Retourner à l'accueil";
         require_once './vue/elements/erreur.php';
     }
 
