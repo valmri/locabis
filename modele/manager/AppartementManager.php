@@ -201,52 +201,27 @@ class AppartementManager extends ManagerPrincipal
 
     }
 
-    /**
-     * Méthodes ancestrales
-     *
-    public function getAppartementById(int $idAppartement) {
+    public function getAppartementsByIdProp(int $idProp) {
 
-    $resultat = false;
+        $resultat = false;
 
-    $bdd = $this->getPDO();
-    $sql = "Select * from appartement a
-    where a.ID = :id";
-    $requete = $bdd->prepare($sql);
-    $requete->bindValue(':id', $idAppartement, PDO::PARAM_INT);
-    $requete->execute();
-    $reponse = $requete->fetch(PDO::FETCH_OBJ);
+        $bdd = $this->getPDO();
+        $sql = "select a.id, a.titre, t.libetype, i.ville from appartement a 
+                join typeappart t on a.type = t.id 
+                join immeuble i on a.immeuble = i.id 
+                where a.proprietaire = :id";
+        $requete = $bdd->prepare($sql);
+        $requete->bindValue(':id', $idProp, PDO::PARAM_INT);
+        $requete->execute();
+        $reponse = $requete->fetchAll(PDO::FETCH_OBJ);
 
+        if(count($reponse) > 0) {
+            $resultat = $reponse;
+        }
 
-    if(!empty($reponse)) {
-    $resultat = $reponse;
-    }
-
-    return $resultat;
+        return $resultat;
 
     }
-
-    public function getTypeAppart(int $idAppartement) {
-
-    $resultat = false;
-
-    $bdd = $this->getPDO();
-    $sql = "Select t.ID, t.LIBETYPE, t.TARIFLOCABASE from appartement a
-    join typeappart t on a.ID_TYPEAPPART = t.ID
-    where a.ID = :id";
-    $requete = $bdd->prepare($sql);
-    $requete->bindValue(':id', $idAppartement, PDO::PARAM_INT);
-    $requete->execute();
-    $reponse = $requete->fetch(PDO::FETCH_OBJ);
-
-
-    if(!empty($reponse)) {
-    $resultat = $reponse;
-    }
-
-    return $resultat;
-
-    }
-     */
 
 
 

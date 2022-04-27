@@ -26,6 +26,11 @@
                         <li>
                             <a class="boutonMenu" href="?page=membre">Espace membre</a>
                         </li>
+                    <?php if(isset($_SESSION['utilisateur']['role']) && (int)$_SESSION['utilisateur']['role'] === 2) : ?>
+                        <li>
+                            <a class="boutonMenu" href="?page=proprietaire">Espace proprietaire</a>
+                        </li>
+                    <?php endif; ?>
                         <li>
                             <a class="boutonMenu" href="?page=deconnexion">Déconnexion</a>
                         </li>
