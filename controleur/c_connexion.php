@@ -31,6 +31,7 @@ if(
         session_start();
         $_SESSION['utilisateur']['id'] = $authentification['id'];
         $_SESSION['utilisateur']['mel'] = $authentification['mel'];
+        $_SESSION['utilisateur']['role'] = $authentification['role'];
         $_SESSION['utilisateur']['motDePasse'] = $authentification['motDePasse'];
         $_SESSION['jeton'] = bin2hex(openssl_random_pseudo_bytes(6));
 

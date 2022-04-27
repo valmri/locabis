@@ -13,6 +13,11 @@
             <div class="contenuInfo">
                 <p><span class="titreInfo">Identité :</span> <?= $utilisateur->getPrenom().' '.$utilisateur->getNom(); ?></p>
                 <p><span class="titreInfo">Adresse-mel :</span> <?= $utilisateur->getMel(); ?></p>
+                <?php if($utilisateur->getRole() === 2) : ?>
+                <p><span class="titreInfo">Adresse :</span> <?= $proprietaire->getAdresse(); ?></p>
+                <p><span class="titreInfo">Ville :</span> <?= $proprietaire->getVille(); ?></p>
+                <p><span class="titreInfo">Téléphone :</span> <?= $proprietaire->getTelephone(); ?></p>
+                <?php endif; ?>
                 <p><span class="titreInfo">Dernière connexion :</span> <?= date('d/m/Y H:m', strtotime($utilisateur->getDateConnexion())); ?></p>
             </div>
 
@@ -59,6 +64,37 @@
 
                 <button type="submit">Modifier</button>
             </form>
+
+            <?php if($utilisateur->getRole() === 2) :?>
+
+                <form action="#" method="post">
+                    <label for="adresse">Nouvelle adresse :</label>
+                    <input type="text" name="adresse" id="adresse" placeholder="Adresse" required>
+
+                    <input type="hidden" name="jeton" value="<?= $_SESSION['jeton'] ?>">
+
+                    <button type="submit">Modifier</button>
+                </form>
+
+                <form action="#" method="post">
+                    <label for="ville">Nouvelle ville :</label>
+                    <input type="text" name="ville" id="ville" placeholder="Ville" required>
+
+                    <input type="hidden" name="jeton" value="<?= $_SESSION['jeton'] ?>">
+
+                    <button type="submit">Modifier</button>
+                </form>
+
+                <form action="#" method="post">
+                    <label for="telephone">Nouveau numéro de téléphone :</label>
+                    <input type="text" name="telephone" id="telephone" placeholder="Téléphone" required>
+
+                    <input type="hidden" name="jeton" value="<?= $_SESSION['jeton'] ?>">
+
+                    <button type="submit">Modifier</button>
+                </form>
+
+            <?php endif; ?>
 
         </div>
 

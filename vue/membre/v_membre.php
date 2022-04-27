@@ -13,6 +13,11 @@
                 <div class="contenuInfo">
                     <p><span class="titreInfo">Identité :</span> <?= $utilisateur->getPrenom().' '.$utilisateur->getNom(); ?></p>
                     <p><span class="titreInfo">Adresse-mel :</span> <?= $utilisateur->getMel(); ?></p>
+                    <?php if($utilisateur->getRole() === 2) : ?>
+                        <p><span class="titreInfo">Adresse :</span> <?= $proprietaire->getAdresse(); ?></p>
+                        <p><span class="titreInfo">Ville :</span> <?= $proprietaire->getVille(); ?></p>
+                        <p><span class="titreInfo">Téléphone :</span> <?= $proprietaire->getTelephone(); ?></p>
+                    <?php endif; ?>
                     <p><span class="titreInfo">Dernière connexion :</span> <?= date('d/m/Y H:m', strtotime($utilisateur->getDateConnexion())); ?></p>
                     <a href="?page=compte" class="bouton">Gérer son compte</a>
                 </div>

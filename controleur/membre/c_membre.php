@@ -5,10 +5,12 @@ require_once './modele/manager/UtilisateurManager.php';
 require_once './modele/manager/ReservationManager.php';
 require_once './modele/manager/AppartementManager.php';
 require_once './modele/manager/TypeEtatManager.php';
+require_once './modele/manager/ProprietaireManager.php';
 require_once './modele/entite/Utilisateur.php';
 require_once './modele/entite/Reservation.php';
 require_once './modele/entite/Appartement.php';
 require_once './modele/entite/TypeEtat.php';
+require_once './modele/entite/Proprietaire.php';
 
 use modele\manager\UtilisateurManager;
 use modele\entite\Utilisateur;
@@ -22,10 +24,14 @@ use modele\entite\Appartement;
 use modele\manager\TypeEtatManager;
 use modele\entite\TypeEtat;
 
+use modele\manager\ProprietaireManager;
+use modele\entite\Proprietaire;
+
 $utilisateurManager = new UtilisateurManager();
 $reservationManager = new ReservationManager();
 $appartementManager = new AppartementManager();
 $typeEtatManager = new TypeEtatManager();
+$proprietaireManager = new ProprietaireManager();
 
 // Vérification de l'authentification
 if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
@@ -48,6 +54,14 @@ if(isset($authentification) && $authentification) {
         // Récupération des états des réservations
         $etat = $typeEtatManager->read($reservation->getEtat());
         $reservation->setEtat($etat);
+    }
+
+    // Vérification rôle propriétaire
+    if ($utilisateur->getRole() === 2) {
+
+        // Récupération infos proprietaire
+        $proprietaire = $proprietaireManager->read($utilisateur->getId());
+
     }
 
     $nbCase = 0;

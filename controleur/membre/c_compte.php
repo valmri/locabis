@@ -2,11 +2,16 @@
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/UtilisateurManager.php';
+require_once './modele/manager/ProprietaireManager.php';
 require_once './modele/entite/Utilisateur.php';
+require_once './modele/entite/Proprietaire.php';
 
 use modele\manager\UtilisateurManager;
+use modele\manager\ProprietaireManager;
+use modele\entite\Utilisateur;
 
 $utilisateurManager = new UtilisateurManager();
+$proprietaireManager = new ProprietaireManager();
 
 // Vérification de l'authentification
 if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
@@ -17,6 +22,14 @@ if(isset($authentification) && $authentification) {
 
     // Récupération des infos utilisateurs
     $utilisateur = $utilisateurManager->read($_SESSION['utilisateur']['id']);
+
+    // Vérification du role
+    if($utilisateur->getRole() === 2) {
+
+        // Récupération infos proprio
+        $proprietaire = $proprietaireManager->read($utilisateur->getId());
+
+    }
 
     // Vérification du jeton
     if(isset($_POST['jeton']) && $_POST['jeton'] === $_SESSION['jeton']) {
@@ -69,6 +82,47 @@ if(isset($authentification) && $authentification) {
             } else {
                 $msgErreur = "Erreur lors de la mise à jour du mot de passe.";
             }
+        }
+
+        // Vérification du rôle
+        if($utilisateur->getRole() === 2) {
+
+            // Modification adresse
+            if(isset($_POST['adresse']) && !empty($_POST['adresse'])) {
+
+                // Nettoyage
+                $adresse = filter_input(INPUT_POST, 'adresse', FILTER_SANITIZE_STRING);
+
+                // Màj
+                $proprietaire->setAdresse($adresse);
+
+                $proprietaireManager->update($proprietaire);
+
+            }
+
+            // Modification ville
+            if(isset($_POST['ville']) && !empty($_POST['ville'])) {
+
+                // Nettoyage
+                $ville = filter_input(INPUT_POST, 'ville', FILTER_SANITIZE_STRING);
+
+                // Màj
+                $proprietaire->setVille($ville);
+                $proprietaireManager->update($proprietaire);
+
+            }
+
+            if(isset($_POST['telephone']) && !empty($_POST['telephone'])) {
+
+                // Nettoyage
+                $telephone = filter_input(INPUT_POST, 'telephone', FILTER_SANITIZE_STRING);
+
+                // Maj
+                $proprietaire->setTelephone($telephone);
+                $proprietaireManager->update($proprietaire);
+
+            }
+
         }
 
     }

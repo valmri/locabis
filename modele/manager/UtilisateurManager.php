@@ -129,7 +129,7 @@ class UtilisateurManager extends ManagerPrincipal
 
         // Requête SQL
         $bdd = $this->getPDO();
-        $sql = "Select id, mel, motDePasse from utilisateur where mel = :mel;";
+        $sql = "Select id, mel, role, motDePasse from utilisateur where mel = :mel;";
         $requete = $bdd->prepare($sql);
         $requete->bindValue(':mel', $utilisateur->getMel(), PDO::PARAM_STR);
         $requete->execute();
@@ -140,6 +140,7 @@ class UtilisateurManager extends ManagerPrincipal
             // Infos de la bdd
             $id = $infos['id'];
             $mel = $infos['mel'];
+            $role = $infos['role'];
             $mdp = $infos['motDePasse'];
 
             if ($utilisateur->getMel() ===  $mel && password_verify($utilisateur->getMotDePasse(), $mdp)) {
@@ -148,6 +149,7 @@ class UtilisateurManager extends ManagerPrincipal
                 $resultat =  array(
                     'id' => $id,
                     'mel' => $mel,
+                    'role' => $role,
                     'motDePasse' => $utilisateur->getMotDePasse()
                 );
 

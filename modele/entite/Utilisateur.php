@@ -38,6 +38,11 @@ class Utilisateur
      */
     private $date_inscription;
 
+    /**
+     * @var int $role Identifiant du rôle de l'utilisateur
+     */
+    private $role;
+
     public function __construct() {
 
     }
@@ -148,6 +153,22 @@ class Utilisateur
     public function setPrenom(string $prenom)
     {
         $this->prenom = $prenom;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRole(): int
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param int $role
+     */
+    public function setRole(int $role)
+    {
+        $this->role = $role;
     }
 
 }
