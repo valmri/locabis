@@ -54,7 +54,8 @@
                             <span class="infoLoca">
                             <i class="las la-home"></i><?php echo $appartement->libetype; ?>
                         </span>
-                            <a href="?page=appartement&id=<?php echo $appartement->id; ?>" class="bouton">Gérer</a>
+                            <a href="?page=appartement&id=<?php echo $appartement->id; ?>" class="bouton">Gérer l'appartement</a>
+                            <a href="?page=reservation&id=<?php echo $appartement->id; ?>" class="bouton">Gérer les réservations</a>
                         </div>
                     </div>
                     <?php $nbCase++; ?>

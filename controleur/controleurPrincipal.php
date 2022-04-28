@@ -14,7 +14,7 @@ function controleur(string $page) {
     // Contrôle de l'existance d'un identifiant
     if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
         $actions['location'] = 'c_location.php';
-        $actions['reserver'] = 'membre/c_reservation.php';
+        $actions['reserver'] = 'membre/v_reservation.php';
         $actions['avis'] = 'membre/c_avis.php';
     }
 
@@ -24,6 +24,7 @@ function controleur(string $page) {
 
         if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
             $actions['appartement'] = 'proprietaire/c_appartement.php';
+            $actions['reservation'] = 'proprietaire/c_reservation.php';
         }
 
     }
