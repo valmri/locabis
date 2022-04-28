@@ -6,11 +6,15 @@ require_once './modele/manager/ReservationManager.php';
 require_once './modele/manager/AppartementManager.php';
 require_once './modele/manager/TypeEtatManager.php';
 require_once './modele/manager/ProprietaireManager.php';
+require_once './modele/manager/EquipementManager.php';
+require_once './modele/manager/EquipementAppartementManager.php';
 require_once './modele/entite/Utilisateur.php';
 require_once './modele/entite/Reservation.php';
 require_once './modele/entite/Appartement.php';
 require_once './modele/entite/TypeEtat.php';
 require_once './modele/entite/Proprietaire.php';
+require_once './modele/entite/Equipement.php';
+require_once './modele/entite/EquipementAppartement.php';
 
 use modele\manager\UtilisateurManager;
 use modele\entite\Utilisateur;
@@ -27,11 +31,19 @@ use modele\entite\TypeEtat;
 use modele\manager\ProprietaireManager;
 use modele\entite\Proprietaire;
 
+use modele\manager\EquipementManager;
+use modele\entite\Equipement;
+
+use modele\manager\EquipementAppartementManager;
+use modele\entite\EquipementAppartement;
+
 $utilisateurManager = new UtilisateurManager();
 $reservationManager = new ReservationManager();
 $appartementManager = new AppartementManager();
 $typeEtatManager = new TypeEtatManager();
 $proprietaireManager = new ProprietaireManager();
+$equipementManager = new EquipementManager();
+$equipementAppartManager = new EquipementAppartementManager();
 
 // Vérification de l'authentification
 if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
@@ -46,8 +58,8 @@ if(isset($authentification) && $authentification) {
     // Récupération des infos de l'appartement
     $appartement = $appartementManager->read($idAppart);
 
-    // Récupération des équipements de l'appartement
-    // TODO : Faire système pour éditer et ajouter des équipements
+    // Récupération de la liste des équipements
+    $listeEquipements = $equipementManager->readAll();
 
     // Vérification du propriétaire de l'appartement
     if($appartement && (int)$_SESSION['utilisateur']['id'] === $appartement->getProprietaire()) {
@@ -86,6 +98,94 @@ if(isset($authentification) && $authentification) {
             }
 
         }
+
+        if(isset($_POST['equipements']) && !empty($_POST['equipements'])) {
+
+            // Récupération des données
+            $lesEquipements = $_POST['equipements'];
+            foreach ($lesEquipements as $unEquipement) {
+
+                if(isset($unEquipement['id']) && $unEquipement['quantite'] > 0 && is_numeric($unEquipement['quantite'])) {
+
+                    // Nettoyage des données du formulaire
+                    $idPropre = filter_var($unEquipement['id'], FILTER_SANITIZE_NUMBER_INT);
+                    $quantitePropre = filter_var($unEquipement['quantite'], FILTER_SANITIZE_NUMBER_INT);
+
+                    // Initialisation d'un equipement
+                    $equipementPropre = new EquipementAppartement();
+                    $equipementPropre->setIdAppartement($idAppart);
+                    $equipementPropre->setIdEquipement($idPropre);
+                    $equipementPropre->setQuantite($quantitePropre);
+
+                    /**
+                     * Vérification d'un équipement existant dans un appart
+                     * Si true -> update
+                     * Sinon -> create
+                     */
+                    $equipementExiste = $equipementAppartManager->existe($idAppart, $idPropre);
+                    if($equipementExiste) {
+                        $equipementAppartManager->update($equipementPropre);
+                    } else {
+                        $equipementAppartManager->create($equipementPropre);
+                    }
+
+                } elseif(isset($unEquipement['id']) && $unEquipement['quantite'] == 0) {
+
+                    // Nettoyage des données du formulaire
+                    $idPropre = filter_var($unEquipement['id'], FILTER_SANITIZE_NUMBER_INT);
+                    $quantitePropre = filter_var($unEquipement['quantite'], FILTER_SANITIZE_NUMBER_INT);
+
+                    // Initialisation d'un equipement
+                    $equipementPropre = new EquipementAppartement();
+                    $equipementPropre->setIdAppartement($idAppart);
+                    $equipementPropre->setIdEquipement($idPropre);
+
+                    $equipementExiste = $equipementAppartManager->existe($idAppart, $idPropre);
+                    if($equipementExiste) {
+                        $equipementAppartManager->delete($equipementPropre);
+                    }
+
+                }
+
+            }
+
+        }
+
+        // Suppression des éléments décochés
+        if(isset($_POST['equipementsSuppr']) && !empty($_POST['equipementsSuppr'])) {
+
+            $equipementsSuppr = $_POST['equipementsSuppr'];
+
+            foreach ($equipementsSuppr as $equipement) {
+
+                // Nettoyage de l'identifiant de l'équipement
+                (int)$idEquipement = filter_var($equipement, FILTER_SANITIZE_NUMBER_INT);
+
+                if(is_numeric($idEquipement)) {
+
+                    // Vérification de l'existance de l'équipement dans l'appartement
+                    $equipementExiste = $equipementAppartManager->existe($idAppart, $idEquipement);
+
+                    if($equipementExiste) {
+
+                        // Suppression de l'équipement d'un appartement
+                        $equipement = new EquipementAppartement();
+                        $equipement->setIdAppartement($idAppart);
+                        $equipement->setIdEquipement($idEquipement);
+                        $equipementAppartManager->delete($equipement);
+
+                    }
+                }
+
+
+            }
+        }
+
+        // Récupération des équipements de l'appartement
+        $equipements = $equipementManager->getEquipementsByIdAppart($idAppart);
+
+        // Compteur pour affichage
+        $compteur = 0;
 
         // Chargement des vues
         require_once './vue/elements/header.php';

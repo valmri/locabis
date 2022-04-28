@@ -6,7 +6,7 @@ body {
     padding: 0px;
 }
 
-h1, h2, h3, p, a, span, label, input[type='text'], button {
+h1, h2, h3, p, a, span, label, input[type='text'], button, ul {
     font-family: 'Quicksand', sans-serif;
 }
 

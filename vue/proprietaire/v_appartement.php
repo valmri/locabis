@@ -14,6 +14,19 @@
                 <p><span class="titreInfo">Titre :</span> <?= $appartement->getTitre(); ?></p>
                 <p><span class="titreInfo">Description :</span> <?= $appartement->getDescription(); ?></p>
                 <p><span class="titreInfo">Type :</span> <?= $appartement->getType(); ?></p>
+                <?php if($equipements) : ?>
+                <span class="titreInfo">Équipements :</span>
+                <ul>
+                    <?php foreach ($equipements as $equipement) :?>
+
+                    <li>
+                        <i class="<?= $equipement->getIcone(); ?>"></i>
+                        <?= $equipement->getQuantite().' '.$equipement->getLibelle(); ?>
+                    </li>
+
+                    <?php endforeach;?>
+                </ul>
+                <?php endif; ?>
             </div>
 
         </div>
@@ -58,6 +71,21 @@
                 <input type="hidden" name="jeton" value="<?= $_SESSION['jeton'] ?>">
 
                 <button type="submit">Modifier</button>
+            </form>
+
+            <form action="#" method="post">
+                <?php foreach ($listeEquipements as $equipement) :?>
+
+
+                <div>
+                    <input type="checkbox" name="equipements[<?= $equipement->getId(); ?>][id]" id="equipement<?= $equipement->getId(); ?>" value="<?= $equipement->getId(); ?>">
+                    <label for="equipement<?= $equipement->getId(); ?>"><?= $equipement->getLibelle(); ?></label>
+                    <input type="number" id="equipement<?= $equipement->getId(); ?>" name="equipements[<?= $equipement->getId(); ?>][quantite]" value="0" min="0" max="50">
+                </div>
+
+
+                <?php endforeach; ?>
+                <button type="submit">Envoyer</button>
             </form>
 
         </div>
