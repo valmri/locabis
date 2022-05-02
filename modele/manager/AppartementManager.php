@@ -201,6 +201,11 @@ class AppartementManager extends ManagerPrincipal
 
     }
 
+    /**
+     * Récupération de l'appartement d'un proprietaire
+     * @param int $idProp
+     * @return array|false
+     */
     public function getAppartementsByIdProp(int $idProp) {
 
         $resultat = false;
@@ -209,7 +214,7 @@ class AppartementManager extends ManagerPrincipal
         $sql = "select a.id, a.titre, t.libetype, i.ville from appartement a 
                 join typeappart t on a.type = t.id 
                 join immeuble i on a.immeuble = i.id 
-                where a.proprietaire = :id";
+                where a.proprietaire = :id;";
         $requete = $bdd->prepare($sql);
         $requete->bindValue(':id', $idProp, PDO::PARAM_INT);
         $requete->execute();
@@ -223,6 +228,30 @@ class AppartementManager extends ManagerPrincipal
 
     }
 
+    /**
+     * Vérification de la propriété
+     * @param int $idAppart
+     * @param int $idProp
+     * @return bool
+     */
+    public function estProprietaire(int $idAppart, int $idProp) {
 
+        $bdd = $this->getPDO();
+        $sql = "select count(*) as existe from appartement where id = :ida and proprietaire = :idp;";
+        $requete = $bdd->prepare($sql);
+        $requete->bindValue(':ida', $idAppart, PDO::PARAM_INT);
+        $requete->bindValue(':idp', $idProp, PDO::PARAM_INT);
+        $requete->execute();
+        $reponse = $requete->fetch();
+
+        if ((int)$reponse['existe'] != 0) {
+            $resultat = true;
+        } else {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
 
 }

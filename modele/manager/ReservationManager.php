@@ -215,4 +215,24 @@ class ReservationManager extends ManagerPrincipal
 
     }
 
+    public function getReservationByIdAppart(int $idAppart) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "select * from reservation r where appartement = :id and etat != 5 order by id desc;";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':id', $idAppart, PDO::PARAM_INT);
+            $requete->execute();
+            $requete->setFetchMode(PDO::FETCH_CLASS, 'modele\entite\Reservation');
+            $resultat = $requete->fetchAll();
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
 }

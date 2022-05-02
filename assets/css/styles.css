@@ -6,7 +6,7 @@ body {
     padding: 0px;
 }
 
-h1, h2, h3, p, a, span, label, input[type='text'], button, ul {
+h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
     font-family: 'Quicksand', sans-serif;
 }
 
@@ -183,4 +183,13 @@ h1 {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #241F14;
+}
+
+table {
+    width: 100%;
+}
+
+thead {
+    background-color: blanchedalmond;
+    text-align: left;
 }
