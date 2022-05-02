@@ -10,5 +10,6 @@
 <script src="./assets/js/ajax/constructionCalendrier.js"></script>
 <script src="../../assets/js/ajax/archiverReservation.js"></script>
 <script src="./assets/js/f_Proprietaire.js"></script>
+<script src="./assets/js/ajax/modifEtatReservation.js"></script>
 </body>
 </html>

@@ -46,6 +46,9 @@ if(isset($authentification) && $authentification) {
     // Vérification de la propriété de l'appartement
     $estProprietaire = $appartementManager->estProprietaire($idAppart, $_SESSION['utilisateur']['id']);
 
+    // Récupération des états que le proprio peut appliquer
+    $listeEtats = $typeEtatManager->getEtatsProp();
+
     if($estProprietaire) {
 
         // Récupération des infos utilisateurs

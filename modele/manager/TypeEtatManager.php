@@ -133,4 +133,35 @@ class TypeEtatManager extends ManagerPrincipal
 
     }
 
+    public function getEtatsProp() {
+
+        try {
+            $bdd = $this->getPDO();
+            $sql = "Select * from typeetat where id > 1 and id < 4;";
+            $requete = $bdd->prepare($sql);
+            $requete->execute();
+            $requete->setFetchMode(PDO::FETCH_CLASS, 'modele\entite\TypeEtat');
+            $resultat =$requete->fetchAll();
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
+    public function getLibelle(int $id) {
+        try {
+            $bdd = $this->getPDO();
+            $sql = "Select libelle from typeetat where id = :id;";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':id', $id, PDO::PARAM_INT);
+            $requete->execute();
+            $resultat =$requete->fetch();
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+    }
 }

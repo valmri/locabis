@@ -38,18 +38,26 @@
                     <th>Date de début</th>
                     <th>Date de fin</th>
                     <th>Durée</th>
-                    <th>Statut</th>
+                    <th>Etat</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($reservations as $reservation) : ?>
                 <tr>
-                    <td><?= $reservation->getId() ?></td>
+                    <td class="idReservations"><?= $reservation->getId() ?></td>
                     <td><?= $reservation->getUtilisateur() ?></td>
                     <td><?= date('d/m/Y', strtotime($reservation->getDateDebut())) ?></td>
                     <td><?= date('d/m/Y', strtotime($reservation->getDateFin())) ?></td>
                     <td><?= $reservation->getDuree() ?></td>
-                    <td><?= $reservation->getEtat() ?></td>
+                    <td><?= $typeEtatManager->getLibelle($reservation->getEtat())[0]; ?></td>
+                    <td>
+                        <select name="etatReservation" id="etatReservation" onchange="modifEtat(this)">
+                            <option>États</option>
+                            <?php foreach ($listeEtats as $unEtat) : ?>
+                                <option value="<?= $unEtat->getId() ?>"><?= $unEtat->getLibelle() ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
                 </tbody>
