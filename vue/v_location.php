@@ -103,7 +103,7 @@
                         <p><?= $avis->getUtilisateur()->getPrenom();?> - <?= $avis->getDatePublication();?></p>
 
                         <?php if(isset($avisExiste) && $avisExiste && $utilisateur->getId() === $avis->getUtilisateur()->getId()) :?>
-                            <a href="?page=avis&id=<?= $reservation->getId() ?>">Modifier</a>
+                            <a href="?page=avis&id=<?= $avis->getReservation() ?>">Modifier</a>
                         <?php endif; ?>
 
                         <span>Note : <?= $avis->getNote();?>/5</span>
