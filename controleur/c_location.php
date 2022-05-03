@@ -101,7 +101,8 @@ if(
                 ) {
 
                     if(is_numeric($_POST['note'])) {
-                        if($_POST['note'] <= 5) {
+
+                        if( $_POST['note'] >= 0 && $_POST['note'] <= 5) {
 
                             // Nettoyage des valeurs
                             $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_INT);
