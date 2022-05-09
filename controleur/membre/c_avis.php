@@ -53,9 +53,8 @@ if(
     $idAvis = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
     $avis = $avisManager->read($idAvis);
 
-    $autorisationModif = $avisManager->avisExistant($utilisateur->getId(), $avis->getAppartement());
-
-    if(!empty($autorisationModif)) {
+    // Vérification de la propriété de l'avis et de l'existence de l'avis
+    if($avis && (int)$avis->getUtilisateur() === $utilisateur->getId()) {
         // Récupération du commentaire modifier
         if(
             isset($_POST['commentaire'])
