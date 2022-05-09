@@ -145,9 +145,16 @@ if(isset($authentification) && $authentification) {
                 // Nettoyage
                 $telephone = filter_input(INPUT_POST, 'telephone', FILTER_SANITIZE_STRING);
 
-                // Maj
-                $proprietaire->setTelephone($telephone);
-                $proprietaireManager->update($proprietaire);
+                // Vérification de la validité du numéro
+                if(strlen($telephone) >= 10 && strlen($telephone) <= 10 && is_numeric($telephone)) {
+                    // Maj
+                    $proprietaire->setTelephone($telephone);
+                    $proprietaireManager->update($proprietaire);
+                } else {
+                    $msgErreur = "Numéro de téléphone non valide.";
+                }
+
+
 
             }
 
