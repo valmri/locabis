@@ -8,7 +8,6 @@ require_once './modele/entite/Proprietaire.php';
 
 use modele\manager\UtilisateurManager;
 use modele\manager\ProprietaireManager;
-use modele\entite\Utilisateur;
 
 $utilisateurManager = new UtilisateurManager();
 $proprietaireManager = new ProprietaireManager();
@@ -44,22 +43,32 @@ if(isset($authentification) && $authentification) {
             // Vérification de la conformité de l'adresse mel
             if($nouvelAdresseMel) {
 
-                // Modification de l'objet
-                $utilisateur->setMel($nouvelAdresseMel);
+                // Vérification de l'existence de l'adresse
+                $adresseExiste = $utilisateurManager->verifMel($nouvelAdresseMel);
 
-                // Mise à jour en base de donnée avec le manager
-                $majSucces = $utilisateurManager->updateMel($utilisateur);
+                if($adresseExiste) {
 
-                // Vérification de la mise à jour
-                if($majSucces) {
+                    // Modification de l'adresse mel de l'objet utilisateur
+                    $utilisateur->setMel($nouvelAdresseMel);
 
-                    // Modification variable de session pour maintenir la session active
-                    $_SESSION['utilisateur']['mel'] = $nouvelAdresseMel;
-                    $msgInfo = "Adresse mel modifié avec succès !";
+                    // Mise à jour en base de donnée avec le manager
+                    $majSucces = $utilisateurManager->updateMel($utilisateur);
+
+                    // Vérification de la mise à jour
+                    if($majSucces) {
+
+                        // Modification variable de session pour maintenir la session active
+                        $_SESSION['utilisateur']['mel'] = $nouvelAdresseMel;
+                        $msgInfo = "Adresse mel modifié avec succès !";
+
+                    } else {
+                        $msgErreur = "Erreur lors de la mise à jour de l'adresse mel.";
+                    }
 
                 } else {
-                    $msgErreur = "Erreur lors de la mise à jour de l'adresse mel.";
+                    $msgErreur = "Adresse mel déjà utilisé.";
                 }
+
             } else {
                 $msgErreur = "Adresse mel non valide.";
             }

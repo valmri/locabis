@@ -257,18 +257,18 @@ class UtilisateurManager extends ManagerPrincipal
     }
 
     /**
-     * Vérification d'une adresse mél
-     * @param Utilisateur $utilisateur
+     * Vérification de l'existence d'une adresse mel
+     * @param string $mel
      * @return bool
      */
-    public function verifMel(Utilisateur $utilisateur) {
+    public function verifMel(string $mel) {
 
         try {
 
             $bdd = $this->getPDO();
             $sql = "Select count(*) as melExiste from utilisateur where mel = :mel";
             $requete = $bdd->prepare($sql);
-            $requete->bindValue(':mel', $utilisateur->getMel(), PDO::PARAM_STR);
+            $requete->bindValue(':mel', $mel, PDO::PARAM_STR);
             $requete->execute();
             $reponse = $requete->fetch(PDO::FETCH_ASSOC);
 
