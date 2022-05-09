@@ -42,6 +42,11 @@
                 <input name="motDePasse" type="password" required/></br>
             </div>
 
+            <div class="inputConnexion">
+                <label for="motDePasseConf">Confirmer votre mot de passe</label></br>
+                <input name="motDePasseConf" type="password" required/></br>
+            </div>
+
             <button class="boutonConnexion" type="submit">S'inscrire</button>
 
         </form>

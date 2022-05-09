@@ -15,6 +15,7 @@ if(
     && isset($_POST['prenom']) && !empty($_POST['prenom'])
     && isset($_POST['mel']) && !empty($_POST['mel'])
     && isset($_POST['motDePasse']) && !empty($_POST['motDePasse'])
+    && isset($_POST['motDePasseConf']) && !empty($_POST['motDePasseConf'])
 ) {
 
     // Filtrage des données
@@ -22,6 +23,7 @@ if(
     $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
     $adresseMel = filter_input(INPUT_POST, 'mel', FILTER_SANITIZE_EMAIL);
     $motDePasse = filter_input(INPUT_POST, 'motDePasse', FILTER_SANITIZE_STRING);
+    $motDePasseConfirme = filter_input(INPUT_POST, 'motDePasseConf', FILTER_SANITIZE_STRING);
 
     // Création de l'utilisateur
     $utilisateur = new Utilisateur();
@@ -37,27 +39,34 @@ if(
 
         $createSucces = $utilisateurManager->create($utilisateur);
 
-        // Connexion dès lorsque l'inscription à aboutie
-        if($createSucces) {
+        // Vérification de la confirmation du mot de passe
+        if($motDePasse === $motDePasseConfirme) {
 
-            $authentification = $utilisateurManager->connexion($utilisateur);
+            // Connexion dès lorsque l'inscription a abouti
+            if($createSucces) {
 
-            if($authentification) {
+                $authentification = $utilisateurManager->connexion($utilisateur);
 
-                session_start();
-                $_SESSION['utilisateur']['id'] = $authentification['id'];
-                $_SESSION['utilisateur']['mel'] = $authentification['mel'];
-                $_SESSION['utilisateur']['motDePasse'] = $authentification['motDePasse'];
-                $_SESSION['jeton'] = bin2hex(openssl_random_pseudo_bytes(6));
+                if($authentification) {
 
-                header('Location:?page=membre');
+                    session_start();
+                    $_SESSION['utilisateur']['id'] = $authentification['id'];
+                    $_SESSION['utilisateur']['mel'] = $authentification['mel'];
+                    $_SESSION['utilisateur']['motDePasse'] = $authentification['motDePasse'];
+                    $_SESSION['jeton'] = bin2hex(openssl_random_pseudo_bytes(6));
+
+                    header('Location:?page=membre');
+
+                }
 
             }
 
+        } else {
+            $msgErreur = "Le mot de passe confirmé est différent du mot de passe choisi.";
         }
 
     } else {
-        $msgErreur = "Adresse mél déjà utilisé !";
+        $msgErreur = "Adresse mél déjà utilisé.";
     }
 
 }
