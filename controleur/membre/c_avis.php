@@ -53,54 +53,66 @@ if(
     $idAvis = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
     $avis = $avisManager->read($idAvis);
 
-    // Récupération du commentaire modifier
-    if(
-        isset($_POST['commentaire'])
-        && !empty($_POST['commentaire'])
-        && isset($_POST['note'])
-        && !empty($_POST['note']
-        && isset($_POST['jeton']))
-    ) {
+    $autorisationModif = $avisManager->avisExistant($utilisateur->getId(), $avis->getAppartement());
 
-        // Contrôle du jeton
-        if($_POST['jeton'] && $_POST['jeton'] === $_SESSION['jeton']) {
+    if(!empty($autorisationModif)) {
+        // Récupération du commentaire modifier
+        if(
+            isset($_POST['commentaire'])
+            && !empty($_POST['commentaire'])
+            && isset($_POST['note'])
+            && !empty($_POST['note']
+                && isset($_POST['jeton']))
+        ) {
 
-            if(is_numeric($_POST['note'])) {
+            // Contrôle du jeton
+            if($_POST['jeton'] && $_POST['jeton'] === $_SESSION['jeton']) {
 
-                if($_POST['note'] >= 0 && $_POST['note'] <= 5) {
+                if(is_numeric($_POST['note'])) {
 
-                    // Nettoyage du commentaire
-                    $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_INT);
-                    $commentaire = filter_input(INPUT_POST, 'commentaire', FILTER_SANITIZE_STRING);
+                    if($_POST['note'] >= 0 && $_POST['note'] <= 5) {
 
-                    // Mise à jour du commentaire
-                    $avis->setNote($note);
-                    $avis->setCommentaire($commentaire);
-                    $majSucces = $avisManager->update($avis);
+                        // Nettoyage du commentaire
+                        $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_INT);
+                        $commentaire = filter_input(INPUT_POST, 'commentaire', FILTER_SANITIZE_STRING);
 
-                    if($majSucces) {
-                        $msgInfo = "Commentaire mis à jour !";
+                        // Mise à jour du commentaire
+                        $avis->setNote($note);
+                        $avis->setCommentaire($commentaire);
+                        $majSucces = $avisManager->update($avis);
+
+                        if($majSucces) {
+                            $msgInfo = "Commentaire mis à jour !";
+                        } else {
+                            $msgErreur = "Erreur lors de la mise à jour.";
+                        }
+
                     } else {
-                        $msgErreur = "Erreur lors de la mise à jour.";
+                        $msgErreur = "La note soit être comprise entre 0 et 5.";
                     }
 
                 } else {
-                    $msgErreur = "La note soit être comprise entre 0 et 5.";
+                    $msgErreur = "Veuillez saisir un entier.";
                 }
 
             } else {
-                $msgErreur = "Veuillez saisir un entier.";
+                header("Location:?page=deconnexion");
             }
 
-        } else {
-            header("Location:?page=deconnexion");
         }
 
+        // Chargement des vues
+        require_once './vue/elements/header.php';
+        require_once './vue/membre/v_avis.php';
+    } else {
+        require_once './vue/elements/header.php';
+        $titreErreur = "Permission insufisante !";
+        $msgErreur = "Vous n'avez pas l'autorisation d'agir sur cet avis.";
+        $redirection = "accueil";
+        $redirectionLibelle = "Retourner à l'accueil";
+        require_once './vue/elements/erreur.php';
     }
 
-    // Chargement des vues
-    require_once './vue/elements/header.php';
-    require_once './vue/membre/v_avis.php';
 } else {
     require_once './controleur/c_connexion.php';
 }
