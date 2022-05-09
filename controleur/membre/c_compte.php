@@ -147,9 +147,18 @@ if(isset($authentification) && $authentification) {
 
                 // Vérification de la validité du numéro
                 if(strlen($telephone) >= 10 && strlen($telephone) <= 10 && is_numeric($telephone)) {
-                    // Maj
-                    $proprietaire->setTelephone($telephone);
-                    $proprietaireManager->update($proprietaire);
+
+                    // Vérification de l'existence du numéro
+                    $numeroExiste = $proprietaireManager->verifTelephone($telephone);
+
+                    if($numeroExiste) {
+                        // Maj
+                        $proprietaire->setTelephone($telephone);
+                        $proprietaireManager->update($proprietaire);
+                    } else {
+                        $msgErreur = "Numéro de téléphone déjà utilisé.";
+                    }
+
                 } else {
                     $msgErreur = "Numéro de téléphone non valide.";
                 }

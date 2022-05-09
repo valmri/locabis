@@ -114,4 +114,30 @@ class ProprietaireManager extends ManagerPrincipal
         return $resultat;
 
     }
+
+    public function verifTelephone(string $telephone) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Select count(*) as telExiste from proprietaire where telephone = :tel";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':tel', $telephone, PDO::PARAM_STR);
+            $requete->execute();
+            $reponse = $requete->fetch(PDO::FETCH_ASSOC);
+
+            if($reponse['telExiste'] <= 0) {
+                $resultat = true;
+            } else {
+                $resultat = false;
+            }
+
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
 }
