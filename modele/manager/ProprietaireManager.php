@@ -115,6 +115,11 @@ class ProprietaireManager extends ManagerPrincipal
 
     }
 
+    /**
+     * Vérification de l'existence du numéro de téléphone
+     * @param string $telephone
+     * @return bool
+     */
     public function verifTelephone(string $telephone) {
 
         try {
