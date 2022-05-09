@@ -21,52 +21,63 @@ if(
     // Filtrage des données
     $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
     $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
-    $adresseMel = filter_input(INPUT_POST, 'mel', FILTER_SANITIZE_EMAIL);
+    $adresseMel = filter_input(INPUT_POST, 'mel', FILTER_VALIDATE_EMAIL);
     $motDePasse = filter_input(INPUT_POST, 'motDePasse', FILTER_SANITIZE_STRING);
     $motDePasseConfirme = filter_input(INPUT_POST, 'motDePasseConf', FILTER_SANITIZE_STRING);
 
-    // Création de l'utilisateur
-    $utilisateur = new Utilisateur();
-    $utilisateur->setMel($adresseMel);
-    $utilisateur->setPrenom($prenom);
-    $utilisateur->setNom($nom);
-    $utilisateur->setMotDePasse($motDePasse);
+    // Vérification du format de l'adresse mel
+    if($adresseMel) {
 
-    // Vérification de l'adresse mel
-    $verifMel = $utilisateurManager->verifMel($utilisateur);
+        // Création de l'utilisateur
+        $utilisateur = new Utilisateur();
+        $utilisateur->setMel($adresseMel);
+        $utilisateur->setPrenom($prenom);
+        $utilisateur->setNom($nom);
+        $utilisateur->setMotDePasse($motDePasse);
 
-    if($verifMel) {
 
-        $createSucces = $utilisateurManager->create($utilisateur);
+        // Vérification de l'existence de l'adresse mel
+        $verifMel = $utilisateurManager->verifMel($utilisateur);
 
-        // Vérification de la confirmation du mot de passe
-        if($motDePasse === $motDePasseConfirme) {
+        if($verifMel) {
 
-            // Connexion dès lorsque l'inscription a abouti
-            if($createSucces) {
+            $createSucces = $utilisateurManager->create($utilisateur);
 
-                $authentification = $utilisateurManager->connexion($utilisateur);
+            // Vérification de la confirmation du mot de passe
+            if($motDePasse === $motDePasseConfirme) {
 
-                if($authentification) {
+                // Connexion dès lorsque l'inscription a abouti
+                if($createSucces) {
 
-                    session_start();
-                    $_SESSION['utilisateur']['id'] = $authentification['id'];
-                    $_SESSION['utilisateur']['mel'] = $authentification['mel'];
-                    $_SESSION['utilisateur']['motDePasse'] = $authentification['motDePasse'];
-                    $_SESSION['jeton'] = bin2hex(openssl_random_pseudo_bytes(6));
+                    $authentification = $utilisateurManager->connexion($utilisateur);
 
-                    header('Location:?page=membre');
+                    if($authentification) {
 
+                        session_start();
+                        $_SESSION['utilisateur']['id'] = $authentification['id'];
+                        $_SESSION['utilisateur']['mel'] = $authentification['mel'];
+                        $_SESSION['utilisateur']['motDePasse'] = $authentification['motDePasse'];
+                        $_SESSION['jeton'] = bin2hex(openssl_random_pseudo_bytes(6));
+
+                        header('Location:?page=membre');
+
+                    }
+
+                } else {
+                    $msgErreur = "Erreur lors de la création du compte.";
                 }
 
+            } else {
+                $msgErreur = "Le mot de passe confirmé est différent du mot de passe choisi.";
             }
 
         } else {
-            $msgErreur = "Le mot de passe confirmé est différent du mot de passe choisi.";
+            $msgErreur = "Adresse mél déjà utilisé.";
         }
 
+
     } else {
-        $msgErreur = "Adresse mél déjà utilisé.";
+        $msgErreur =  "Format de l'adresse mel incorrecte !";
     }
 
 }
