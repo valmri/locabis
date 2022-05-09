@@ -37,7 +37,7 @@ if(
 
 
         // Vérification de l'existence de l'adresse mel
-        $verifMel = $utilisateurManager->verifMel($utilisateur);
+        $verifMel = $utilisateurManager->verifMel($utilisateur->getMel());
 
         if($verifMel) {
 
@@ -72,12 +72,12 @@ if(
             }
 
         } else {
-            $msgErreur = "Adresse mél déjà utilisé.";
+            $msgErreur = "Adresse mél déjà utilisée.";
         }
 
 
     } else {
-        $msgErreur =  "Format de l'adresse mel incorrecte !";
+        $msgErreur =  "Format de l'adresse mel incorrect !";
     }
 
 }
