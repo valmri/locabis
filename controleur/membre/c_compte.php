@@ -39,49 +39,68 @@ if(isset($authentification) && $authentification) {
         if(isset($_POST['mel']) && !empty($_POST['mel'])) {
 
             // Récupération de la nouvelle donnée
-            $nouvelAdresseMel = filter_input(INPUT_POST, 'mel', FILTER_SANITIZE_EMAIL);
+            $nouvelAdresseMel = filter_input(INPUT_POST, 'mel', FILTER_VALIDATE_EMAIL);
 
-            // Modification de l'objet
-            $utilisateur->setMel($nouvelAdresseMel);
+            // Vérification de la conformité de l'adresse mel
+            if($nouvelAdresseMel) {
 
-            // Mise à jour en base de donnée avec le manager
-            $majSucces = $utilisateurManager->updateMel($utilisateur);
+                // Modification de l'objet
+                $utilisateur->setMel($nouvelAdresseMel);
 
-            // Vérification de la mise à jour
-            if($majSucces) {
+                // Mise à jour en base de donnée avec le manager
+                $majSucces = $utilisateurManager->updateMel($utilisateur);
 
-                // Modification variable de session pour maintenir la session active
-                $_SESSION['utilisateur']['mel'] = $nouvelAdresseMel;
-                $msgInfo = "Adresse mel modifié avec succès !";
+                // Vérification de la mise à jour
+                if($majSucces) {
 
+                    // Modification variable de session pour maintenir la session active
+                    $_SESSION['utilisateur']['mel'] = $nouvelAdresseMel;
+                    $msgInfo = "Adresse mel modifié avec succès !";
+
+                } else {
+                    $msgErreur = "Erreur lors de la mise à jour de l'adresse mel.";
+                }
             } else {
-                $msgErreur = "Erreur lors de la mise à jour de l'adresse mel.";
+                $msgErreur = "Adresse mel non valide.";
             }
+
         }
 
         // Mise à jour du mot de passe
-        if(isset($_POST['motdepasse']) && !empty($_POST['motdepasse'])) {
+        if(
+            isset($_POST['motdepasse']) && !empty($_POST['motdepasse'])
+            && isset($_POST['motdepasseConf']) && !empty($_POST['motdepasseConf'])
+        ) {
 
             // Récupération de la nouvelle donnée
             $nouveauMotdepasse = filter_input(INPUT_POST, 'motdepasse', FILTER_SANITIZE_STRING);
+            $motDePasseConfirme = filter_input(INPUT_POST, 'motdepasseConf', FILTER_SANITIZE_STRING);
 
-            // Modification de l'objet
-            $nouveauMotdepasseHache = password_hash($nouveauMotdepasse, PASSWORD_BCRYPT);
-            $utilisateur->setMotDePasse($nouveauMotdepasseHache);
+            // Vérification du mot de passe
+            if($nouveauMotdepasse === $motDePasseConfirme) {
 
-            // Mise à jour en base de donnée avec le manager
-            $majSucces = $utilisateurManager->updateMotDePasse($utilisateur);
+                // Modification de l'objet
+                $nouveauMotdepasseHache = password_hash($nouveauMotdepasse, PASSWORD_BCRYPT);
+                $utilisateur->setMotDePasse($nouveauMotdepasseHache);
 
-            // Vérification de la mise à jour
-            if($majSucces) {
+                // Mise à jour en base de donnée avec le manager
+                $majSucces = $utilisateurManager->updateMotDePasse($utilisateur);
 
-                // Modification variable de session pour maintenir la session active
-                $_SESSION['utilisateur']['motDePasse'] = $nouveauMotdepasse;
-                $msgInfo = "Mot de passe modifié avec succès !";
+                // Vérification de la mise à jour
+                if($majSucces) {
+
+                    // Modification variable de session pour maintenir la session active
+                    $_SESSION['utilisateur']['motDePasse'] = $nouveauMotdepasse;
+                    $msgInfo = "Mot de passe modifié avec succès !";
+
+                } else {
+                    $msgErreur = "Erreur lors de la mise à jour du mot de passe.";
+                }
 
             } else {
-                $msgErreur = "Erreur lors de la mise à jour du mot de passe.";
+                $msgErreur = "Le mot de passe confirmé est différent du mot de passe choisi.";
             }
+
         }
 
         // Vérification du rôle

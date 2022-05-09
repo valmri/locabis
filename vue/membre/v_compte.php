@@ -58,7 +58,10 @@
 
             <form action="#" method="post">
                 <label for="motdepasse">Nouveau mot de passe :</label>
-                <input type="password" name="motdepasse" id="motdepasse" placeholder="Mot de passe" required>
+                <input type="password" name="motdepasse" id="motdepasse" placeholder="Mot de passe" required><br>
+
+                <label for="motdepasseConf">Confirmer votre mot de passe :</label>
+                <input type="password" name="motdepasseConf" id="motdepasseConf" placeholder="Mot de passe" required>
 
                 <input type="hidden" name="jeton" value="<?= $_SESSION['jeton'] ?>">
 
