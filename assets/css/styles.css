@@ -6,107 +6,23 @@
     Ancien Design
  */
 
-.contenu {
-    display: flex;
-    justify-content: center;
-    margin: 50px 100px;
-}
 
-.page {
-    width: 100%;
-}
 
-.infos {
-    width: 30%;
-}
 
-.page,
-.infos {
-    margin: 0px 10px;
-    padding: 10px 20px;
-    border: 1px solid #241F14;
-}
 
-.entetePage,
-.enteteInfo {
-    border-bottom: 1px solid #241F14;
-}
 
-.inputConnexion {
-    margin: 10px 0px;
-}
 
-.inputConnexion > input {
-    width: 50%;
-}
 
-.contenuCarte {
-    display: flex;
-}
 
-.carteLoc {
-    margin: 10px;
-    padding: 10px 20px;
-    border: 1px solid #241F14;
-    width: 100%;
-}
 
-.carteLoc_contenu > h2 {
-    font-size: 16px;
-}
 
-.message {
-    display: flex;
-    align-items: center;
-    border: 1px solid #241F14;
-    margin: 10px 0px;
-    padding: 5px;
-    color: #fff;
-}
 
-.msgErreur {
-    background-color: rgb(172, 25, 25);
-}
 
-.msgInfo {
-    background-color: rgb(25, 172, 74);
-}
 
-.titreInfo {
-    font-weight: 500;
-}
 
-.bouton {
-    display: flex;
-    margin: 10px;
-    padding: 10px 20px;
-    border: 1px solid #241F14;
-    justify-content: center;
-    text-decoration: none;
-    color: #000;
-}
 
-.bouton:hover {
-    background-color: gray;
-    transition: 0.5s;
-    color: #fff;
-}
 
-.pagination {
-    display: flex;
-    list-style: none;
-    padding: 0px;
-    justify-content: center;
-}
 
-.nbPage,
-.pagination > li > a {
-    margin: 0px 10px;
-    padding: 10px;
-    border: 1px solid #241F14;
-    color: #000;
-    text-transform: none;
-}
 
 .equipements {
     display: flex;
@@ -228,4 +144,130 @@ h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
     transition: 0.3s;
     border: 3px solid #1d2f3d;
     border-radius: 0px;
+}
+
+.contenu {
+    display: flex;
+    justify-content: center;
+    margin: 50px 100px;
+}
+
+.page {
+    width: 100%;
+}
+
+.infos {
+    width: 40%;
+}
+
+.page,
+.infos {
+    margin: 0px 10px;
+    padding: 10px 20px;
+}
+
+.entetePage,
+.enteteInfo {
+    border-bottom: 1px solid #241F14;
+}
+
+.entetePage > h1,
+.enteteInfo > h2{
+    font-weight: 500;
+    color: #1d2f3d;
+}
+
+.entetePage > h1 {
+    font-size: 27px;
+}
+
+.contenuCarte {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Boutons du site */
+.bouton {
+    display: flex;
+    margin: 10px;
+    padding: 10px 20px;
+    border: 3px solid #1D2F3D;
+    justify-content: center;
+    text-decoration: none;
+    color: #1d2f3d;
+    font-weight: 500;
+}
+
+.bouton:hover {
+    transition: 0.2s;
+    background-color: #1D2F3D;
+    color: #fff;
+    box-shadow: 2px 2px 3px black;
+}
+
+/* Catalogue des apparts */
+.carteLoc {
+    margin: 10px 0px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 28%;
+}
+
+.carteLoc_contenu > h2 {
+    font-size: 16px;
+    color: #1d2f3d;
+    font-weight: 500;
+}
+
+.infoLoca {
+    color: #1d2f3d;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0px;
+    justify-content: center;
+}
+
+.nbPage,
+.pagination > li > a {
+    margin: 0px 10px;
+    padding: 10px;
+    border: 1px solid #241F14;
+    color: #000;
+    text-transform: none;
+}
+
+/* Messages */
+.message {
+    display: flex;
+    align-items: center;
+    border: 1px solid #241F14;
+    margin: 10px 0px;
+    padding: 5px;
+    color: #fff;
+}
+
+.msgErreur {
+    background-color: rgb(172, 25, 25);
+}
+
+.msgInfo {
+    background-color: rgb(25, 172, 74);
+}
+
+.titreInfo {
+    font-weight: 500;
+}
+
+/* Page de connexion */
+.inputConnexion {
+    margin: 10px 0px;
+}
+
+.inputConnexion > input {
+    width: 50%;
 }
