@@ -1,7 +1,7 @@
 <header>
     <div class="menu">
         <span class="logo">
-            <a href="?page=accueil">Locabis</a>
+            <a href="?page=accueil"></a>
         </span>
         <nav class="navigation">
 

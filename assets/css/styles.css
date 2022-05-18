@@ -1,60 +1,10 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 
-body {
-    margin: 0px;
-    padding: 0px;
-}
 
-h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
-    font-family: 'Quicksand', sans-serif;
-}
-
-h1 {
-    font-size: 25px;
-}
-
-.menu {
-    display: flex;
-    align-items: center;
-    padding: 5px 100px;
-    justify-content: space-between;
-    background-color: #241F14 ;
-    box-shadow: 0px 0px 10px #000;
-    color : #fff;
-}
-
-.navigation {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-}
-
-.boutonNavigations > ul,
-.boutonConnecte > ul {
-    display: flex;
-    list-style: none;
-}
-
-.boutonMenu {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border: 1px solid #fff;
-    border-radius: 10px;
-    margin: 0px 5px;
-}
-
-.boutonMenu:hover {
-    background-color: rgba(255, 255, 255, 0.295);
-    transition: 0.5s;
-}
-
-.logo > a{
-    font-size: 20px;
-    text-decoration: none;
-    color: #fff;
-}
+/**
+    Ancien Design
+ */
 
 .contenu {
     display: flex;
@@ -192,4 +142,90 @@ table {
 thead {
     background-color: blanchedalmond;
     text-align: left;
+}
+
+/**
+    Nouveau Design
+ */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #F2F2F2;
+}
+
+.logo > a{
+    font-size: 20px;
+    text-decoration: none;
+    color: #1D2F3D;
+}
+
+.logo > a::before {
+    content: "Loca";
+    border: 3px solid #1D2F3D;
+    margin-right: 39px;
+    display: block;
+    font-weight: 500;
+    height: 20px;
+    padding: 0px 1px 7px 2px;
+    letter-spacing: 0.5px;
+}
+
+.logo > a::after {
+    content: "bis";
+    border: 3px solid #1D2F3D;
+    margin-top: -19px;
+    margin-left: 55px;
+    display: block;
+    font-weight: 500;
+    height: 21px;
+    padding: 0px 2px 6px 3px;
+    letter-spacing: 0.5px;
+}
+
+.logo:hover > a::before,
+.logo:hover > a::after {
+    transition: 0.2s;
+    background-color: #1D2F3D;
+    color: #fff;
+    box-shadow: 2px 2px 3px black;
+}
+
+h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
+    font-family: 'Poppins', sans-serif;
+}
+
+.menu {
+    background-color: #F2DCB3;
+    display: flex;
+    padding: 10px 110px;
+    align-items: center;
+    box-shadow: 0px 0px 10px black;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.boutonNavigations > ul,
+.boutonConnecte > ul {
+    display: flex;
+    list-style: none;
+}
+
+.boutonMenu {
+    color: #1d2f3d;
+    text-decoration: none;
+    padding: 6px 10px;
+    border: 3px solid transparent;
+    margin: 0px 5px;
+    font-weight: 500;
+}
+
+.boutonMenu:hover {
+    transition: 0.3s;
+    border: 3px solid #1d2f3d;
+    border-radius: 0px;
 }
