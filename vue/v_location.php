@@ -25,6 +25,11 @@
 
                     <?php if (isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) :?>
                         <a href="?page=reserver&id=<?php echo $appartement->getId(); ?>" class="bouton">Louer</a>
+                    <?php else :  ?>
+                    <div class="message msgInfo">
+                        <i class="las la-info-circle"></i>
+                        <p>Vous devez avoir un compte pour pouvoir louer.</p>
+                    </div>
                     <?php endif; ?>
                 </div>
 

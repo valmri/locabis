@@ -252,18 +252,24 @@ header {
 .message {
     display: flex;
     align-items: center;
-    border: 1px solid #241F14;
+    border: 3px solid #1d2f3d;
     margin: 10px 0px;
     padding: 5px;
     color: #fff;
+    box-shadow: 1px 1px 3px #000;
+
 }
 
 .msgErreur {
-    background-color: rgb(172, 25, 25);
+    background-color: rgb(236, 97, 97);
 }
 
 .msgInfo {
-    background-color: rgb(25, 172, 74);
+    background-color: rgb(97, 164, 236);
+}
+
+.msgConfirmation {
+    background-color: rgb(73, 185, 101);
 }
 
 .titreInfo {
