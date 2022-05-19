@@ -24,32 +24,9 @@
 
 
 
-.equipements {
-    display: flex;
-}
 
-.equipement {
-    display: inherit;
-    align-items: center;
-    padding: 5px 20px;
-    margin-right: 10px;
-    border: 1px solid #241F14;
-}
 
-.avis {
-    padding: 5px 20px;
-    margin-top: 10px;
-    margin-right: 10px;
-    border: 1px solid #241F14;
-    width: 45%;
-}
 
-.avisEntete {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #241F14;
-}
 
 table {
     width: 100%;
@@ -111,6 +88,10 @@ h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
     font-family: 'Poppins', sans-serif;
 }
 
+h3 {
+    font-weight: 500;
+}
+
 header {
     position: fixed;
     top: 0;
@@ -167,10 +148,22 @@ header {
     width: 40%;
 }
 
+.descAppart {
+    position: fixed;
+    left: 100px;
+    width: 20%;
+}
+
 .page,
 .infos {
     margin: 0px 10px;
     padding: 10px 20px;
+}
+
+.info {
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
 }
 
 .entetePage,
@@ -191,6 +184,10 @@ header {
 .contenuCarte {
     display: flex;
     justify-content: space-around;
+}
+
+.contenuAppart {
+    margin-left: 520px;
 }
 
 /* Boutons du site */
@@ -229,6 +226,45 @@ header {
 
 .infoLoca {
     color: #1d2f3d;
+}
+
+/* Annonce */
+
+.equipements {
+    display: flex;
+}
+
+.equipement {
+    display: inherit;
+    align-items: center;
+    padding: 5px 20px;
+    margin-right: 10px;
+    border: 3px solid #1d2f3d;
+}
+
+.equipement > i {
+    font-size: 21px;
+    margin-right: 5px;
+    color: #1d2f3d;
+}
+
+.equipement > p {
+    color: #1d2f3d;
+}
+
+/* Avis */
+.avis {
+    padding: 5px 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border: 3px solid #1d2f3d;
+}
+
+.avisEntete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #1d2f3d;
 }
 
 /* Pagination */
