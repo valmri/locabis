@@ -44,7 +44,7 @@ body {
     box-shadow: 2px 2px 3px black;
 }
 
-h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
+h1, h2, h3, p, a, span, label, input, button, ul, table, textarea {
     font-family: 'Poppins', sans-serif;
 }
 
@@ -76,6 +76,11 @@ header {
 .boutonConnecte > ul {
     display: flex;
     list-style: none;
+}
+
+.btnConnexion {
+    cursor: pointer;
+    width: 43%;
 }
 
 .boutonMenu {
@@ -160,6 +165,7 @@ header {
     text-decoration: none;
     color: #1d2f3d;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .bouton:hover {
@@ -277,8 +283,26 @@ header {
     margin: 10px 0px;
 }
 
-.inputConnexion > input {
-    width: 50%;
+input {
+    width: 20%;
+    background-color: transparent;
+    border: 3px solid transparent;
+    border-bottom: 3px solid #1d2f3d;
+}
+
+input:focus-visible {
+    outline: none;
+    border: 3px solid #1d2f3d;
+    transition: 0.2ms;
+}
+
+textarea {
+    width: 100%;
+    border: 3px solid #1d2f3d;
+}
+
+.inputTitre {
+    width: 100%;
 }
 
 /* Tableaux */
@@ -289,4 +313,19 @@ table {
 thead {
     background-color: blanchedalmond;
     text-align: left;
+}
+
+td {
+    background-color: #fff;
+}
+
+/* Espace membre */
+
+.actionResrvation {
+    display: flex;
+    justify-content: space-between;
+}
+
+.actionResrvation > input {
+    margin: 0px;
 }

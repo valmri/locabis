@@ -16,16 +16,16 @@
         <form action="#" method="post">
 
             <div class="inputConnexion">
-                <label for="identifiant">Identifiant</label></br>
-                <input name="identifiant" type="text" required/></br>
+                <i class="las la-user"></i>
+                <input name="identifiant" type="text" placeholder="Identifiant" required/>
             </div>
 
             <div class="inputConnexion">
-                <label for="motDePasse">Mot de passe</label></br>
-                <input name="motDePasse" type="password" required/></br>
+                <i class="las la-lock"></i>
+                <input name="motDePasse" type="password" placeholder="Mot de passe" required/>
             </div>
 
-            <button class="boutonConnexion" type="submit">Se connecter</button>
+            <button class="bouton btnConnexion" type="submit">Se connecter</button>
 
         </form>
         

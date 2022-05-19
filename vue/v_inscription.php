@@ -23,31 +23,23 @@
         <form action="#" method="post">
 
             <div class="inputConnexion">
-                <label for="nom">Nom</label></br>
-                <input name="nom" type="text" required/></br>
+                <i class="las la-user"></i>
+                <input name="nom" type="text" placeholder="Nom*" required/>
+                <input name="prenom" type="text" placeholder="Prénom*" required/>
             </div>
 
             <div class="inputConnexion">
-                <label for="prenom">Prenom</label></br>
-                <input name="prenom" type="text" required/></br>
+                <i class="las la-at"></i>
+                <input name="mel" type="text" placeholder="Adresse-mél*" required/>
             </div>
 
             <div class="inputConnexion">
-                <label for="mel">Adresse mel</label></br>
-                <input name="mel" type="text" required/></br>
+                <i class="las la-lock"></i>
+                <input name="motDePasse" type="password"  placeholder="Mot de passe*" required/>
+                <input name="motDePasseConf" type="password" placeholder="Confirmez le mot de passe*" required/>
             </div>
 
-            <div class="inputConnexion">
-                <label for="motDePasse">Mot de passe</label></br>
-                <input name="motDePasse" type="password" required/></br>
-            </div>
-
-            <div class="inputConnexion">
-                <label for="motDePasseConf">Confirmer votre mot de passe</label></br>
-                <input name="motDePasseConf" type="password" required/></br>
-            </div>
-
-            <button class="boutonConnexion" type="submit">S'inscrire</button>
+            <button class="bouton btnConnexion" type="submit">S'inscrire</button>
 
         </form>
 

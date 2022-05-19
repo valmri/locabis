@@ -47,7 +47,7 @@
         <?php endif; ?>
 
         <?php if (!empty($msgInfo)) :?>
-            <div class="message msgInfo">
+            <div class="message msgConfirmation">
                 <i class="las la-info-circle"></i>
                 <p><?php echo $msgInfo; ?></p>
             </div>
@@ -56,21 +56,15 @@
         <div class="contenuPage">
 
             <form action="#" method="post">
-                <label for="titre">Titre :</label>
-                <input type="text" name="titre" id="titre" placeholder="Titre de l'appartement" value="<?= $appartement->getTitre(); ?>" required>
-
-                <input type="hidden" name="jeton" value="<?= $_SESSION['jeton'] ?>">
-
-                <button type="submit">Modifier</button>
-            </form>
-
-            <form action="#" method="post">
+                <label for="titre">Titre :</label><br>
+                <input class="inputTitre" type="text" name="titre" id="titre" placeholder="Titre de l'appartement" value="<?= $appartement->getTitre(); ?>" required>
+                <br>
                 <label for="description">Description :</label><br>
                 <textarea name="description" id="description" cols="30" rows="10" required><?= $appartement->getDescription(); ?></textarea><br>
 
                 <input type="hidden" name="jeton" value="<?= $_SESSION['jeton'] ?>">
 
-                <button type="submit">Modifier</button>
+                <button class="bouton" type="submit">Modifier</button>
             </form>
 
             <form action="#" method="post">
@@ -78,14 +72,14 @@
 
 
                 <div>
-                    <input type="checkbox" name="equipements[<?= $equipement->getId(); ?>][id]" id="equipement<?= $equipement->getId(); ?>" value="<?= $equipement->getId(); ?>">
                     <label for="equipement<?= $equipement->getId(); ?>"><?= $equipement->getLibelle(); ?></label>
+                    <input type="checkbox" name="equipements[<?= $equipement->getId(); ?>][id]" id="equipement<?= $equipement->getId(); ?>" value="<?= $equipement->getId(); ?>">
                     <input type="number" id="equipement<?= $equipement->getId(); ?>" name="equipements[<?= $equipement->getId(); ?>][quantite]" value="0" min="0" max="50">
                 </div>
 
 
                 <?php endforeach; ?>
-                <button type="submit">Envoyer</button>
+                <button class="bouton" type="submit">Modifier</button>
             </form>
 
         </div>

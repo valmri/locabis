@@ -56,6 +56,8 @@
                 <button type="submit">Modifier</button>
             </form>
 
+            <hr>
+
             <form action="#" method="post">
                 <label for="motdepasse">Nouveau mot de passe :</label>
                 <input type="password" name="motdepasse" id="motdepasse" placeholder="Mot de passe" required><br>
@@ -69,6 +71,7 @@
             </form>
 
             <?php if($utilisateur->getRole() === 2) :?>
+                <hr>
 
                 <form action="#" method="post">
                     <label for="adresse">Nouvelle adresse :</label>

@@ -43,7 +43,7 @@
             <?php endif; ?>
 
             <?php if (!empty($msgInfo)) :?>
-            <div class="message msgInfo">
+            <div class="message msgConfirmation">
                 <i class="las la-info-circle"></i>
                 <p><?php echo $msgInfo; ?></p>
             </div>
@@ -51,13 +51,11 @@
 
             <div class="contenuPage">
                 <form action="#" method="post">
-                    <label for="dateDebut">Date de début :</label>
-                    <input type="text" name="dateDebut" id="dateDebut" placeholder="Début du séjour" required></br>
-
-                    <label for="dateFin">Date de fin :</label>
+                    <i class="las la-calendar"></i>
+                    <input type="text" name="dateDebut" id="dateDebut" placeholder="Début du séjour" required>
                     <input type="text" name="dateFin" id="dateFin" placeholder="Fin du séjour" required></br>
 
-                    <button type="submit">Réserver</button>
+                    <button class="bouton" type="submit">Réserver</button>
                 </form>
 
             </div>

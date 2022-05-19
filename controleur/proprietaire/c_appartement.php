@@ -92,7 +92,7 @@ if(isset($authentification) && $authentification) {
             $majSucces = $appartementManager->update($appartement);
 
             if($majSucces) {
-                $msgInfo = "Description modifiée avec succès !";
+                $msgInfo = "Modifiée avec succès !";
             } else {
                 $msgErreur = "Erreur lors de la modification de la description.";
             }

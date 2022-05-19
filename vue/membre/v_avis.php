@@ -35,7 +35,7 @@
         <?php endif; ?>
 
         <?php if (!empty($msgInfo)) :?>
-            <div class="message msgInfo">
+            <div class="message msgConfirmation">
                 <i class="las la-info-circle"></i>
                 <p><?php echo $msgInfo; ?></p>
             </div>
@@ -53,7 +53,7 @@
 
                 <input type="hidden" name="jeton" id="jeton" value="<?= $_SESSION['jeton'] ?>">
 
-                <button type="submit">Envoyer</button>
+                <button class="bouton" type="submit">Envoyer</button>
 
             </form>
 
