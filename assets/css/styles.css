@@ -111,6 +111,12 @@ h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
     font-family: 'Poppins', sans-serif;
 }
 
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
 .menu {
     background-color: #F2DCB3;
     display: flex;
@@ -150,6 +156,7 @@ h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
     display: flex;
     justify-content: center;
     margin: 50px 100px;
+    padding-top: 50px;
 }
 
 .page {
@@ -183,7 +190,7 @@ h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
 
 .contenuCarte {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 /* Boutons du site */
