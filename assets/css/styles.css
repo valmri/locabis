@@ -1,27 +1,69 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 
 body {
     margin: 0px;
     padding: 0px;
+    background-color: #F2F2F2;
+}
+
+.logo > a{
+    font-size: 20px;
+    text-decoration: none;
+    color: #1D2F3D;
+}
+
+.logo > a::before {
+    content: "Loca";
+    border: 3px solid #1D2F3D;
+    margin-right: 39px;
+    display: block;
+    font-weight: 500;
+    height: 20px;
+    padding: 0px 1px 7px 2px;
+    letter-spacing: 0.5px;
+}
+
+.logo > a::after {
+    content: "bis";
+    border: 3px solid #1D2F3D;
+    margin-top: -19px;
+    margin-left: 55px;
+    display: block;
+    font-weight: 500;
+    height: 21px;
+    padding: 0px 2px 6px 3px;
+    letter-spacing: 0.5px;
+}
+
+.logo:hover > a::before,
+.logo:hover > a::after {
+    transition: 0.2s;
+    background-color: #1D2F3D;
+    color: #fff;
+    box-shadow: 2px 2px 3px black;
 }
 
 h1, h2, h3, p, a, span, label, input[type='text'], button, ul, table {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
-h1 {
-    font-size: 25px;
+h3 {
+    font-weight: 500;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .menu {
+    background-color: #F2DCB3;
     display: flex;
+    padding: 10px 110px;
     align-items: center;
-    padding: 5px 100px;
-    justify-content: space-between;
-    background-color: #241F14 ;
-    box-shadow: 0px 0px 10px #000;
-    color : #fff;
+    box-shadow: 0px 0px 10px black;
 }
 
 .navigation {
@@ -37,29 +79,25 @@ h1 {
 }
 
 .boutonMenu {
-    color: #fff;
+    color: #1d2f3d;
     text-decoration: none;
-    padding: 10px 20px;
-    border: 1px solid #fff;
-    border-radius: 10px;
+    padding: 6px 10px;
+    border: 3px solid transparent;
     margin: 0px 5px;
+    font-weight: 500;
 }
 
 .boutonMenu:hover {
-    background-color: rgba(255, 255, 255, 0.295);
-    transition: 0.5s;
-}
-
-.logo > a{
-    font-size: 20px;
-    text-decoration: none;
-    color: #fff;
+    transition: 0.3s;
+    border: 3px solid #1d2f3d;
+    border-radius: 0px;
 }
 
 .contenu {
     display: flex;
     justify-content: center;
     margin: 50px 100px;
+    padding-top: 50px;
 }
 
 .page {
@@ -67,14 +105,25 @@ h1 {
 }
 
 .infos {
-    width: 30%;
+    width: 40%;
+}
+
+.descAppart {
+    position: fixed;
+    left: 100px;
+    width: 20%;
 }
 
 .page,
 .infos {
     margin: 0px 10px;
     padding: 10px 20px;
-    border: 1px solid #241F14;
+}
+
+.info {
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
 }
 
 .entetePage,
@@ -82,66 +131,103 @@ h1 {
     border-bottom: 1px solid #241F14;
 }
 
-.inputConnexion {
-    margin: 10px 0px;
+.entetePage > h1,
+.enteteInfo > h2{
+    font-weight: 500;
+    color: #1d2f3d;
 }
 
-.inputConnexion > input {
-    width: 50%;
+.entetePage > h1 {
+    font-size: 27px;
 }
 
 .contenuCarte {
     display: flex;
+    justify-content: space-around;
 }
 
-.carteLoc {
-    margin: 10px;
-    padding: 10px 20px;
-    border: 1px solid #241F14;
-    width: 100%;
+.contenuAppart {
+    margin-left: 520px;
 }
 
-.carteLoc_contenu > h2 {
-    font-size: 16px;
-}
-
-.message {
-    display: flex;
-    align-items: center;
-    border: 1px solid #241F14;
-    margin: 10px 0px;
-    padding: 5px;
-    color: #fff;
-}
-
-.msgErreur {
-    background-color: rgb(172, 25, 25);
-}
-
-.msgInfo {
-    background-color: rgb(25, 172, 74);
-}
-
-.titreInfo {
-    font-weight: 500;
-}
-
+/* Boutons du site */
 .bouton {
     display: flex;
     margin: 10px;
     padding: 10px 20px;
-    border: 1px solid #241F14;
+    border: 3px solid #1D2F3D;
     justify-content: center;
     text-decoration: none;
-    color: #000;
+    color: #1d2f3d;
+    font-weight: 500;
 }
 
 .bouton:hover {
-    background-color: gray;
-    transition: 0.5s;
+    transition: 0.2s;
+    background-color: #1D2F3D;
     color: #fff;
+    box-shadow: 2px 2px 3px black;
 }
 
+/* Catalogue des apparts */
+.carteLoc {
+    margin: 10px 0px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 28%;
+}
+
+.carteLoc_contenu > h2 {
+    font-size: 16px;
+    color: #1d2f3d;
+    font-weight: 500;
+}
+
+.infoLoca {
+    color: #1d2f3d;
+}
+
+/* Annonce */
+
+.equipements {
+    display: flex;
+}
+
+.equipement {
+    display: inherit;
+    align-items: center;
+    padding: 5px 20px;
+    margin-right: 10px;
+    border: 3px solid #1d2f3d;
+}
+
+.equipement > i {
+    font-size: 21px;
+    margin-right: 5px;
+    color: #1d2f3d;
+}
+
+.equipement > p {
+    color: #1d2f3d;
+}
+
+/* Avis */
+.avis {
+    padding: 5px 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border: 3px solid #1d2f3d;
+}
+
+.avisEntete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #1d2f3d;
+}
+
+/* Pagination */
 .pagination {
     display: flex;
     list-style: none;
@@ -158,33 +244,44 @@ h1 {
     text-transform: none;
 }
 
-.equipements {
+/* Messages */
+.message {
     display: flex;
-}
-
-.equipement {
-    display: inherit;
     align-items: center;
-    padding: 5px 20px;
-    margin-right: 10px;
-    border: 1px solid #241F14;
+    border: 3px solid #1d2f3d;
+    margin: 10px 0px;
+    padding: 5px;
+    color: #fff;
+    box-shadow: 1px 1px 3px #000;
+
 }
 
-.avis {
-    padding: 5px 20px;
-    margin-top: 10px;
-    margin-right: 10px;
-    border: 1px solid #241F14;
-    width: 45%;
+.msgErreur {
+    background-color: rgb(236, 97, 97);
 }
 
-.avisEntete {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #241F14;
+.msgInfo {
+    background-color: rgb(97, 164, 236);
 }
 
+.msgConfirmation {
+    background-color: rgb(73, 185, 101);
+}
+
+.titreInfo {
+    font-weight: 500;
+}
+
+/* Page de connexion */
+.inputConnexion {
+    margin: 10px 0px;
+}
+
+.inputConnexion > input {
+    width: 50%;
+}
+
+/* Tableaux */
 table {
     width: 100%;
 }

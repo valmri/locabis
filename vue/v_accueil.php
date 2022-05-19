@@ -1,22 +1,6 @@
 <body>
 
     <div class="contenu">
-
-        <aside class="infos">
-
-            <div class="info">
-
-                <div class="enteteInfo">
-                    <h2>Bienvenue sur Locabis !</h2>
-                </div>
-
-                <div class="contenuInfo">
-                    <p>Consultez dès aujourd'hui nos offres de location pour vos prochaines vacances.</p>
-                </div>
-
-            </div>
-
-        </aside>
     
         <div class="page">
 

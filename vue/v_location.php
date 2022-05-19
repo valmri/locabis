@@ -1,8 +1,8 @@
 <body>
 
-    <div class="contenu">
+    <div class="contenu contenuAppart">
 
-        <aside class="infos">
+        <aside class="infos descAppart">
 
             <div class="info">
 
@@ -25,6 +25,11 @@
 
                     <?php if (isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) :?>
                         <a href="?page=reserver&id=<?php echo $appartement->getId(); ?>" class="bouton">Louer</a>
+                    <?php else :  ?>
+                    <div class="message msgInfo">
+                        <i class="las la-info-circle"></i>
+                        <p>Vous devez avoir un compte pour pouvoir louer.</p>
+                    </div>
                     <?php endif; ?>
                 </div>
 
@@ -90,9 +95,15 @@
                         <button type="submit">Envoyer</button>
                     </form>
                 <?php elseif($avisExiste) : ?>
-                    <p>Un avis a déjà été donné, vous pouvez modifier votre avis.</p>
+                    <div class="message msgInfo">
+                        <i class="las la-info-circle"></i>
+                        <p>Un avis a déjà été donné, vous pouvez modifier votre avis.</p>
+                    </div>
                 <?php else : ?>
-                    <p>Une réservation doit être validée pour donner un avis.</p>
+                    <div class="message msgInfo">
+                        <i class="las la-info-circle"></i>
+                        <p>Une réservation doit être validée pour donner un avis.</p>
+                    </div>
                 <?php endif; ?>
 
                 <?php endif; ?>
