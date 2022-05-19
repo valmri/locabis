@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <?php $nbCase++; ?>
-                    <?php if ($nbCase === 2) :?>
+                    <?php if ($nbCase === 3) :?>
                     </div>
                     <?php $nbCase = 0;?>
                 <?php endif; ?>
