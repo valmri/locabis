@@ -1,0 +1,40 @@
+@media(max-width: 1500px) {
+    .menuDesk {
+        display: none;
+    }
+
+    .menuResp {
+        display: flex;
+        padding: 10px;
+    }
+
+    .contenu {
+        display: block;
+        margin: 50px 0px;
+    }
+
+    .contenuCarte {
+        display: block;
+    }
+
+    .carteLoc {
+        width: 100%;
+    }
+
+    .descAppart {
+        position: initial;
+        left: 0;
+        width: 100%;
+    }
+
+    .carteLoc {
+        padding: 10px 0px;
+    }
+
+    .page,
+    .infos {
+        margin: 0px;
+        padding: 0px;
+    }
+
+}

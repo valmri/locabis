@@ -329,3 +329,8 @@ td {
 .actionResrvation > input {
     margin: 0px;
 }
+
+/* Responsive */
+.menuResp {
+    display: none;
+}
