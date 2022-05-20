@@ -150,11 +150,11 @@ class AvisManager extends ManagerPrincipal
         try {
 
             $bdd = $this->getPDO();
-            $sql = "Select a.reservation, a.note, a.commentaire, a.date_publication, u.id as id_utilisateur, u.prenom from avis a
-                    join reservation r on a.reservation = r.id
-                    join utilisateur u on r.utilisateur = u.id
-                    where a.appartement = :idappart 
-                    order by a.date_publication desc";
+            $sql = "select r.id as id_reservation, av.note, av.commentaire, av.date_publication, u.id as id_utilisateur, u.prenom from reservation r
+                    join avis av on r.id  = av.reservation  
+                    join utilisateur u on r.utilisateur =  u.id 
+                    where r.appartement = :idappart
+                    order by av.date_publication desc";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idappart', $idAppartement, PDO::PARAM_INT);
             $requete->execute();
@@ -168,7 +168,7 @@ class AvisManager extends ManagerPrincipal
                 foreach ($tableauAvis as $avis) {
 
                     $unAvis = new Avis();
-                    $unAvis->setReservation($avis['reservation']);
+                    $unAvis->setReservation($avis['id_reservation']);
 
                     $utilisateur = $utilisateurManager->read($avis['id_utilisateur']);
 
