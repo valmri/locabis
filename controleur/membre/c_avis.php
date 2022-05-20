@@ -78,6 +78,7 @@ if(
                         // Mise à jour du commentaire
                         $avis->setNote($note);
                         $avis->setCommentaire($commentaire);
+                        $avis->setReservation($idAvis);
                         $majSucces = $avisManager->update($avis);
 
                         if($majSucces) {

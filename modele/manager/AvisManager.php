@@ -53,7 +53,10 @@ class AvisManager extends ManagerPrincipal
 
         try {
             $bdd = $this->getPDO();
-            $sql = "Select * from avis where reservation = :idr;";
+            $sql = "select r.id as id_reservation, av.note, av.commentaire, av.date_publication, u.id as utilisateur, u.prenom from reservation r
+                    join avis av on r.id  = av.reservation  
+                    join utilisateur u on r.utilisateur =  u.id 
+                    where av.reservation = :idr;";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idr', $idReservation, PDO::PARAM_INT);
             $requete->execute();
@@ -97,11 +100,10 @@ class AvisManager extends ManagerPrincipal
         try {
 
             $bdd = $this->getPDO();
-            $sql = "Update avis set note = :note, commentaire = :com, date_publication = now() where appartement = :ida and reservation = :idr;";
+            $sql = "Update avis set note = :note, commentaire = :com, date_publication = now() where reservation = :idr;";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':note', $avis->getNote(), PDO::PARAM_INT);
             $requete->bindValue(':com', $avis->getCommentaire(), PDO::PARAM_STR);
-            $requete->bindValue(':ida', $avis->getAppartement(), PDO::PARAM_INT);
             $requete->bindValue(':idr', $avis->getReservation(), PDO::PARAM_INT);
             $requete->execute();
 
@@ -203,18 +205,29 @@ class AvisManager extends ManagerPrincipal
      * Permet de vérifier l'existence d'un avis
      * @param int $idUtilisateur
      * @param int $idAppart
-     * @return false|mixed|object|\stdClass|null
+     * @return bool
      */
-    public function avisExistant(int $idUtilisateur, int $idAppart) {
+    public function verifAvis(int $idUtilisateur, int $idAppart) {
+
+        $resultat = true;
 
         try {
             $bdd = $this->getPDO();
-            $sql = "Select * from avis where utilisateur = :idu and appartement = :ida;";
+            $sql = "select count(*) as nbReservation from reservation r
+                    join utilisateur u on u.id = r.utilisateur
+                    join appartement a on a.id = r.appartement
+                    where r.utilisateur = :idu and r.appartement = :ida;";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idu', $idUtilisateur, PDO::PARAM_INT);
             $requete->bindValue(':ida', $idAppart, PDO::PARAM_INT);
             $requete->execute();
-            $resultat =$requete->fetchObject('modele\entite\Avis');
+            $reponse =$requete->fetch();
+
+            // S'il existe une ou plusieurs réservations l'utilisateur ne pourra pas publier de nouvel avis sur l'appart
+            if($reponse > 0) {
+                $resultat = false;
+            }
+
         } catch (Exception $e) {
             $resultat = false;
         }

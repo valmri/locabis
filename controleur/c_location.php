@@ -89,7 +89,7 @@ if(
         if($reservation) {
 
             // Vérification de l'existance d'un avis
-            $avisExiste = $avisManager->avisExistant($utilisateur->getId(), $appartement->getId());
+            $avisExiste = $avisManager->verifAvis($utilisateur->getId(), $appartement->getId());
 
             if(!$avisExiste) {
                 // Création d'un avis

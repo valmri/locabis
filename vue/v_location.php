@@ -47,7 +47,7 @@
             <?php endif; ?>
 
             <?php if (!empty($msgInfo)) :?>
-                <div class="message msgInfo">
+                <div class="message msgConfirmation">
                     <i class="las la-info-circle"></i>
                     <p><?php echo $msgInfo; ?></p>
                 </div>
@@ -92,9 +92,9 @@
                         <label for="commentaire">Commentaire :</label><br>
                         <textarea name="commentaire" id="commentaire" cols="30" rows="10" required></textarea><br>
 
-                        <button type="submit">Envoyer</button>
+                        <button class="bouton" type="submit">Envoyer</button>
                     </form>
-                <?php elseif($avisExiste) : ?>
+                <?php elseif(!$avisExiste) : ?>
                     <div class="message msgInfo">
                         <i class="las la-info-circle"></i>
                         <p>Un avis a déjà été donné, vous pouvez modifier votre avis.</p>
@@ -112,8 +112,7 @@
                 <div class="avis">
                     <div class="avisEntete">
                         <p><?= $avis->getUtilisateur()->getPrenom();?> - <?= $avis->getDatePublication();?></p>
-
-                        <?php if(isset($avisExiste) && $avisExiste && $utilisateur->getId() === $avis->getUtilisateur()->getId()) :?>
+                        <?php if(isset($avisExiste) && $utilisateur->getId() === $avis->getUtilisateur()->getId()) :?>
                             <a href="?page=avis&id=<?= $avis->getReservation() ?>">Modifier</a>
                         <?php endif; ?>
 
