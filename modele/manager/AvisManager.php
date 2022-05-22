@@ -24,11 +24,9 @@ class AvisManager extends ManagerPrincipal
         try {
 
             $bdd = $this->getPDO();
-            $sql = "Insert into avis(reservation, appartement, utilisateur, note, commentaire, date_publication) values (:idreservation, :idappart, :idutil, :note, :commentaire, now());";
+            $sql = "Insert into avis(reservation, note, commentaire, date_publication) values (:idreservation,:note, :commentaire, now());";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idreservation', $avis->getReservation(), PDO::PARAM_INT);
-            $requete->bindValue(':idappart', $avis->getAppartement(), PDO::PARAM_INT);
-            $requete->bindValue(':idutil', $avis->getUtilisateur(), PDO::PARAM_INT);
             $requete->bindValue(':note', $avis->getNote(), PDO::PARAM_INT);
             $requete->bindValue(':commentaire', $avis->getCommentaire(), PDO::PARAM_STR);
             $requete->execute();
