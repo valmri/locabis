@@ -8,6 +8,7 @@ require_once './modele/manager/EquipementManager.php';
 require_once './modele/manager/AvisManager.php';
 require_once './modele/manager/UtilisateurManager.php';
 require_once './modele/manager/ReservationManager.php';
+require_once './modele/manager/EquipementAppartementManager.php';
 require_once './modele/entite/Appartement.php';
 require_once './modele/entite/TypeAppart.php';
 require_once './modele/entite/Immeuble.php';
@@ -15,6 +16,7 @@ require_once './modele/entite/Equipement.php';
 require_once './modele/entite/Avis.php';
 require_once './modele/entite/Utilisateur.php';
 require_once './modele/entite/Reservation.php';
+require_once './modele/entite/EquipementAppartement.php';
 
 use modele\manager\AppartementManager;
 use modele\entite\Appartement;
@@ -37,6 +39,8 @@ use modele\entite\Utilisateur;
 use modele\manager\ReservationManager;
 use modele\entite\Reservation;
 
+use modele\manager\EquipementAppartementManager;
+
 $appartementManager = new AppartementManager();
 $typeAppartManager = new TypeAppartManager();
 $immeubleManager = new ImmeubleManager();
@@ -44,6 +48,7 @@ $equipementManager = new EquipementManager();
 $avisManager = new AvisManager();
 $utilisateurManager = new UtilisateurManager();
 $reservationManager = new ReservationManager();
+$equipementAppartManager = new EquipementAppartementManager();
 
 if(
     isset($_GET['id']) &&
@@ -59,16 +64,28 @@ if(
 
     // Récupération du type d'appart
     $type = $typeAppartManager->read($appartement->getType());
-    $appartement->setType($type);
 
     // Récupération de l'immeuble
     $immeuble = $immeubleManager->read($appartement->getImmeuble());
-    $appartement->setImmeuble($immeuble);
 
     // Récupération des équipements de l'appartement
-    $estEquipe = $equipements = $equipementManager->getEquipementsByIdAppart($appartement->getId());
-    if($estEquipe) {
-        $appartement->setEquipements($equipements);
+    $equipements = $equipementAppartManager->getEquipementsByIdAppart($appartement->getId());
+
+    // Création d'une collection des équipements
+    $collectionEquipement = new \Ds\Vector();
+
+    foreach ($equipements as $equipement) {
+
+        $unEquipement = new \Ds\Vector();
+
+        // Recherche de l'icône et du libelle en bdd
+        $idEquipement = $equipement->getIdEquipement();
+        $infosEquipement = $equipementManager->read($idEquipement);
+        $unEquipement->push($infosEquipement->getIcone());
+        $unEquipement->push($infosEquipement->getLibelle());
+        $unEquipement->push($equipement->getQuantite());
+
+        $collectionEquipement->push($unEquipement);
     }
 
     // Vérification de l'authentification
@@ -79,7 +96,7 @@ if(
     // Récupération de l'utilisateur
     if(isset($authentification) && $authentification) {
 
-        // Récupératop, de l'utilisateur
+        // Récupération de l'utilisateur
         $utilisateur = $utilisateurManager->read($_SESSION['utilisateur']['id']);
 
         // Récupération d'une réservation
@@ -88,10 +105,10 @@ if(
         // Vérification de l'existence d'une réservation
         if($reservation) {
 
-            // Vérification de l'existance d'un avis
+            // Vérification de l'existence d'un avis
             $avisExiste = $avisManager->verifAvis($utilisateur->getId(), $appartement->getId());
 
-            if(!$avisExiste) {
+            if($avisExiste) {
                 // Création d'un avis
                 if(
                     isset($_POST['note'])
@@ -141,10 +158,6 @@ if(
 
     // Récupération des avis
     $lesAvis = $avisManager->getAvisByIdAppart($appartement->getId());
-    if($lesAvis) {
-        $appartement->setAvis($lesAvis);
-    }
-
 
     // Chargements des vues
     require_once './vue/elements/header.php';

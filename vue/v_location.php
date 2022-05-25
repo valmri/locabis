@@ -11,17 +11,17 @@
                 </div>
 
                 <div class="contenuInfo">
-                    <p><span class="titreInfo">Type :</span> <?php echo $appartement->getType()->getLibeType(); ?></p>
-                    <p><span class="titreInfo">Adresse :</span> <?php echo $appartement->getImmeuble()->getAdresse(); ?> </p>
-                    <p><span class="titreInfo">Ville :</span> <?php echo $appartement->getImmeuble()->getVille(); ?> </p>
+                    <p><span class="titreInfo">Type :</span> <?= $type->getLibetype(); ?></p>
+                    <p><span class="titreInfo">Adresse :</span> <?= $immeuble->getAdresse(); ?> </p>
+                    <p><span class="titreInfo">Ville :</span> <?= $immeuble->getVille(); ?> </p>
 
-                    <?php if ($appartement->getImmeuble()->isAscensseur()) : ?>
+                    <?php if ($immeuble->isAscenseur()) : ?>
                         <p><span class="titreInfo">Ascenseur :</span> Oui</p>
                     <?php else : ?>
                         <p><span class="titreInfo">Ascenseur :</span> Non</p>
                     <?php endif; ?>
 
-                    <p><span class="titreInfo">Prix :</span> <?php echo $appartement->getType()->getTarifLocaBase(); ?>€</p>
+                    <p><span class="titreInfo">Prix :</span> <?= $type->getTarifLocaBase(); ?>€</p>
 
                     <?php if (isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) :?>
                         <a href="?page=reserver&id=<?php echo $appartement->getId(); ?>" class="bouton">Louer</a>
@@ -54,8 +54,8 @@
             <?php endif; ?>
 
             <div class="entetePage">
-                <?php if ($appartement->getPhoto() != null) : ?>
-                    <img src="./images/apparts/<?php echo $appartement->getPhoto(); ?>.jpg" width="50%" alt="<?php $appartement->getType()->getLibeType(); ?>">
+                <?php if ($appartement->getPhoto() !== null) : ?>
+                    <img src="./images/apparts/<?= $appartement->getPhoto(); ?>.jpg" width="50%" alt="<?= $type->getLibeType(); ?>">
                 <?php else :?>
                     <img src="./assets/img/appart.jpg" width="50%" alt="<?php echo $appartement->getType()->getLibeType(); ?>">
                 <?php endif; ?>
@@ -65,13 +65,13 @@
             <div class="contenuPage">
                 <p><?php echo $appartement->getDescription(); ?></p>
             </div>
-            <?php if ($estEquipe) : ?>
+            <?php if ($collectionEquipement->count() > 0) : ?>
             <h3>Equipements :</h3>
             <div class="equipements">
-                <?php foreach ($appartement->getEquipements() as $equipement) : ?>
+                <?php foreach ($collectionEquipement as $equipement) : ?>
                 <div class="equipement">
-                    <i class="<?= $equipement->getIcone(); ?>"></i>
-                    <p><?= $equipement->getQuantite().' '.$equipement->getLibelle(); ?></p>
+                    <i class="<?= $equipement->get(0); ?>"></i>
+                    <p><?= $equipement->get(1).' '.$equipement->get(2); ?></p>
                 </div>
                 <?php endforeach; ?>
                 
@@ -84,7 +84,7 @@
                 <h3 id="avis">Avis :</h3>
                 <?php if(isset($reservation) && $reservation) : ?>
 
-                <?php if(!$avisExiste && $reservation->getEtat() === "3") : ?>
+                <?php if($avisExiste && $reservation->getEtat() === "3") : ?>
                     <form action="#" method="post">
                         <label for="note">Note : </label>
                         <input type="number" name="note" id="note" min="0" max="5" required> <span> / 5</span><br>
@@ -108,18 +108,18 @@
 
                 <?php endif; ?>
                 <?php if ($lesAvis) : ?>
-                <?php foreach ($appartement->getAvis() as $avis) : ?>
+                <?php foreach ($lesAvis as $avis) : ?>
                 <div class="avis">
                     <div class="avisEntete">
-                        <p><?= $avis->getUtilisateur()->getPrenom();?> - <?= $avis->getDatePublication();?></p>
-                        <?php if(isset($avisExiste) && $utilisateur->getId() === $avis->getUtilisateur()->getId()) :?>
-                            <a href="?page=avis&id=<?= $avis->getReservation() ?>">Modifier</a>
+                        <p><?= $avis->get(2);?> - <?= $avis->get(3);?></p>
+                        <?php if(isset($avisExiste) && !$avisExiste && (int)$utilisateur->getId() === (int)$avis->get(1)) :?>
+                            <a href="?page=avis&id=<?= $avis->get(0) ?>">Modifier</a>
                         <?php endif; ?>
 
-                        <span>Note : <?= $avis->getNote();?>/5</span>
+                        <span>Note : <?= $avis->get(4);?>/5</span>
                     </div>
                     <div class="avisCorps">
-                        <p><?= $avis->getCommentaire();?></p>
+                        <p><?= $avis->get(5); ?></p>
                     </div>
                 </div>
                 <?php endforeach; ?>
