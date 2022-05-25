@@ -1,4 +1,9 @@
 <?php
+/**
+ * annulationReservation.php
+ * Description : Permet d'annuler une réservation par la méthode AJAX
+ * @author : Valentin Marmié
+ */
 // Initialisation de l'entête de la requête
 header("Cache-Control: no-cache, must-revalidate");
 header('Content-Type: text/xml; charset=UTF-8');

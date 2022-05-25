@@ -1,4 +1,9 @@
 <?php
+/**
+ * Index.php
+ * Description : Initialisation des fichiers
+ * @author : Valentin Marmié
+ */
 // Autoloader de composer
 require_once './vendor/autoload.php';
 

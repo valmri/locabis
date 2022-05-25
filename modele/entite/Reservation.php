@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Reservation.php
+ * Description : Entite représentant une réservation
+ * @author : Valentin Marmié
+ */
 namespace modele\entite;
 
 class Reservation

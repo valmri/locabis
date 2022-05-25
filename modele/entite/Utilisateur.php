@@ -1,4 +1,9 @@
 <?php
+/**
+ * Utilisateur.php
+ * Description : Entite représentant un utilisateur (dit client)
+ * @author : Valentin Marmié
+ */
 namespace modele\entite;
 
 class Utilisateur

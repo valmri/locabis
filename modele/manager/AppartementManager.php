@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * AppartementManager.php
+ * Description : Manager permettant de manipuler les données de la table Appartement
+ * @author : Valentin Marmié
+ */
 namespace modele\manager;
 
 use PDO;

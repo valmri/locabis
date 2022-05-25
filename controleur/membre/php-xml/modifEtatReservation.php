@@ -1,4 +1,9 @@
 <?php
+/**
+ * modifEtatReservation.php
+ * Description : Permet de changer l'état d'une réservation avec la méthode AJAX depuis l'espace proriétaire
+ * @author : Valentin Marmié
+ */
 // Initialisation de l'entête de la requête
 header("Cache-Control: no-cache, must-revalidate");
 header('Content-Type: text/xml; charset=UTF-8');

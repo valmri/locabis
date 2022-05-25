@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * TypeEtatManager.php
+ * Description : Manager permettant de manipuler les données de la table TypeEtat
+ * @author : Valentin Marmié
+ */
 namespace modele\manager;
 
 use modele\entite\TypeEtat;

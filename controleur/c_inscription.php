@@ -1,4 +1,9 @@
 <?php
+/**
+ * c_inscription.php
+ * Description : Permet l'inscription à l'application
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/UtilisateurManager.php';

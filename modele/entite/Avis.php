@@ -1,4 +1,9 @@
 <?php
+/**
+ * Avis.php
+ * Description : Entite représentant un avis
+ * @author : Valentin Marmié
+ */
 
 namespace modele\entite;
 

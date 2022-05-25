@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * ImmeubleManager.php
+ * Description : Manager permettant de manipuler les données de la table Immeuble
+ * @author : Valentin Marmié
+ */
 namespace modele\manager;
 
 use PDO;

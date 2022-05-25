@@ -1,4 +1,9 @@
 <?php
+/**
+ * c_accueil.php
+ * Description : Permet de récupérer les informations liées à la page d'accueil
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/AppartementManager.php';

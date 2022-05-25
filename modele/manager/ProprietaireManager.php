@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * ProprietaireManager.php
+ * Description : Manager permettant de manipuler les données de la table Proprietaire
+ * @author : Valentin Marmié
+ */
 namespace modele\manager;
 
 use modele\entite\Proprietaire;

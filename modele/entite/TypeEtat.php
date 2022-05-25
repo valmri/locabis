@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * TypeEtat.php
+ * Description : Entite représentant un type d'état d'une réservation
+ * @author : Valentin Marmié
+ */
 namespace modele\entite;
 
 class TypeEtat

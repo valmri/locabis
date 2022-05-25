@@ -1,4 +1,9 @@
 <?php
+/**
+ * c_compte.php
+ * Description : Permet de mettre à jour les informations de son compte
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/UtilisateurManager.php';

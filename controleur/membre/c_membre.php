@@ -1,4 +1,9 @@
 <?php
+/**
+ * constructionCalendrier.php
+ * Description : Permet de récupérer toutes les informations liées à l'espace client/membre
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/UtilisateurManager.php';
@@ -40,7 +45,7 @@ if(isset($_SESSION['utilisateur']) && isset($_SESSION['jeton'])) {
 
 if(isset($authentification) && $authentification) {
 
-    // Récupération des infos utilisateurs
+    // Récupération des infos utilisateur
     $utilisateur = $utilisateurManager->read($_SESSION['utilisateur']['id']);
 
     // Récupération des réservations

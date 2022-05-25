@@ -1,4 +1,9 @@
 <?php
+/**
+ * constructionCalendrier.php
+ * Description : Permet de récupérer les dates déjà réservées concernant la réservation d'un appartement
+ * @author : Valentin Marmié
+ */
 // Initialisation de l'entête de la requête
 header("Cache-Control: no-cache, must-revalidate");
 header('Content-Type: text/xml; charset=UTF-8');

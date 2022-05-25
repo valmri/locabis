@@ -1,4 +1,9 @@
 <?php
+/**
+ * c_connexion.php
+ * Description : Permet de l'authentification à l'application
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/UtilisateurManager.php';

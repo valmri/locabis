@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Immeuble.php
+ * Description : Entite représentant un immeuble
+ * @author : Valentin Marmié
+ */
 namespace modele\entite;
 
 class Immeuble

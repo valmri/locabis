@@ -1,4 +1,9 @@
 <?php
+/**
+ * c_location.php
+ * Description : Permet de récupérer toutes les informations liées à un appartement
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/AppartementManager.php';

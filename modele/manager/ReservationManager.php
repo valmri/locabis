@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * ReservationManager.php
+ * Description : Manager permettant de manipuler les données de la table Reservation
+ * @author : Valentin Marmié
+ */
 namespace modele\manager;
 
 use PDO;

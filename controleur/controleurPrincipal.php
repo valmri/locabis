@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * controleurPrincipal.php
+ * Description : Permet de diriger les usagers sur les différentes pages
+ * @author : Valentin Marmié
+ */
 function controleur(string $page) {
 
     // Définition du tableau des directions

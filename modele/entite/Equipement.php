@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Equipement.php
+ * Description : Entite représentant un equipement
+ * @author : Valentin Marmié
+ */
 namespace modele\entite;
 
 class Equipement

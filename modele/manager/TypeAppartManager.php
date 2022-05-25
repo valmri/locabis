@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * TypeAppartManager.php
+ * Description : Manager permettant de manipuler les données de la table TypeAppart
+ * @author : Valentin Marmié
+ */
 namespace modele\manager;
 
 use modele\entite\TypeAppart;

@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * EquipementAppartement.php
+ * Description : Entite représentant un équipement lié à un appartement ainsi que sa quantité
+ * @author : Valentin Marmié
+ */
 namespace modele\entite;
 
 class EquipementAppartement

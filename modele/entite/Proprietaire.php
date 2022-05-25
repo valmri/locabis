@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Proprietaire.php
+ * Description : Entite représentant un propriétaire
+ * @author : Valentin Marmié
+ */
 namespace modele\entite;
 
 class Proprietaire

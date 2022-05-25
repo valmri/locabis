@@ -1,4 +1,9 @@
 <?php
+/**
+ * c_appartement.php
+ * Description : Permet de modifier les informations d'un appartement
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/UtilisateurManager.php';

@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Appartement.php
+ * Description : Entite représentant un appartement
+ * @author : Valentin Marmié
+ */
 namespace modele\entite;
 
 use Ds\Vector;

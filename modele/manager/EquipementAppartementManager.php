@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * EquipementAppartementManager.php
+ * Description : Manager permettant de manipuler les données de la table EquipementAppartement
+ * @author : Valentin Marmié
+ */
 namespace modele\manager;
 
 use Ds\Vector;

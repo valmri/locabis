@@ -1,4 +1,9 @@
 <?php
+/**
+ * c_proprietaire.php
+ * Description : Permet de récupérer les informations liées à l'espace propriétaire
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/UtilisateurManager.php';

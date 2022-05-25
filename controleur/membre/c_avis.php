@@ -1,4 +1,9 @@
 <?php
+/**
+ * c_Avis.php
+ * Description : Permet de modifier un avis
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/UtilisateurManager.php';

@@ -1,4 +1,9 @@
 <?php
+/**
+ * c_reservation.php
+ * Description : Permet de réaliser une réservation
+ * @author : Valentin Marmié
+ */
 // Chargement des managers
 require_once './modele/manager/ManagerPrincipal.php';
 require_once './modele/manager/UtilisateurManager.php';

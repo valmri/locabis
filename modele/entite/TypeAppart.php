@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * TypeAppart.php
+ * Description : Entite représentant un type d'appartement
+ * @author : Valentin Marmié
+ */
 namespace modele\entite;
 
 class TypeAppart

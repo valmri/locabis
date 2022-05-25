@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * UtilisateurManager.php
+ * Description : Manager permettant de manipuler les données de la table Utilisateur
+ * @author : Valentin Marmié
+ */
 namespace modele\manager;
 
 use PDO;
