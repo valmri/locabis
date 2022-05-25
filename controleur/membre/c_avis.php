@@ -55,6 +55,10 @@ if(
     // Vérification de la propriété de l'avis
     $verifProprio = $avisManager->verifPropAvis($idAvis, $utilisateur->getId());
     if($verifProprio) {
+
+        // Récupération des données de l'avis
+        $avis = $avisManager->read($idAvis);
+
         // Récupération du commentaire modifier
         if(
             isset($_POST['commentaire'])
@@ -63,9 +67,6 @@ if(
             && !empty($_POST['note']
                 && isset($_POST['jeton']))
         ) {
-
-            // Récupération des données de l'avis
-            $avis = $avisManager->read($idAvis);
 
             // Contrôle du jeton
             if($_POST['jeton'] && $_POST['jeton'] === $_SESSION['jeton']) {
