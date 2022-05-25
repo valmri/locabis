@@ -78,10 +78,10 @@
             </div>
             <?php endif; ?>
 
-            <div class="carteAvis">
+            <div id="avis" class="carteAvis">
 
                 
-                <h3 id="avis">Avis :</h3>
+                <h3>Avis :</h3>
 
                 <?php if(isset($reservation) && $reservation) : ?>
 

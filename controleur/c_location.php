@@ -107,7 +107,6 @@ if(
 
             // Vérification de l'existence d'un avis
             $avisExiste = $avisManager->verifPropAvis($idAppartement, $utilisateur->getId());
-            var_dump($avisExiste);
 
             if(!$avisExiste) {
                 // Création d'un avis
