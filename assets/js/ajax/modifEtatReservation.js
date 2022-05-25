@@ -113,7 +113,6 @@ function affichageModifReservation(requeteHTTP) {
 
         // Récupération des éléments html
         let ligneReservation = document.getElementsByClassName('idReservations');
-        console.log(ligneReservation)
 
         // Recherche de l'élément HTML
         let i = 0;

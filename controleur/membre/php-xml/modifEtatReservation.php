@@ -38,7 +38,6 @@ if(
 
             // Récupération de l'etat
             $etatReservation = $typeEtatManager->read($reservation->getEtat());
-            $reservation->setEtat($etatReservation);
 
         }
 
@@ -58,7 +57,7 @@ if($majSucces) {
     echo '<reponse>true</reponse>';
     echo '<etat>';
     echo '<reservation>' . $reservation->getId() . '</reservation>';
-    echo '<libelle>' . $reservation->getEtat()->getLibelle() . '</libelle>';
+    echo '<libelle>' . $etatReservation->getLibelle() . '</libelle>';
     echo '</etat>';
 } else {
     echo '<reponse>false</reponse>';
