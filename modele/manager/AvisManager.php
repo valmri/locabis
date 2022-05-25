@@ -191,40 +191,6 @@ class AvisManager extends ManagerPrincipal
     }
 
     /**
-     * Permet de vérifier l'existence d'un avis
-     * @param int $idUtilisateur
-     * @param int $idAppart
-     * @return bool
-     */
-    public function verifAvis(int $idUtilisateur, int $idAppart) {
-
-        $resultat = true;
-
-        try {
-            $bdd = $this->getPDO();
-            $sql = "select count(*) as nbReservation from reservation r
-                    join utilisateur u on u.id = r.utilisateur
-                    join appartement a on a.id = r.appartement
-                    where r.utilisateur = :idu and r.appartement = :ida;";
-            $requete = $bdd->prepare($sql);
-            $requete->bindValue(':idu', $idUtilisateur, PDO::PARAM_INT);
-            $requete->bindValue(':ida', $idAppart, PDO::PARAM_INT);
-            $requete->execute();
-            $reponse =$requete->fetch();
-
-            // S'il existe une ou plusieurs réservations l'utilisateur ne pourra pas publier de nouvel avis sur l'appart
-            if($reponse > 0) {
-                $resultat = false;
-            }
-
-        } catch (Exception $e) {
-            $resultat = false;
-        }
-
-        return $resultat;
-    }
-
-    /**
      * Vérification de la propriété de l'avis
      * @param int $idAppartement
      * @param int $idProp
@@ -241,6 +207,33 @@ class AvisManager extends ManagerPrincipal
                     where r.appartement = :ida and r.utilisateur = :idp;";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':ida', $idAppartement, PDO::PARAM_INT);
+            $requete->bindValue(':idp', $idProp, PDO::PARAM_INT);
+            $requete->execute();
+            $reponse =$requete->fetch();
+
+            if((int)$reponse['existe'] <= 0) {
+                $resultat = false;
+            }
+
+        } catch (Exception $e) {
+            $resultat = $e;
+        }
+
+        return $resultat;
+
+    }
+
+    public function verifPropAvisByIdAvis(int $idAvis, int $idProp) {
+
+        $resultat = true;
+
+        try {
+            $bdd = $this->getPDO();
+            $sql = "select count(*) as existe from reservation r
+                    join avis a on a.reservation = r.id
+                    where a.reservation = :ida and r.utilisateur = :idp;";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':ida', $idAvis, PDO::PARAM_INT);
             $requete->bindValue(':idp', $idProp, PDO::PARAM_INT);
             $requete->execute();
             $reponse =$requete->fetch();

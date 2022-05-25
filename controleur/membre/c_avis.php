@@ -53,7 +53,7 @@ if(
     $idAvis = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
     // Vérification de la propriété de l'avis
-    $verifProprio = $avisManager->verifPropAvis($idAvis, $utilisateur->getId());
+    $verifProprio = $avisManager->verifPropAvisByIdAvis($idAvis, $utilisateur->getId());
     if($verifProprio) {
 
         // Récupération des données de l'avis
