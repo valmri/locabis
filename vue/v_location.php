@@ -85,7 +85,7 @@
 
                 <?php if(isset($reservation) && $reservation) : ?>
 
-                <?php if($avisExiste && $reservation->getEtat() === "3") : ?>
+                <?php if(!$avisExiste && $reservation->getEtat() === "3") : ?>
                     <form action="#" method="post">
                         <label for="note">Note : </label>
                         <input type="number" name="note" id="note" min="0" max="5" required> <span> / 5</span><br>
@@ -95,12 +95,12 @@
 
                         <button class="bouton" type="submit">Envoyer</button>
                     </form>
-                <?php elseif($avisExiste && $reservation->getEtat() === "5") : ?>
+                <?php elseif($avisExiste) : ?>
                     <div class="message msgInfo">
                         <i class="las la-info-circle"></i>
                         <p>Un avis a déjà été donné, vous pouvez modifier votre avis.</p>
                     </div>
-                <?php elseif($avisExiste && $reservation->getEtat() === "1") : ?>
+                <?php elseif(!$avisExiste && $reservation->getEtat() === "1") : ?>
                     <div class="message msgInfo">
                         <i class="las la-info-circle"></i>
                         <p>Une réservation doit être validée pour donner un avis.</p>

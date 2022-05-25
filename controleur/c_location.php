@@ -106,9 +106,10 @@ if(
         if($reservation) {
 
             // Vérification de l'existence d'un avis
-            $avisExiste = $avisManager->verifPropAvis($utilisateur->getId(), $reservation->getId());
+            $avisExiste = $avisManager->verifPropAvis($idAppartement, $utilisateur->getId());
+            var_dump($avisExiste);
 
-            if($avisExiste && $reservation->getEtat() === "3") {
+            if(!$avisExiste) {
                 // Création d'un avis
                 if(
                     isset($_POST['note'])

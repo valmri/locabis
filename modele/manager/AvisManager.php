@@ -226,31 +226,31 @@ class AvisManager extends ManagerPrincipal
 
     /**
      * Vérification de la propriété de l'avis
-     * @param int $idAvis
+     * @param int $idAppartement
      * @param int $idProp
      * @return bool
      */
-    public function verifPropAvis(int $idAvis, int $idProp) {
+    public function verifPropAvis(int $idAppartement, int $idProp) {
 
         $resultat = true;
 
         try {
             $bdd = $this->getPDO();
-            $sql = "select count(*) from avis a
-                    join reservation r on a.reservation = r.id
-                    where r.utilisateur = :idu and a.reservation = :ida;";
+            $sql = "select count(*) as existe from reservation r
+                    join avis a on a.reservation = r.id
+                    where r.appartement = :ida and r.utilisateur = :idp;";
             $requete = $bdd->prepare($sql);
-            $requete->bindValue(':idu', $idProp, PDO::PARAM_INT);
-            $requete->bindValue(':ida', $idAvis, PDO::PARAM_INT);
+            $requete->bindValue(':ida', $idAppartement, PDO::PARAM_INT);
+            $requete->bindValue(':idp', $idProp, PDO::PARAM_INT);
             $requete->execute();
             $reponse =$requete->fetch();
 
-            if($reponse < 0) {
+            if((int)$reponse['existe'] <= 0) {
                 $resultat = false;
             }
 
         } catch (Exception $e) {
-            $resultat = false;
+            $resultat = $e;
         }
 
         return $resultat;
