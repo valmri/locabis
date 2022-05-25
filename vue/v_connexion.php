@@ -17,7 +17,7 @@
 
             <div class="inputConnexion">
                 <i class="las la-user"></i>
-                <input name="identifiant" type="text" placeholder="Identifiant" required/>
+                <input name="identifiant" type="text" placeholder="Adresse-mél" required/>
             </div>
 
             <div class="inputConnexion">

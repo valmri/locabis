@@ -49,7 +49,7 @@
                         <div class="carteLoc_contenu">
                             <h2><?php echo $reservation->get(1)->getTitre(); ?></h2>
                             <span id="statutReservation" class="infoLoca">
-                                <i class="<?php echo $reservation->get(2)->getIcone();?>"></i><strong>Statut : </strong><?php echo $reservation->get(2)->getLibelle();?>
+                                <i class="<?php echo $reservation->get(2)->getIcone();?>"></i><strong>État : </strong><?php echo $reservation->get(2)->getLibelle();?>
                             </span></br>
                             <span class="infoLoca">
                                 <i class="las la-calendar"></i><strong>Début : </strong><?php echo date('d/m/Y', strtotime($reservation->get(0)->getDateDebut())); ?>
