@@ -45,7 +45,7 @@ if(isset($authentification) && $authentification) {
 
     // Récupération des réservations
     $reservations = $reservationManager->readAll($utilisateur->getId());
-    var_dump($reservations[0]);
+
     $collectionReservation = new \Ds\Vector();
     foreach ($reservations as $reservation) {
 
