@@ -40,7 +40,6 @@ if(isset($_POST['id']) && !empty($_POST['id']) && is_numeric($_POST['id'])) {
 
             // Récupération de l'etat
             $etatReservation = $typeEtatManager->read($reservation->getEtat());
-            $reservation->setEtat($etatReservation);
 
         }
 
@@ -60,8 +59,8 @@ if($majSucces) {
     echo '<reponse>true</reponse>';
     echo '<etat>';
         echo '<reservation>' . $reservation->getId() . '</reservation>';
-        echo '<icone>' . $reservation->getEtat()->getIcone() . '</icone>';
-        echo '<libelle>' . $reservation->getEtat()->getLibelle() . '</libelle>';
+        echo '<icone>' . $etatReservation->getIcone() . '</icone>';
+        echo '<libelle>' . $etatReservation->getLibelle() . '</libelle>';
     echo '</etat>';
 } else {
     echo '<reponse>false</reponse>';
