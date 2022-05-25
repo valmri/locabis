@@ -182,7 +182,24 @@ if(isset($authentification) && $authentification) {
         }
 
         // Récupération des équipements de l'appartement
-        $equipements = $equipementManager->getEquipementsByIdAppart($idAppart);
+        $equipements = $equipementAppartManager->getEquipementsByIdAppart($idAppart);
+
+        // Création d'une collection des équipements
+        $collectionEquipement = new \Ds\Vector();
+
+        foreach ($equipements as $equipement) {
+
+            $unEquipement = new \Ds\Vector();
+
+            // Recherche de l'icône et du libelle en bdd
+            $idEquipement = $equipement->getIdEquipement();
+            $infosEquipement = $equipementManager->read($idEquipement);
+            $unEquipement->push($infosEquipement->getIcone());
+            $unEquipement->push($infosEquipement->getLibelle());
+            $unEquipement->push($equipement->getQuantite());
+
+            $collectionEquipement->push($unEquipement);
+        }
 
         // Compteur pour affichage
         $compteur = 0;

@@ -14,14 +14,14 @@
                 <p><span class="titreInfo">Titre :</span> <?= $appartement->getTitre(); ?></p>
                 <p><span class="titreInfo">Description :</span> <?= $appartement->getDescription(); ?></p>
                 <p><span class="titreInfo">Type :</span> <?= $appartement->getType(); ?></p>
-                <?php if($equipements) : ?>
+                <?php if($collectionEquipement->count() > 0) : ?>
                 <span class="titreInfo">Équipements :</span>
                 <ul>
-                    <?php foreach ($equipements as $equipement) :?>
+                    <?php foreach ($collectionEquipement as $equipement) :?>
 
                     <li>
-                        <i class="<?= $equipement->getIcone(); ?>"></i>
-                        <?= $equipement->getQuantite().' '.$equipement->getLibelle(); ?>
+                        <i class="<?= $equipement->get(0); ?>"></i>
+                        <?= $equipement->get(2).' '.$equipement->get(1); ?>
                     </li>
 
                     <?php endforeach;?>
