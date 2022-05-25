@@ -55,11 +55,9 @@ if(isset($authentification) && $authentification) {
 
         // Récupération du type
         $type = $typeAppartManager->read($laLocation->getType());
-        $laLocation->setType($type);
 
         // Récupération de l'immeuble
         $immeuble = $immeubleManager->read($laLocation->getImmeuble());
-        $laLocation->setImmeuble($immeuble);
 
         if(
             isset($_POST['dateDebut']) &&

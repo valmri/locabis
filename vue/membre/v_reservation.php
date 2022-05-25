@@ -11,17 +11,17 @@
                 </div>
 
                 <div class="contenuInfo">
-                    <p><span class="titreInfo">Type :</span> <?php echo $laLocation->getType()->getLibeType(); ?></p>
-                    <p><span class="titreInfo">Adresse :</span> <?php echo $laLocation->getImmeuble()->getAdresse(); ?> </p>
-                    <p><span class="titreInfo">Ville :</span> <?php echo $laLocation->getImmeuble()->getVille(); ?> </p>
+                    <p><span class="titreInfo">Type :</span> <?php echo $type->getLibeType(); ?></p>
+                    <p><span class="titreInfo">Adresse :</span> <?php echo $immeuble->getAdresse(); ?> </p>
+                    <p><span class="titreInfo">Ville :</span> <?php echo $immeuble->getVille(); ?> </p>
 
-                    <?php if ($laLocation->getImmeuble()->isAscensseur()) : ?>
+                    <?php if ($immeuble->isAscenseur()) : ?>
                         <p><span class="titreInfo">Ascenseur :</span> Oui</p>
                     <?php else : ?>
                         <p><span class="titreInfo">Ascenseur :</span> Non</p>
                     <?php endif; ?>
 
-                    <p><span class="titreInfo">Prix :</span> <?php echo $laLocation->getType()->getTarifLocaBase(); ?>€</p>
+                    <p><span class="titreInfo">Prix :</span> <?php echo $type->getTarifLocaBase(); ?>€</p>
 
                 </div>
 
