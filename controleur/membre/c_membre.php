@@ -45,15 +45,26 @@ if(isset($authentification) && $authentification) {
 
     // Récupération des réservations
     $reservations = $reservationManager->readAll($utilisateur->getId());
-
+    var_dump($reservations[0]);
+    $collectionReservation = new \Ds\Vector();
     foreach ($reservations as $reservation) {
+
+        $uneReservation = new \Ds\Vector();
+
+        $uneReservation->push($reservation);
+
         // Récupération des appartements attachés aux réservations
         $appart = $appartementManager->read($reservation->getAppartement());
-        $reservation->setAppartement($appart);
+
+        $uneReservation->push($appart);
 
         // Récupération des états des réservations
         $etat = $typeEtatManager->read($reservation->getEtat());
-        $reservation->setEtat($etat);
+
+        $uneReservation->push($etat);
+
+        $collectionReservation->push($uneReservation);
+
     }
 
     // Vérification rôle propriétaire

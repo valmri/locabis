@@ -38,7 +38,7 @@
                 <p>Vous n'avez réaliser aucunes réservations.</p>
                 <?php
                 else :
-                foreach ($reservations as $reservation) :
+                foreach ($collectionReservation as $reservation) :
                 ?>
 
                     <?php if ($nbCase === 0) :?>
@@ -47,24 +47,24 @@
 
                     <div class="carteLoc">
                         <div class="carteLoc_contenu">
-                            <h2><?php echo $reservation->getAppartement()->getTitre(); ?></h2>
+                            <h2><?php echo $reservation->get(1)->getTitre(); ?></h2>
                             <span id="statutReservation" class="infoLoca">
-                                <i class="<?php echo $reservation->getEtat()->getIcone();?>"></i><strong>Statut : </strong><?php echo $reservation->getEtat()->getLibelle();?>
+                                <i class="<?php echo $reservation->get(2)->getIcone();?>"></i><strong>Statut : </strong><?php echo $reservation->get(2)->getLibelle();?>
                             </span></br>
                             <span class="infoLoca">
-                                <i class="las la-calendar"></i><strong>Début : </strong><?php echo date('d/m/Y', strtotime($reservation->getDateDebut())); ?>
+                                <i class="las la-calendar"></i><strong>Début : </strong><?php echo date('d/m/Y', strtotime($reservation->get(0)->getDateDebut())); ?>
                             </span></br>
                             <span class="infoLoca">
-                                <i class="las la-calendar"></i><strong>Fin : </strong><?php echo date('d/m/Y', strtotime($reservation->getDateFin())); ?>
+                                <i class="las la-calendar"></i><strong>Fin : </strong><?php echo date('d/m/Y', strtotime($reservation->get(0)->getDateFin())); ?>
                             </span>
-                            <input class="idReservations" type="hidden" value="<?= $reservation->getId(); ?>">
-                            <a href="?page=location&id=<?php echo $reservation->getAppartement()->getId(); ?>" class="bouton">Consulter</a>
+                            <input class="idReservations" type="hidden" value="<?= $reservation->get(1)->getId(); ?>">
+                            <a href="?page=location&id=<?php echo $reservation->get(1)->getId(); ?>" class="bouton">Consulter</a>
                             <div class="actionResrvation">
-                                <?php if($reservation->getEtat()->getId() === 3): ?>
-                                    <button onclick="archiverReservation(<?= $reservation->getAppartement()->getId(); ?>, <?= $reservation->getId(); ?>)" class="bouton">Archiver</button>
+                                <?php if($reservation->get(2)->getId() === 3): ?>
+                                    <button onclick="archiverReservation(<?= $reservation->get(1)->getId(); ?>, <?= $reservation->get(0)->getId(); ?>)" class="bouton">Archiver</button>
                                 <?php endif; ?>
-                                <?php if($reservation->getEtat()->getId() === 1 || $reservation->getEtat()->getId() === 3): ?>
-                                    <button onclick='annulationReservation(<?= $reservation->getId(); ?>, "<?= $reservation->getAppartement()->getTitre(); ?>")' class='bouton'>Annuler</button>
+                                <?php if($reservation->get(2)->getId() === 1 || $reservation->get(2)->getId() === 3): ?>
+                                    <button onclick='annulationReservation(<?= $reservation->get(0)->getId(); ?>, "<?= $reservation->get(1)->getTitre(); ?>")' class='bouton'>Annuler</button>
                                 <?php endif; ?>
                             </div>
                         </div>
