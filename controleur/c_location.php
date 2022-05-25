@@ -108,7 +108,7 @@ if(
             // Vérification de l'existence d'un avis
             $avisExiste = $avisManager->verifAvis($utilisateur->getId(), $appartement->getId());
 
-            if($avisExiste) {
+            if(!$avisExiste) {
                 // Création d'un avis
                 if(
                     isset($_POST['note'])
@@ -128,8 +128,6 @@ if(
                             // Enregistrement de l'avis
                             $avis = new Avis();
                             $avis->setReservation($reservation->getId());
-                            $avis->setUtilisateur($utilisateur->getId());
-                            $avis->setAppartement($idAppartement);
                             $avis->setNote($note);
                             $avis->setCommentaire($commentaire);
 

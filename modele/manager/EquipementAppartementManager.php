@@ -154,6 +154,7 @@ class EquipementAppartementManager extends ManagerPrincipal
      */
     public function getEquipementsByIdAppart(int $idAppartement) {
 
+        $collectionEquipement = new Vector();
         try {
 
             $bdd = $this->getPDO();
@@ -163,24 +164,19 @@ class EquipementAppartementManager extends ManagerPrincipal
             $requete->execute();
             $equipements = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-            if(count($equipements) > 0) {
-                $collectionEquipement = new Vector();
 
-                foreach ($equipements as $equipement) {
+            foreach ($equipements as $equipement) {
 
-                    $nouveauEquipement = new EquipementAppartement();
-                    $nouveauEquipement->setIdEquipement($equipement['id_equipement']);
-                    $nouveauEquipement->setIdAppartement($equipement['id_appartement']);
-                    $nouveauEquipement->setQuantite($equipement['quantite']);
-                    $collectionEquipement->push($nouveauEquipement);
+                $nouveauEquipement = new EquipementAppartement();
+                $nouveauEquipement->setIdEquipement($equipement['id_equipement']);
+                $nouveauEquipement->setIdAppartement($equipement['id_appartement']);
+                $nouveauEquipement->setQuantite($equipement['quantite']);
+                $collectionEquipement->push($nouveauEquipement);
 
-                }
-
-                $resultat = $collectionEquipement;
-
-            } else {
-                $resultat = false;
             }
+
+            $resultat = $collectionEquipement;
+
 
 
         } catch (Exception $e) {

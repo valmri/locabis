@@ -82,9 +82,10 @@
 
                 
                 <h3 id="avis">Avis :</h3>
+
                 <?php if(isset($reservation) && $reservation) : ?>
 
-                <?php if($avisExiste && $reservation->getEtat() === "3") : ?>
+                <?php if(!$avisExiste && $reservation->getEtat() === "3") : ?>
                     <form action="#" method="post">
                         <label for="note">Note : </label>
                         <input type="number" name="note" id="note" min="0" max="5" required> <span> / 5</span><br>
