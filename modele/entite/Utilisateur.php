@@ -47,9 +47,8 @@ class Utilisateur
 
     }
 
-    /* Liste des accesseurs */
-
     /**
+     * Lecture de l'identifiant d'un utilisateur
      * @return int
      */
     public function getId(): int
@@ -58,6 +57,7 @@ class Utilisateur
     }
 
     /**
+     * Lecture du nom d'un utilisateur
      * @return string
      */
     public function getNom(): string
@@ -66,6 +66,7 @@ class Utilisateur
     }
 
     /**
+     * Lecture du prénom d'un utilisateur
      * @return string
      */
     public function getPrenom(): string
@@ -74,6 +75,7 @@ class Utilisateur
     }
 
     /**
+     * Lecture de l'adresse-mél d'un utilisateur
      * @return string
      */
     public function getMel(): string
@@ -82,6 +84,7 @@ class Utilisateur
     }
 
     /**
+     * Lecture du mot de passe d'un utilisateur
      * @return string
      */
     public function getMotDePasse(): string
@@ -90,6 +93,7 @@ class Utilisateur
     }
 
     /**
+     * Lecture de la date de connection d'un utilisateur
      * @return string
      */
     public function getDateConnexion(): string
@@ -98,6 +102,7 @@ class Utilisateur
     }
 
     /**
+     * Lecture de la date d'inscription d'un utilisateur
      * @return string
      */
     public function getDateInscription(): string
@@ -105,9 +110,8 @@ class Utilisateur
         return $this->date_inscription;
     }
 
-    /* Liste des mutateurs */
-
     /**
+     * Écriture de la date de connexion d'un utilisateur
      * @param string $date_connexion
      */
     public function setDateConnexion(string $date_connexion)
@@ -116,6 +120,7 @@ class Utilisateur
     }
 
     /**
+     * Écriture de la date d'inscription d'un utilisateur
      * @param string $date_inscription
      */
     public function setDateInscription(string $date_inscription)
@@ -124,6 +129,7 @@ class Utilisateur
     }
 
     /**
+     * Écriture de l'adresse-mél d'un utilisateur
      * @param string $mel
      */
     public function setMel(string $mel)
@@ -132,6 +138,7 @@ class Utilisateur
     }
 
     /**
+     * Écriture du mot de passe d'un utilisateur
      * @param string $motDePasse
      */
     public function setMotDePasse(string $motDePasse)
@@ -140,6 +147,7 @@ class Utilisateur
     }
 
     /**
+     * Écriture du nom d'un utilisateur
      * @param string $nom
      */
     public function setNom(string $nom)
@@ -148,6 +156,7 @@ class Utilisateur
     }
 
     /**
+     * Écriture du prénom d'un utilisateur
      * @param string $prenom
      */
     public function setPrenom(string $prenom)
@@ -156,6 +165,7 @@ class Utilisateur
     }
 
     /**
+     * Lecture de l'identifiant d'un role
      * @return int
      */
     public function getRole(): int
@@ -164,6 +174,7 @@ class Utilisateur
     }
 
     /**
+     * Écriture de l'identifiant du role d'un utilisateur
      * @param int $role
      */
     public function setRole(int $role)
@@ -172,6 +183,7 @@ class Utilisateur
     }
 
     /**
+     * Écriture de l'identifiant d'un utilisateur
      * @param int $id
      */
     public function setId(int $id)

@@ -5,17 +5,17 @@ namespace modele\entite;
 class TypeAppart
 {
     /**
-     * @var int Identifiant d'un type d'appart
+     * @var int $id Identifiant d'un type d'appart
      */
     private $id;
 
     /**
-     * @var string Libellé d'un type d'appart
+     * @var string $libetype Libellé d'un type d'appart
      */
     private $libetype;
 
     /**
-     * @var string Tarif d'une location
+     * @var string $tariflocabase Tarif d'un type d'appart
      */
     private $tariflocabase;
 
@@ -24,14 +24,16 @@ class TypeAppart
     }
 
     /**
-     * @return int
+     * Lecture de l'identifiant d'un type d'appart
+     * @return string
      */
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
+     * Lecture du libelle d'un type d'appart
      * @return string
      */
     public function getLibetype(): string
@@ -40,6 +42,7 @@ class TypeAppart
     }
 
     /**
+     * Lecture du tarif d'un type d'appart
      * @return string
      */
     public function getTariflocabase(): string
@@ -48,6 +51,7 @@ class TypeAppart
     }
 
     /**
+     * Écriture du libelle d'un type d'appart
      * @param string $libetype
      */
     public function setLibetype(string $libetype)
@@ -56,6 +60,7 @@ class TypeAppart
     }
 
     /**
+     * Écriture du tarif d'un type d'appart
      * @param string $tariflocabase
      */
     public function setTariflocabase(string $tariflocabase)

@@ -24,6 +24,7 @@ class TypeEtat
     }
 
     /**
+     * Lecture de l'identifiant d'un type d'état
      * @return int
      */
     public function getId(): int
@@ -32,6 +33,7 @@ class TypeEtat
     }
 
     /**
+     * Lecture de l'icône d'un type d'état
      * @return string
      */
     public function getIcone(): string
@@ -40,6 +42,7 @@ class TypeEtat
     }
 
     /**
+     * Lecture du libelle d'un type d'état
      * @return string
      */
     public function getLibelle(): string
@@ -48,6 +51,7 @@ class TypeEtat
     }
 
     /**
+     * Écriture de l'icone d'un type d'état
      * @param string $icone
      */
     public function setIcone(string $icone)
@@ -56,6 +60,7 @@ class TypeEtat
     }
 
     /**
+     * Écriture du libelle d'un type d'état
      * @param string $libelle
      */
     public function setLibelle(string $libelle)

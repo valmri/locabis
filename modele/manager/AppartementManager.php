@@ -13,7 +13,7 @@ class AppartementManager extends ManagerPrincipal
     }
 
     /**
-     * Insertion d'un appartement
+     * Enregistrement d'un appartement dans la base de données
      * @param Appartement $appartement
      * @return bool
      */
@@ -46,7 +46,7 @@ class AppartementManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération d'un appartement
+     * Récupération d'un enregistrement concernant un appartement
      * @param int $idAppartement
      * @return bool|Appartement
      */
@@ -68,7 +68,7 @@ class AppartementManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération de tous les appartements
+     * Récupération de tous les enregistrements concernant les appartements
      * @param int $idAppartement
      * @return bool|Appartement
      */
@@ -90,7 +90,7 @@ class AppartementManager extends ManagerPrincipal
     }
 
     /**
-     * Mise à jour d'un appartement
+     * Mise à jour d'un enregistrement concernant un appartement
      * @param Appartement $appartement
      * @return bool
      */
@@ -126,7 +126,7 @@ class AppartementManager extends ManagerPrincipal
     }
 
     /**
-     * Suppression d'un appartement
+     * Suppression d'un enregistrement concernant un appartement
      * @param Appartement $appartement
      * @return bool
      */
@@ -149,6 +149,10 @@ class AppartementManager extends ManagerPrincipal
         return $resultat;
 
     }
+
+    /**
+     * Fonctions et méthodes liées aux appartements
+     */
 
     /**
      * Retourne le nombre total d'appartement présent en base de données
@@ -202,7 +206,7 @@ class AppartementManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération de l'appartement d'un proprietaire
+     * Récupération de l'appartement d'un propriétaire
      * @param int $idProp
      * @return array|false
      */

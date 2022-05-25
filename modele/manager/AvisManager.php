@@ -15,7 +15,7 @@ class AvisManager extends ManagerPrincipal
     }
 
     /**
-     * Création d'un avis
+     * Enregistrement d'un avis
      * @param Avis $avis
      * @return bool
      */
@@ -42,19 +42,16 @@ class AvisManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération d'un avis
+     * Récupération d'un enregistrement concernant un avis
      * @param int $idReservation
      * @param int $idAppart
-     * @return false|mixed|object|\stdClass|null
+     * @return bool|Avis
      */
     public function read(int $idReservation) {
 
         try {
             $bdd = $this->getPDO();
-            $sql = "select r.id as id_reservation, av.note, av.commentaire, av.date_publication, u.id as utilisateur, u.prenom from reservation r
-                    join avis av on r.id  = av.reservation  
-                    join utilisateur u on r.utilisateur =  u.id 
-                    where av.reservation = :idr;";
+            $sql = "select * from avis where reservation = :idr;";
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':idr', $idReservation, PDO::PARAM_INT);
             $requete->execute();
@@ -68,8 +65,8 @@ class AvisManager extends ManagerPrincipal
     }
 
     /**
-     * Récupère tous les avis
-     * @return array|false
+     * Récupère tous enregistrements concernant les avis
+     * @return bool|array
      */
     public function readAll() {
 
@@ -89,7 +86,7 @@ class AvisManager extends ManagerPrincipal
     }
 
     /**
-     * Mise à jour d'un avis
+     * Mise à jour d'un enregistrement concernant un avis
      * @param Avis $avis
      * @return bool
      */
@@ -116,7 +113,7 @@ class AvisManager extends ManagerPrincipal
     }
 
     /**
-     * Suppression d'un avis
+     * Suppression d'un enregistrement concernant un avis
      * @param Avis $avis
      * @return bool
      */
@@ -150,7 +147,7 @@ class AvisManager extends ManagerPrincipal
         try {
 
             $bdd = $this->getPDO();
-            $sql = "select r.id as id_reservation, av.note, av.commentaire, av.date_publication, u.id as id_utilisateur, u.prenom from reservation r
+            $sql = "select r.id as id_reservation, u.id as id_utilisateur, u.prenom, av.note, av.commentaire, av.date_publication from reservation r
                     join avis av on r.id  = av.reservation  
                     join utilisateur u on r.utilisateur =  u.id 
                     where r.appartement = :idappart
@@ -161,25 +158,19 @@ class AvisManager extends ManagerPrincipal
             $tableauAvis = $requete->fetchAll(PDO::FETCH_ASSOC);
 
             if(count($tableauAvis) > 0) {
-                $collectionAvis = new Vector();
 
-                $utilisateurManager = new UtilisateurManager();
+                $collectionAvis = new Vector();
 
                 foreach ($tableauAvis as $avis) {
 
-                    $unAvis = new Avis();
-                    $unAvis->setReservation($avis['id_reservation']);
+                    $unAvis = new Vector();
+                    $unAvis->push($avis['id_reservation']);
+                    $unAvis->push($avis['id_utilisateur']);
+                    $unAvis->push($avis['prenom']);
+                    $unAvis->push(date('d/m/Y', strtotime($avis['date_publication'])));
+                    $unAvis->push($avis['note']);
+                    $unAvis->push($avis['commentaire']);
 
-                    $utilisateur = $utilisateurManager->read($avis['id_utilisateur']);
-
-                    $lutilisateur = new Utilisateur();
-                    $lutilisateur->setId($utilisateur->getId());
-                    $lutilisateur->setPrenom($utilisateur->getPrenom());
-                    $unAvis->setUtilisateur($lutilisateur);
-
-                    $unAvis->setDatePublication(date('d/m/Y', strtotime($avis['date_publication'])));
-                    $unAvis->setNote($avis['note']);
-                    $unAvis->setCommentaire($avis['commentaire']);
                     $collectionAvis->push($unAvis);
 
                 }
@@ -231,6 +222,39 @@ class AvisManager extends ManagerPrincipal
         }
 
         return $resultat;
+    }
+
+    /**
+     * Vérification de la propriété de l'avis
+     * @param int $idAvis
+     * @param int $idProp
+     * @return bool
+     */
+    public function verifPropAvis(int $idAvis, int $idProp) {
+
+        $resultat = true;
+
+        try {
+            $bdd = $this->getPDO();
+            $sql = "select count(*) from avis a
+                    join reservation r on a.reservation = r.id
+                    where r.utilisateur = :idu and a.reservation = :ida;";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':idu', $idProp, PDO::PARAM_INT);
+            $requete->bindValue(':ida', $idAvis, PDO::PARAM_INT);
+            $requete->execute();
+            $reponse =$requete->fetch();
+
+            if($reponse < 0) {
+                $resultat = false;
+            }
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
     }
 
 }

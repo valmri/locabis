@@ -5,35 +5,36 @@ namespace modele\entite;
 class Immeuble
 {
     /**
-     * @var int Identifiant d'un immeuble
+     * @var int $id Identifiant d'un immeuble
      */
     private $id;
 
     /**
-     * @var string Adresse d'un immeuble
+     * @var string $adresse Adresse d'un immeuble
      */
     private $adresse;
 
     /**
-     * @var string Ville d'un immeuble
+     * @var string $ville Ville d'un immeuble
      */
     private $ville;
 
     /**
-     * @var int Nombre d'étage d'un immeuble
+     * @var int $nbetage Nombre d'étage d'un immeuble
      */
-    private $nbEtage;
+    private $nbetage;
 
     /**
-     * @var boolean Présence d'un ascensseur dans l'immeuble
+     * @var boolean $ascenseur Présence d'un ascensseur dans l'immeuble
      */
-    private $ascensseur;
+    private $ascenseur;
 
     public function __construct() {
 
     }
 
     /**
+     * Lecture de l'identifiant d'un avis
      * @return int
      */
     public function getId(): int
@@ -42,6 +43,7 @@ class Immeuble
     }
 
     /**
+     * Lecture d'une adresse d'un immeuble
      * @return string
      */
     public function getAdresse(): string
@@ -50,6 +52,7 @@ class Immeuble
     }
 
     /**
+     * Écriture d'une adresse d'un immeuble
      * @param string $adresse
      */
     public function setAdresse(string $adresse)
@@ -58,6 +61,7 @@ class Immeuble
     }
 
     /**
+     * Lecture d'une ville d'un immeuble
      * @return string
      */
     public function getVille(): string
@@ -66,6 +70,7 @@ class Immeuble
     }
 
     /**
+     * Écriture d'une ville d'un immeuble
      * @param string $ville
      */
     public function setVille(string $ville)
@@ -74,35 +79,39 @@ class Immeuble
     }
 
     /**
+     * Lecture du nombre d'étage d'un immeuble
      * @return int
      */
-    public function getNbEtage(): int
+    public function getNbetage(): int
     {
-        return $this->nbEtage;
+        return $this->nbetage;
     }
 
     /**
-     * @param int $nbEtage
+     * Écriture d'un nombre d'étages d'un immeuble
+     * @param int $nbetage
      */
-    public function setNbEtage(int $nbEtage)
+    public function setNbetage(int $nbetage)
     {
-        $this->nbEtage = $nbEtage;
+        $this->nbetage = $nbetage;
     }
 
     /**
+     * Lecture de la présence d'un ascenseur dans un immeuble
      * @return bool
      */
-    public function isAscensseur(): bool
+    public function isAscenseur(): bool
     {
-        return $this->ascensseur;
+        return $this->ascenseur;
     }
 
     /**
-     * @param bool $ascensseur
+     * Écriture du booléen définissant l'ascenseur dans un immeuble
+     * @param bool $ascenseur
      */
-    public function setAscensseur(bool $ascensseur)
+    public function setAscenseur(bool $ascenseur)
     {
-        $this->ascensseur = $ascensseur;
+        $this->ascenseur = $ascenseur;
     }
 
 

@@ -19,16 +19,12 @@ class Equipement
      */
     private $libelle;
 
-    /**
-     * @var int $quantite Quantité d'équipement
-     */
-    private $quantite;
-
     public function __construct() {
 
     }
 
     /**
+     * Lecture de l'identifiant d'un équipement
      * @return int
      */
     public function getId(): int
@@ -37,6 +33,7 @@ class Equipement
     }
 
     /**
+     * Lecture de l'icône d'un équipement
      * @return string
      */
     public function getIcone(): string
@@ -45,6 +42,7 @@ class Equipement
     }
 
     /**
+     * Écriture de l'icône d'un équipement
      * @param string $icone
      */
     public function setIcone(string $icone)
@@ -53,6 +51,7 @@ class Equipement
     }
 
     /**
+     * Lecture du libelle d'un équipement
      * @return string
      */
     public function getLibelle(): string
@@ -61,27 +60,12 @@ class Equipement
     }
 
     /**
+     * Écriture du libelle d'un équipement
      * @param string $libelle
      */
     public function setLibelle(string $libelle)
     {
         $this->libelle = $libelle;
-    }
-
-    /**
-     * @return int
-     */
-    public function getQuantite(): int
-    {
-        return $this->quantite;
-    }
-
-    /**
-     * @param int $quantite
-     */
-    public function setQuantite(int $quantite)
-    {
-        $this->quantite = $quantite;
     }
 
 }

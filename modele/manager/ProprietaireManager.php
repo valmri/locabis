@@ -13,7 +13,7 @@ class ProprietaireManager extends ManagerPrincipal
     }
 
     /**
-     * Création d'un propriétaire
+     * Enregistrement d'un propriétaire dans la base de données
      * @param Proprietaire $proprietaire
      * @return bool
      */
@@ -41,9 +41,9 @@ class ProprietaireManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération d'un propriétaire
+     * Récupération d'un enregistrement concernant un propriétaire
      * @param int $idProprietaire
-     * @return bool|mixed|\modele\entite\Proprietaire|object|\stdClass|null
+     * @return bool|Proprietaire
      */
     public function read(int $idProprietaire) {
 
@@ -63,7 +63,7 @@ class ProprietaireManager extends ManagerPrincipal
     }
 
     /**
-     * Mise à jour d'un propriétaire
+     * Mise à jour d'un enregistrement concernant un propriétaire
      * @param Proprietaire $proprietaire
      * @return bool
      */
@@ -91,7 +91,7 @@ class ProprietaireManager extends ManagerPrincipal
     }
 
     /**
-     * Suppression d'un proprietaire
+     * Suppression d'un enregistrement concernant un proprietaire
      * @param Proprietaire $proprietaire
      * @return bool
      */

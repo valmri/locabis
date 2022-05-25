@@ -15,7 +15,7 @@ class EquipementManager extends ManagerPrincipal
     }
 
     /**
-     * Création d'un équipement
+     * Enregistrement d'un équipement
      * @param Equipement $equipement
      * @return bool
      */
@@ -41,9 +41,9 @@ class EquipementManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération d'un équipement
+     * Récupération d'un enregistrement concernant un équipement
      * @param string $idEquipement
-     * @return false|mixed|object|\stdClass|null
+     * @return bool|Equipement
      */
     public function read(string $idEquipement) {
 
@@ -63,8 +63,8 @@ class EquipementManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération de tous les équipements
-     * @return array|false
+     * Récupération de tous les enregistrements concernant les équipements
+     * @return bool|array
      */
     public function readAll() {
 
@@ -84,7 +84,7 @@ class EquipementManager extends ManagerPrincipal
     }
 
     /**
-     * Mise à jour d'un équipement
+     * Mise à jour d'un enregistrement concernant un équipement
      * @param Equipement $equipement
      * @return bool
      */
@@ -111,7 +111,7 @@ class EquipementManager extends ManagerPrincipal
     }
 
     /**
-     * Suppression d'un équipement
+     * Suppression d'un enregistrement concernant un équipement
      * @param Equipement $equipement
      * @return bool
      */
@@ -126,48 +126,6 @@ class EquipementManager extends ManagerPrincipal
             $requete->execute();
 
             $resultat = true;
-
-        } catch (Exception $e) {
-            $resultat = false;
-        }
-
-        return $resultat;
-
-    }
-
-    /**
-     * Récupère tous les équipements d'un appartement
-     * @param int $idAppartement
-     * @return Vector|false
-     */
-    public function getEquipementsByIdAppart(int $idAppartement) {
-
-        try {
-
-            $bdd = $this->getPDO();
-            $sql = "Select * from equipement_appart where id_appartement = :idappart";
-            $requete = $bdd->prepare($sql);
-            $requete->bindValue(':idappart', $idAppartement, PDO::PARAM_INT);
-            $requete->execute();
-            $equipements = $requete->fetchAll(PDO::FETCH_ASSOC);
-
-            if(count($equipements) > 0) {
-                $collectionEquipement = new Vector();
-
-                foreach ($equipements as $equipement) {
-
-                    $unEquipement = $this->read($equipement['id_equipement']);
-                    $unEquipement->setQuantite($equipement['quantite']);
-                    $collectionEquipement->push($unEquipement);
-
-                }
-
-                $resultat = $collectionEquipement;
-
-            } else {
-                $resultat = false;
-            }
-
 
         } catch (Exception $e) {
             $resultat = false;

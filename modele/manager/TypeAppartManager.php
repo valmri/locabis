@@ -13,7 +13,7 @@ class TypeAppartManager extends ManagerPrincipal
     }
 
     /**
-     * Création d'un type d'appart
+     * Enregistrement d'un type d'appart
      * @param TypeAppart $typeAppart
      * @return bool
      */
@@ -39,9 +39,9 @@ class TypeAppartManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération d'un type d'appart
+     * Récupération d'un enregistrement concernant un type d'appart
      * @param int $idType
-     * @return false|mixed|object|\stdClass|null
+     * @return false|TypeAppart
      */
     public function read(string $idType) {
 

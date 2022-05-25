@@ -24,6 +24,7 @@ class EquipementAppartement
     }
 
     /**
+     * Lecture d'un identifiant d'un appartement
      * @return int
      */
     public function getIdAppartement(): int
@@ -32,6 +33,7 @@ class EquipementAppartement
     }
 
     /**
+     * Lecture de l'identifiant d'un équipement
      * @return int
      */
     public function getIdEquipement(): int
@@ -40,6 +42,7 @@ class EquipementAppartement
     }
 
     /**
+     * Lecture d'une quantité d'équipement d'un appartement
      * @return int
      */
     public function getQuantite(): int
@@ -48,6 +51,7 @@ class EquipementAppartement
     }
 
     /**
+     * Écriture d'une quantité d'équipement d'un appartement
      * @param int $quantite
      */
     public function setQuantite(int $quantite)
@@ -56,6 +60,7 @@ class EquipementAppartement
     }
 
     /**
+     * Écriture d'un identifiant d'un appartement
      * @param int $id_appartement
      */
     public function setIdAppartement(int $id_appartement)
@@ -64,6 +69,7 @@ class EquipementAppartement
     }
 
     /**
+     * Écriture d'un identifiant d'un équipement
      * @param int $id_equipement
      */
     public function setIdEquipement(int $id_equipement)

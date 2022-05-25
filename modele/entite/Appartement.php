@@ -7,65 +7,56 @@ use Ds\Vector;
 class Appartement
 {
     /**
-     * @var int Identifiant de l'appartement
+     * @var int $id Identifiant de l'appartement
      */
     private $id;
 
     /**
-     * @var string Identifiant de la photo de l'appartement sur le serveur
+     * @var string $photo Identifiant de la photo de l'appartement sur le serveur
      */
     private $photo;
 
     /**
-     * @var string Titre de l'appartement
+     * @var string $titre Titre de l'appartement
      */
     private $titre;
 
     /**
-     * @var string Description de l'appartement
+     * @var string $description Description de l'appartement
      */
     private $description;
 
     /**
-     * @var int Numero de l'appartement
+     * @var int $numero Numero de l'appartement
      */
     private $numero;
 
     /**
-     * @var int Numero de l'étage de l'appartement
+     * @var int $etage Numero de l'étage de l'appartement
      */
     private $etage;
 
     /**
-     * @var int Identifiant du propriétaire de l'appartement
+     * @var int $proprietaire Identifiant du propriétaire de l'appartement
      */
     private $proprietaire;
 
     /**
-     * @var mixed Identifiant de l'immeuble de l'appartement
+     * @var int $immeuble Identifiant de l'immeuble de l'appartement
      */
     private $immeuble;
 
     /**
-     * @var mixed Identifiant du type de l'appartement
+     * @var string $type Identifiant du type de l'appartement
      */
     private $type;
-
-    /**
-     * @var Vector Collection d'équipements
-     */
-    private $equipements;
-
-    /**
-     * @var Vector Collection d'avis
-     */
-    private $avis;
 
     public function __construct() {
 
     }
 
     /**
+     * Lecture de l'identifiant de l'appartement
      * @return int
      */
     public function getId(): int
@@ -74,6 +65,7 @@ class Appartement
     }
 
     /**
+     * Lecture de l'identifiant de la photo
      * @return string
      */
     public function getPhoto(): string
@@ -82,6 +74,7 @@ class Appartement
     }
 
     /**
+     * Lecture du titre de l'appartement
      * @return string
      */
     public function getTitre(): string
@@ -90,6 +83,7 @@ class Appartement
     }
 
     /**
+     * Lecture de la description de l'appartement
      * @return string
      */
     public function getDescription(): string
@@ -98,6 +92,7 @@ class Appartement
     }
 
     /**
+     * Lecture du numéro de l'appartement
      * @return int
      */
     public function getNumero(): int
@@ -106,6 +101,7 @@ class Appartement
     }
 
     /**
+     * Lecture du numéro de l'étage de l'appartement
      * @return int
      */
     public function getEtage(): int
@@ -114,6 +110,7 @@ class Appartement
     }
 
     /**
+     * Lecture de l'identifiant du propriétaire
      * @return int
      */
     public function getProprietaire(): int
@@ -122,7 +119,8 @@ class Appartement
     }
 
     /**
-     * @return mixed
+     * Lecture de l'identifiant de l'immeuble
+     * @return int
      */
     public function getImmeuble()
     {
@@ -130,7 +128,8 @@ class Appartement
     }
 
     /**
-     * @return mixed
+     * Lecture de l'identifiant du type de l'appartement
+     * @return string
      */
     public function getType()
     {
@@ -138,6 +137,7 @@ class Appartement
     }
 
     /**
+     * Écriture de l'identifiant de la photo de l'appartement
      * @param string $photo
      */
     public function setPhoto(string $photo)
@@ -146,6 +146,7 @@ class Appartement
     }
 
     /**
+     * Écriture du titre de l'appartement
      * @param string $titre
      */
     public function setTitre(string $titre)
@@ -154,6 +155,7 @@ class Appartement
     }
 
     /**
+     * Écriture de la description de l'appartement
      * @param string $description
      */
     public function setDescription(string $description)
@@ -162,6 +164,7 @@ class Appartement
     }
 
     /**
+     * Écriture du numéro de l'appartement
      * @param int $numero
      */
     public function setNumero(int $numero)
@@ -170,6 +173,7 @@ class Appartement
     }
 
     /**
+     * Écriture du numéro de l'étage de l'appartement
      * @param int $etage
      */
     public function setEtage(int $etage)
@@ -178,6 +182,7 @@ class Appartement
     }
 
     /**
+     * Écriture de l'identifiant du propriétaire de l'appartement
      * @param int $proprietaire
      */
     public function setProprietaire(int $proprietaire)
@@ -186,51 +191,21 @@ class Appartement
     }
 
     /**
-     * @param mixed $immeuble
+     * Écriture de l'identifiant de l'immeuble de l'appartement
+     * @param int $immeuble
      */
-    public function setImmeuble($immeuble)
+    public function setImmeuble(int $immeuble)
     {
         $this->immeuble = $immeuble;
     }
 
     /**
-     * @param mixed $type
+     * Écriture de l'identifiant du type de l'appartement
+     * @param int $type
      */
-    public function setType($type)
+    public function setType(int $type)
     {
         $this->type = $type;
-    }
-
-    /**
-     * @return Vector
-     */
-    public function getEquipements(): Vector
-    {
-        return $this->equipements;
-    }
-
-    /**
-     * @param Vector $equipements
-     */
-    public function setEquipements(Vector $equipements)
-    {
-        $this->equipements = $equipements;
-    }
-
-    /**
-     * @return Vector
-     */
-    public function getAvis(): Vector
-    {
-        return $this->avis;
-    }
-
-    /**
-     * @param Vector $avis
-     */
-    public function setAvis(Vector $avis)
-    {
-        $this->avis = $avis;
     }
 
 }

@@ -14,7 +14,7 @@ class ReservationManager extends ManagerPrincipal
     }
 
     /**
-     * Insertion d'une réservation
+     * Enregistrement d'une réservation
      * @param Reservation $reservation
      * @return bool
      */
@@ -41,7 +41,8 @@ class ReservationManager extends ManagerPrincipal
 
     }
 
-    /** Récupération d'une réservation
+    /**
+     * Récupération d'un enregistrement concernant une réservation
      * @param int $idReservation
      * @return bool|Reservation
      */
@@ -63,7 +64,7 @@ class ReservationManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération des réservations d'un utilisateur
+     * Récupération des enregistrements des réservations effectuées par un utilisateur
      * @param int $idUtilisateur
      * @return array|false
      */

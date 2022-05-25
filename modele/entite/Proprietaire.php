@@ -5,7 +5,7 @@ namespace modele\entite;
 class Proprietaire
 {
     /**
-     * @var int $id Identifiant de l'utilisateur
+     * @var int $id Identifiant d'un propriétaire
      */
     private $id;
 
@@ -30,6 +30,7 @@ class Proprietaire
     }
 
     /**
+     * Lecture du numéro de téléphone d'un propriétaire
      * @return string
      */
     public function getTelephone(): string
@@ -38,6 +39,7 @@ class Proprietaire
     }
 
     /**
+     * Écriture du numéro de téléphone d'un propriétaire
      * @param string $telephone
      */
     public function setTelephone(string $telephone)
@@ -46,6 +48,7 @@ class Proprietaire
     }
 
     /**
+     * Lecture de l'adresse d'un propriétaire
      * @return string
      */
     public function getAdresse(): string
@@ -54,6 +57,7 @@ class Proprietaire
     }
 
     /**
+     * Écriture de l'adresse d'un propriétaire
      * @param string $adresse
      */
     public function setAdresse(string $adresse)
@@ -62,6 +66,7 @@ class Proprietaire
     }
 
     /**
+     * Lecture de la ville d'un propriétaire
      * @return string
      */
     public function getVille(): string
@@ -70,6 +75,7 @@ class Proprietaire
     }
 
     /**
+     * Écriture de la ville d'un propriétaire
      * @param string $ville
      */
     public function setVille(string $ville)
@@ -78,6 +84,7 @@ class Proprietaire
     }
 
     /**
+     * Lecture de l'identifiant d'un propriétaire
      * @return int
      */
     public function getId(): int

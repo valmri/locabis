@@ -2,6 +2,7 @@
 
 namespace modele\manager;
 
+use Ds\Vector;
 use modele\entite\EquipementAppartement;
 use PDO;
 
@@ -13,7 +14,7 @@ class EquipementAppartementManager extends ManagerPrincipal
     }
 
     /**
-     * Création d'un équipement pour un appartement
+     * Enregistrement d'un équipement pour un appartement
      * @param EquipementAppartement $equipement
      * @return bool
      */
@@ -137,6 +138,50 @@ class EquipementAppartementManager extends ManagerPrincipal
             } else {
                 $resultat = false;
             }
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+
+    }
+
+    /**
+     * Récupération de tous les équipements d'un appartement
+     * @param int $idAppartement
+     * @return Vector|false
+     */
+    public function getEquipementsByIdAppart(int $idAppartement) {
+
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "Select * from equipement_appart where id_appartement = :idappart";
+            $requete = $bdd->prepare($sql);
+            $requete->bindValue(':idappart', $idAppartement, PDO::PARAM_INT);
+            $requete->execute();
+            $equipements = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+            if(count($equipements) > 0) {
+                $collectionEquipement = new Vector();
+
+                foreach ($equipements as $equipement) {
+
+                    $nouveauEquipement = new EquipementAppartement();
+                    $nouveauEquipement->setIdEquipement($equipement['id_equipement']);
+                    $nouveauEquipement->setIdAppartement($equipement['id_appartement']);
+                    $nouveauEquipement->setQuantite($equipement['quantite']);
+                    $collectionEquipement->push($nouveauEquipement);
+
+                }
+
+                $resultat = $collectionEquipement;
+
+            } else {
+                $resultat = false;
+            }
+
 
         } catch (Exception $e) {
             $resultat = false;

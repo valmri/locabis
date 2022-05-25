@@ -5,37 +5,37 @@ namespace modele\entite;
 class Reservation
 {
     /**
-     * @var int Identifiant d'une réservation
+     * @var int $id Identifiant d'une réservation
      */
     private $id;
 
     /**
-     * @var string Date de début d'une réservation
+     * @var string $date_debut Date de début d'une réservation
      */
     private $date_debut;
 
     /**
-     * @var string Date de fin d'une réservation
+     * @var string $date_fin Date de fin d'une réservation
      */
     private $date_fin;
 
     /**
-     * @var int Durée de la réservation
+     * @var int $duree Durée de la réservation
      */
     private $duree;
 
     /**
-     * @var int Identifiant de l'utilisateur
+     * @var int $utilisateur Identifiant de l'utilisateur
      */
     private $utilisateur;
 
     /**
-     * @var mixed Identifiant de l'appartement
+     * @var int $appartement Identifiant de l'appartement
      */
     private $appartement;
 
     /**
-     * @var mixed Identifiant de l'état de la réservation
+     * @var int $etat Identifiant de l'état de la réservation
      */
     private $etat;
 
@@ -44,6 +44,7 @@ class Reservation
     }
 
     /**
+     * Lecture de l'identifiant d'une réservation
      * @return int
      */
     public function getId(): int
@@ -52,6 +53,7 @@ class Reservation
     }
 
     /**
+     * Lecture de la date de début d'une réservation
      * @return string
      */
     public function getDateDebut(): string
@@ -60,6 +62,7 @@ class Reservation
     }
 
     /**
+     * Lecture de la date de fin d'une réservation
      * @return string
      */
     public function getDateFin(): string
@@ -68,6 +71,7 @@ class Reservation
     }
 
     /**
+     * Lecture de la durée d'une réservation
      * @return int
      */
     public function getDuree(): int
@@ -76,6 +80,7 @@ class Reservation
     }
 
     /**
+     * Lecture de l'identifiant d'un utilisateur
      * @return int
      */
     public function getUtilisateur(): int
@@ -84,7 +89,8 @@ class Reservation
     }
 
     /**
-     * @return mixed
+     * Lecture de l'identifiant de l'appartement d'une réservation
+     * @return int
      */
     public function getAppartement()
     {
@@ -92,7 +98,8 @@ class Reservation
     }
 
     /**
-     * @return mixed
+     * Lecture de l'identifiant de l'état d'une réservation
+     * @return int
      */
     public function getEtat()
     {
@@ -100,6 +107,7 @@ class Reservation
     }
 
     /**
+     * Écriture de la date de début d'une réservation
      * @param string $date_debut
      */
     public function setDateDebut(string $date_debut)
@@ -108,6 +116,7 @@ class Reservation
     }
 
     /**
+     * Écriture de la date de fin d'une réservation
      * @param string $date_fin
      */
     public function setDateFin(string $date_fin)
@@ -116,6 +125,7 @@ class Reservation
     }
 
     /**
+     * Écriture de l'identifiant de l'utilisateur d'une réservation
      * @param int $utilisateur
      */
     public function setUtilisateur(int $utilisateur)
@@ -124,17 +134,19 @@ class Reservation
     }
 
     /**
-     * @param mixed $appartement
+     * Écriture de l'identifiant de l'appartement d'une réservation
+     * @param int $appartement
      */
-    public function setAppartement($appartement)
+    public function setAppartement(int $appartement)
     {
         $this->appartement = $appartement;
     }
 
     /**
-     * @param mixed $etat
+     * Écriture de l'identifiant de l'état d'une réservation
+     * @param int $etat
      */
-    public function setEtat($etat)
+    public function setEtat(int $etat)
     {
         $this->etat = $etat;
     }

@@ -5,40 +5,31 @@ namespace modele\entite;
 class Avis
 {
     /**
-     * @var int $note Note pour un appartement
+     * @var int $note Note de l'appartement
      */
     private $note;
 
     /**
-     * @var string Commentaire pour un appart
+     * @var string $commentaire Commentaire de l'appartement
      */
     private $commentaire;
 
     /**
-     * @var string Date de publication
+     * @var string $date_publication Date de publication de l'avis
      */
     private $date_publication;
 
     /**
-     * @var int Identifiant d'une réservation
+     * @var int $reservation Identifiant de la réservation
      */
     private $reservation;
-
-    /**
-     * @var int Identifiant d'un appart
-     */
-    private $appartement;
-
-    /**
-     * @var Mixed Utilisateur ayant publié l'avis
-     */
-    private $utilisateur;
 
     public function __construct() {
 
     }
 
     /**
+     * Lecture de la note
      * @return int
      */
     public function getNote(): int
@@ -47,6 +38,7 @@ class Avis
     }
 
     /**
+     * Lecture du commentaire
      * @return string
      */
     public function getCommentaire(): string
@@ -55,6 +47,7 @@ class Avis
     }
 
     /**
+     * Lecture de la date de publication
      * @return string
      */
     public function getDatePublication(): string
@@ -63,6 +56,7 @@ class Avis
     }
 
     /**
+     * Lecture de l'identifiant de la réservation
      * @return int
      */
     public function getReservation(): int
@@ -71,6 +65,7 @@ class Avis
     }
 
     /**
+     * Écriture de l'identifiant de la réservation
      * @param int $reservation
      */
     public function setReservation(int $reservation)
@@ -79,22 +74,7 @@ class Avis
     }
 
     /**
-     * @return int
-     */
-    public function getAppartement(): int
-    {
-        return $this->appartement;
-    }
-
-    /**
-     * @param int $appartement
-     */
-    public function setAppartement(int $appartement)
-    {
-        $this->appartement = $appartement;
-    }
-
-    /**
+     * Écriture de la note d'un avis pour un appartement
      * @param int $note
      */
     public function setNote(int $note)
@@ -103,6 +83,7 @@ class Avis
     }
 
     /**
+     * Écriture du commentaire d'un avis pour un appartement
      * @param string $commentaire
      */
     public function setCommentaire(string $commentaire)
@@ -111,27 +92,12 @@ class Avis
     }
 
     /**
+     * Écriture de la date de publication d'un avis
      * @param string $date_publication
      */
     public function setDatePublication(string $date_publication)
     {
         $this->date_publication = $date_publication;
-    }
-
-    /**
-     * @return Mixed
-     */
-    public function getUtilisateur()
-    {
-        return $this->utilisateur;
-    }
-
-    /**
-     * @param Mixed $utilisateur
-     */
-    public function setUtilisateur($utilisateur)
-    {
-        $this->utilisateur = $utilisateur;
     }
 
 }

@@ -13,7 +13,7 @@ class ImmeubleManager extends ManagerPrincipal
     }
 
     /**
-     * Construction d'un immeuble
+     * Enregistrement d'un immeuble dans la base de données
      * @param Immeuble $immeuble
      * @return bool
      */
@@ -26,8 +26,8 @@ class ImmeubleManager extends ManagerPrincipal
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':adresse', $immeuble->getAdresse(), PDO::PARAM_STR);
             $requete->bindValue(':ville', $immeuble->getVille(), PDO::PARAM_STR);
-            $requete->bindValue(':etage', $immeuble->getNbEtage(), PDO::PARAM_INT);
-            $requete->bindValue(':ascensseur', $immeuble->isAscensseur(), PDO::PARAM_BOOL);
+            $requete->bindValue(':etage', $immeuble->getNbetage(), PDO::PARAM_INT);
+            $requete->bindValue(':ascensseur', $immeuble->isAscenseur(), PDO::PARAM_BOOL);
             $requete->execute();
 
             $resultat = true;
@@ -41,9 +41,9 @@ class ImmeubleManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération d'un immeuble
+     * Récupération d'un enregistrement concernant un immeuble
      * @param int $idImmeuble
-     * @return false|mixed|object|\stdClass|null
+     * @return bool|Immeuble
      */
     public function read(int $idImmeuble) {
 
@@ -63,8 +63,8 @@ class ImmeubleManager extends ManagerPrincipal
     }
 
     /**
-     * Récupération de tous les immeubles
-     * @return array|false
+     * Récupération de tous les enregistrements concernant les immeubles
+     * @return bool|array
      */
     public function readAll() {
 
@@ -84,7 +84,7 @@ class ImmeubleManager extends ManagerPrincipal
     }
 
     /**
-     * Mise à jour d'un immeuble
+     * Mise à jour d'un enregistrement concernant un immeuble
      * @param Immeuble $immeuble
      * @return bool
      */
@@ -97,8 +97,8 @@ class ImmeubleManager extends ManagerPrincipal
             $requete = $bdd->prepare($sql);
             $requete->bindValue(':adresse', $immeuble->getAdresse(), PDO::PARAM_STR);
             $requete->bindValue(':ville', $immeuble->getVille(), PDO::PARAM_STR);
-            $requete->bindValue(':nbetage', $immeuble->getNbEtage(), PDO::PARAM_INT);
-            $requete->bindValue(':ascensseur', $immeuble->isAscensseur(), PDO::PARAM_BOOL);
+            $requete->bindValue(':nbetage', $immeuble->getNbetage(), PDO::PARAM_INT);
+            $requete->bindValue(':ascensseur', $immeuble->isAscenseur(), PDO::PARAM_BOOL);
             $requete->bindValue(':id', $immeuble->getId(), PDO::PARAM_INT);
             $requete->execute();
 
@@ -113,7 +113,7 @@ class ImmeubleManager extends ManagerPrincipal
     }
 
     /**
-     * Suppression d'un immeuble
+     * Suppression d'un enregistrement concernant un immeuble
      * @param Immeuble $immeuble
      * @return bool
      */
