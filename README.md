@@ -8,8 +8,8 @@ Locabis est une entreprise française spécialisée dans la gestion de locations
 
 
 ## Documentations
-<a href="https://woozy-racer-36c.notion.site/Documentation-utilisateur-b8da7dacb2014ee984c014ce1a75a5bc">🧭 Documentation utilisateur</a>
+<a href="https://woozy-racer-36c.notion.site/Documentation-utilisateur-b8da7dacb2014ee984c014ce1a75a5bc" target="_blank">🧭 Documentation utilisateur</a>
 <br/>
-<a href="https://woozy-racer-36c.notion.site/Documentation-technique-481da60316e447b8822f1de06fc0d015">🧰 Documentation technique</a>
+<a href="https://woozy-racer-36c.notion.site/Documentation-technique-481da60316e447b8822f1de06fc0d015" target="_blank">🧰 Documentation technique</a>
 
 
