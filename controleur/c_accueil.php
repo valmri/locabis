@@ -14,8 +14,10 @@ require_once './modele/entite/TypeAppart.php';
 require_once './modele/entite/Immeuble.php';
 
 use modele\manager\AppartementManager;
+use modele\manager\ImmeubleManager;
 
 $appartementManager = new AppartementManager();
+$immeubleManager = new ImmeubleManager();
 
 // Récupération numero page
 if(isset($_GET['n']) && !empty($_GET['n']) && is_numeric($_GET['n'])) {
@@ -38,6 +40,9 @@ $premierePage = ($pageCourante * $locationParPage) - $locationParPage;
 // Récupération des locations
 $afficheLocation = $appartementManager->getAppartements($premierePage, $locationParPage);
 $nbCase = 0;
+
+// Création de la liste de villes
+$lesVilles = $immeubleManager->getListeVille();
 
 // Chargement des vues
 require_once './vue/elements/header.php';

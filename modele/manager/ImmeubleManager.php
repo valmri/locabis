@@ -140,5 +140,23 @@ class ImmeubleManager extends ManagerPrincipal
         return $resultat;
 
     }
+    
+    public function getListeVille() {
+        
+        try {
+
+            $bdd = $this->getPDO();
+            $sql = "select distinct ville from immeuble order by ville;";
+            $requete = $bdd->prepare($sql);
+            $requete->execute();
+            $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $e) {
+            $resultat = false;
+        }
+
+        return $resultat;
+        
+    }
 
 }

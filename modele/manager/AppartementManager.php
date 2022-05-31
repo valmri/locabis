@@ -259,7 +259,24 @@ class AppartementManager extends ManagerPrincipal
         }
 
         return $resultat;
-
+        
+    }
+    
+    public function getAppartementsByVille(string $ville) {
+        
+        $bdd = $this->getPDO();
+        $sql = "select a.id, a.photo, a.titre, i.ville, libetype from appartement a
+                join immeuble i on a.immeuble = i.id
+                join typeappart t on a.type = t.id
+                where i.ville = :nomville
+                order by i.ville;";
+        $requete = $bdd->prepare($sql);
+        $requete->bindValue(':nomville', $ville, PDO::PARAM_STR);
+        $requete->execute();
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultat;
+        
     }
 
 }

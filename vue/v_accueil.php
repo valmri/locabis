@@ -3,16 +3,34 @@
     <div class="contenu">
     
         <div class="page">
+            
+            <div>
+                <p>Recherche :</p>
+                
+                <form action="#" method="post">
+                    
+                    <label for="ville">Ville :</label>
+                    <select name="ville" id="ville">
+                        
+                        <?php foreach($lesVilles as $uneVille): ?>
+                        <option onclick="getAppartByVille(this.value)" value="<?= $uneVille['ville'] ?>"><?= $uneVille['ville'] ?></option>
+                        <?php endforeach; ?>
+
+                    </select>
+                    
+                </form>
 
             <div class="entetePage">
                 <h1>Nos locations</h1>
             </div>
+                
+            <div id="lesContenus">
 
             <?php if($afficheLocation != null) :?>
             <?php foreach ($afficheLocation as $laLocation) :?>
 
             <?php if ($nbCase === 0) :?>
-            <div class="contenuCarte">
+            <div id="contenu" class="contenuCarte">
             <?php endif; ?>
 
                 <div class="carteLoc">
