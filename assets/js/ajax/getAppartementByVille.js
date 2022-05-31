@@ -100,7 +100,7 @@ function affichageAppartements(requeteHTTP) {
 
             // Image de l'appartement
             let photo = document.createElement('img');
-            photo.setAttribute('src', './images/apparts/'+unAppart.childNodes.item(1).childNodes.item(0).data+'.jpg');
+            photo.setAttribute('src', 'https://media.valmri.fr/locabis/apparts/'+unAppart.childNodes.item(1).childNodes.item(0).data+'.jpg');
             photo.setAttribute('alt', unAppart.childNodes.item(4).childNodes.item(0).data);
             photo.setAttribute('width', '100%');
 

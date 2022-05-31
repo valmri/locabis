@@ -36,7 +36,7 @@
                 <div class="carteLoc">
                     <div class="carteLoc_entete">
                         <?php if ($laLocation->photo != null) :?>
-                            <img src="./images/apparts/<?php echo $laLocation->photo; ?>.jpg" width="100%" alt="<?php echo $laLocation->libetype; ?>">
+                            <img src="https://media.valmri.fr/locabis/apparts/<?php echo $laLocation->photo; ?>.jpg" width="100%" alt="<?php echo $laLocation->libetype; ?>">
                         <?php else :?>
                         <img src="./assets/img/appart.jpg" width="100%" alt="<?php echo $laLocation->libetype; ?>">
                         <?php endif; ?>

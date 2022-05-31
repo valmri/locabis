@@ -55,7 +55,7 @@
 
             <div class="entetePage">
                 <?php if ($appartement->getPhoto() !== null) : ?>
-                    <img src="./images/apparts/<?= $appartement->getPhoto(); ?>.jpg" width="50%" alt="<?= $type->getLibeType(); ?>">
+                    <img src="https://media.valmri.fr/locabis/apparts/<?= $appartement->getPhoto(); ?>.jpg" width="50%" alt="<?= $type->getLibeType(); ?>">
                 <?php else :?>
                     <img src="./assets/img/appart.jpg" width="50%" alt="<?php echo $appartement->getType()->getLibeType(); ?>">
                 <?php endif; ?>
