@@ -5,20 +5,23 @@
         <div class="page">
             
             <div>
-                <p>Recherche :</p>
-                
-                <form action="#" method="post">
-                    
-                    <label for="ville">Ville :</label>
-                    <select name="ville" id="ville">
-                        
-                        <?php foreach($lesVilles as $uneVille): ?>
-                        <option onclick="getAppartByVille(this.value)" value="<?= $uneVille['ville'] ?>"><?= $uneVille['ville'] ?></option>
-                        <?php endforeach; ?>
 
-                    </select>
-                    
-                </form>
+                <div class="recherche">
+                    <p>Recherche :</p>
+
+                    <form action="#" method="post">
+
+                        <label for="ville">Ville :</label>
+                        <select id="ville" name="ville">
+
+                            <?php foreach($lesVilles as $uneVille): ?>
+                                <option onclick="getAppartByVille(this.value)" value="<?= $uneVille['ville'] ?>"><?= $uneVille['ville'] ?></option>
+                            <?php endforeach; ?>
+
+                        </select>
+
+                    </form>
+                </div>
 
             <div class="entetePage">
                 <h1>Nos locations</h1>

@@ -37,4 +37,8 @@
         padding: 0px;
     }
 
+    .recherche {
+        display: none;
+    }
+
 }

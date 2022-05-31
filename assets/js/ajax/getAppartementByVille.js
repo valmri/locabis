@@ -27,6 +27,15 @@ function getRequeteHttp() {
     return requeteHttp;
 }
 
+// Pour les écrans tactiles
+/*
+let liste = document.getElementById('ville');
+
+liste.addEventListener('touchstart', function(e){
+    alert('test')
+})
+*/
+
 function getAppartByVille(nomVille) {
     // Traitement
     let requeteHTTP = getRequeteHttp();
