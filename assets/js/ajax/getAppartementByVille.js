@@ -57,8 +57,8 @@ function affichageAppartements(requeteHTTP) {
     
     // Récupération du booléen de confirmation
     let succesMaj = enregistements.childNodes.item('reponse').childNodes.item(0).data;
-    
-    if(succesMaj) {
+
+    if(succesMaj == 'true') {
         
         // Récupération des appartements
         let listeAppartement = enregistements.childNodes.item(1);
@@ -80,7 +80,7 @@ function affichageAppartements(requeteHTTP) {
         // Création des cartes de présentation
 
         listeAppartement.childNodes.forEach(unAppart => {
-            console.log('DATA', o = unAppart)
+
             // Bloc global
             let carte = document.createElement('div');
             carte.setAttribute('class', 'carteLoc');
@@ -150,6 +150,16 @@ function affichageAppartements(requeteHTTP) {
 
         })
 
+
+    } else {
+
+        Swal.fire({
+            title: 'Aucuns appartements trouvés.',
+            icon: 'info',
+            showCancelButton: true,
+            cancelButtonText: 'Retour',
+            showConfirmButton: false
+        })
 
     }
 
