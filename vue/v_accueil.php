@@ -6,28 +6,25 @@
             
             <div>
 
-                <div class="recherche">
-                    <p>Recherche :</p>
-
-                    <form action="#" method="post">
-
-                        <label for="ville">Ville :</label>
-                        <select id="ville" name="ville">
-
-                            <?php foreach($lesVilles as $uneVille): ?>
-                                <option onclick="getAppartByVille(this.value)" value="<?= $uneVille['ville'] ?>"><?= $uneVille['ville'] ?></option>
-                            <?php endforeach; ?>
-
-                        </select>
-
-                    </form>
-                </div>
-
             <div class="entetePage">
                 <h1>Nos locations</h1>
             </div>
-                
-            <div id="lesContenus">
+
+                <div class="recherche">
+
+                    <label for="ville">Ville</label>
+                    <select id="ville" name="ville">
+
+                        <?php foreach($lesVilles as $uneVille): ?>
+                            <option onclick="getAppartByVille(this.value)" value="<?= $uneVille['ville'] ?>"><?= $uneVille['ville'] ?></option>
+                        <?php endforeach; ?>
+
+                    </select>
+
+                </div>
+
+
+                <div id="lesContenus">
 
             <?php if($afficheLocation != null) :?>
             <?php foreach ($afficheLocation as $laLocation) :?>
